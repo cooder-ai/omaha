@@ -93,7 +93,8 @@ CString InstallManager::install_working_dir() const {
 // For each app, set the state to STATE_INSTALLING, install it, and update the
 // state of the model after it completes.
 void InstallManager::InstallApp(App* app,  const CString& dir) {
-  CORE_LOG(L3, (_T("[InstallManager::InstallApp][0x%p]"), app));
+  NX_VERIFY(app, return);
+  CORE_LOG(L3, (_T("[update]InstallManager::InstallApp[0x%p] app_id:%s dir:%s"), app, app->app_guid_string(), dir));
   ASSERT1(app);
 
   const ConfigManager& cm = *ConfigManager::Instance();
@@ -127,7 +128,8 @@ void InstallManager::InstallApp(App* app,  const CString& dir) {
                           app,
                           dir);
 
-  CORE_LOG(LE, (_T("[InstallApp returned][0x%p][0x%08x]"), app, hr));
+  CORE_LOG(LE, (_T("[InstallApp returned][0x%p][0x%08x] app_id:%s crrent_version:%s"),
+    app, hr, app->app_guid_string(), current_version_string));
 
   app->LogTextAppendFormat(_T("Install result=0x%08x"), hr);
 
@@ -141,13 +143,17 @@ HRESULT InstallManager::InstallApp(bool is_machine,
                                    InstallerWrapper* installer_wrapper,
                                    App* app,
                                    const CString& dir) {
+  
   UNREFERENCED_PARAMETER(is_machine);
   ASSERT1(installer_wrapper);
   ASSERT1(app);
-
+  CString str_app_guid = app->app_guid_string();
+  CORE_LOG(L2, (L"[update]InstallApp app_id:%s is_machine:%d existing_version:%s",
+            str_app_guid, is_machine, existing_version));
   const bool is_update = app->is_update();
 
   CString display_name;
+  
   GUID app_guid = {0};
   CString installer_path;
   // TODO(omaha3): Consider generating the installerdata file external to the
@@ -170,7 +176,6 @@ HRESULT InstallManager::InstallApp(bool is_machine,
     app->Installing();
 
     app_guid = app->app_guid();
-
     // The first package is always the Package Manager for the app.
     // TODO(omaha3): Use program_to_run here instead of the installer_path. This
     // will introduce complexity such as having to find the full path and
@@ -224,7 +229,9 @@ HRESULT InstallManager::InstallApp(bool is_machine,
     if (!is_update) {
       HRESULT hr = app_manager.WritePreInstallData(*app);
       if (FAILED(hr)) {
-        CORE_LOG(LE, (_T("[AppManager::WritePreInstallData failed][0x%08x]")));
+        CORE_LOG(LE, (_T("[update]AppManager::WritePreInstallData failed ")
+                      _T("app_id:%s err:0x%08x"),
+                      str_app_guid, hr));
         const CString message =
             InstallerWrapper::GetMessageForError(hr, CString(), language);
         app->Error(ErrorContext(hr), message);
@@ -235,16 +242,9 @@ HRESULT InstallManager::InstallApp(bool is_machine,
 
   const int install_priority = app->app_bundle()->priority();
   OPT_LOG(L1, (
-      _T("[Installing][display name: %s][app id: %s][installer path: %s]")
-      _T("[manifest args: %s][installer data: %s][untrusted data: %s]")
-      _T("[priority: %d]"),
-      app->display_name(),
-      GuidToString(app_guid),
-      installer_path,
-      manifest_arguments,
-      installer_data,
-      app->untrusted_data(),
-      install_priority));
+      _T("[update]Installing app_id:%s display_name:%s installer_path:%s manifest_args:%s installer_data:%s untrusted data:%s priority: %d"),
+       str_app_guid, app->display_name(), installer_path, manifest_arguments,
+       installer_data, app->untrusted_data(), install_priority));
 
   InstallerResultInfo result_info;
 
@@ -260,8 +260,8 @@ HRESULT InstallManager::InstallApp(bool is_machine,
                                              &result_info);
   app->SetCurrentTimeAs(App::TIME_INSTALL_COMPLETE);
 
-  OPT_LOG(L1, (_T("[InstallApp returned][0x%x][%s][type:%d][code: %d][%s][%s]"),
-               hr, GuidToString(app_guid), result_info.type, result_info.code,
+  OPT_LOG(L1, (_T("[update]InstallApp returned app_id:%s err:0x%08X  type:%d code:%d text:%s post_install_launch_cmdline:%s"),
+               str_app_guid, hr, result_info.type, result_info.code,
                result_info.text, result_info.post_install_launch_command_line));
 
   __mutexScope(model_lock);

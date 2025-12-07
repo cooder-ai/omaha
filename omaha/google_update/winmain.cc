@@ -49,7 +49,7 @@
 
 // TODO(omaha3): move to common.
 #include "omaha/goopdate/main.h"
-
+#include "base/logging.h"
 namespace omaha {
 
 // Disable the stack checks to keep the code size down.
@@ -186,8 +186,10 @@ HRESULT GetDllPath(HINSTANCE instance, bool is_machine, CString* dll_path) {
 //  * Loads the DLL and calls the entry point.
 int WINAPI _tWinMain(HINSTANCE instance,
                      HINSTANCE,
-                     LPTSTR,
+                     LPTSTR pszCmdline,
                      int cmd_show) {
+  OutputDebugString(_T("google_update main enter"));
+  OPT_LOG(L2, (_T("google_update main enter cmdline:%s"), pszCmdline));
   omaha::EnableSecureDllLoading();
 
   // We assume here that running from program files means we should check

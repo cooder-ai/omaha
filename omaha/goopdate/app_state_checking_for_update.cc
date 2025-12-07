@@ -39,7 +39,7 @@ xml::UpdateResponseResult GetUpdateResponseResult(
     const xml::UpdateResponse* update_response) {
   ASSERT1(app);
   ASSERT1(update_response);
-
+  CORE_LOG(L3, (_T("GetUpdateResponseResult app:%s"), app->app_guid_string()));
   const CString app_name = app->display_name();
   const CString language = app->app_bundle()->display_language();
 
@@ -84,7 +84,9 @@ void AppStateCheckingForUpdate::PostUpdateCheck(
     App* app,
     HRESULT update_check_result,
     xml::UpdateResponse* update_response) {
-  CORE_LOG(L3, (_T("[AppStateCheckingForUpdate::PostUpdateCheck][0x%p]"), app));
+  NX_VERIFY(app, return);
+  CORE_LOG(L3, (_T("[AppStateCheckingForUpdate::PostUpdateCheck] app:%s update_check_result:%08X"),
+                app->app_guid_string(), update_check_result));
 
   ASSERT1(app);
   ASSERT1(update_response);
@@ -136,7 +138,9 @@ void AppStateCheckingForUpdate::PostUpdateCheck(
 void AppStateCheckingForUpdate::HandleUpdateAvailable(App* app,
                                                       HRESULT code,
                                                       const CString& message) {
-  CORE_LOG(L3, (_T("[HandleUpdateAvailable][0x%p]"), app));
+  NX_VERIFY(app, return);
+  CORE_LOG(L3, (_T("[HandleUpdateAvailable][0x%p] app:%s cod:%08X msg:%s"),
+    app, app->app_guid_string(), code, message));
 
   ASSERT1(app);
   ASSERT1(SUCCEEDED(code));
@@ -150,6 +154,7 @@ void AppStateCheckingForUpdate::HandleUpdateAvailable(App* app,
   if (FAILED(hr)) {
     // Most of the errors that might actually be seen are likely to be due to
     // response issues. Therefore, display a message about the server.
+    CORE_LOG(LE, (_T("BuildApp Failed app:%s err:%08x"), app->app_guid_string(), hr));
     const CString language = app->app_bundle()->display_language();
     StringFormatter formatter(language);
     CString error_message;
@@ -179,7 +184,8 @@ void AppStateCheckingForUpdate::HandleUpdateAvailable(App* app,
 void AppStateCheckingForUpdate::HandleUpdateDeferred(App* app,
                                                      HRESULT code,
                                                      const CString& message) {
-  CORE_LOG(L3, (_T("[HandleUpdateDeferred][0x%p]"), app));
+  NX_VERIFY(app, return);
+  CORE_LOG(L3, (_T("[HandleUpdateDeferred][0x%p] app:%s"), app, app->app_guid_string()));
 
   ASSERT1(app);
   ASSERT1(code == GOOPDATE_E_UPDATE_DEFERRED);
@@ -193,7 +199,8 @@ void AppStateCheckingForUpdate::HandleUpdateDeferred(App* app,
 void AppStateCheckingForUpdate::HandleNoUpdate(App* app,
                                                HRESULT code,
                                                const CString& message) {
-  CORE_LOG(L3, (_T("[HandleNoUpdate][0x%p]"), app));
+  NX_VERIFY(app, return);
+  CORE_LOG(L3, (_T("[HandleNoUpdate][0x%p] app:%s"), app, app->app_guid_string()));
   ASSERT1(app);
   ASSERT1(code == GOOPDATE_E_NO_UPDATE_RESPONSE);
 
@@ -217,7 +224,8 @@ void AppStateCheckingForUpdate::HandleNoUpdate(App* app,
 void AppStateCheckingForUpdate::HandleErrorResponse(App* app,
                                                     HRESULT code,
                                                     const CString& message) {
-  CORE_LOG(L3, (_T("[HandleErrorResponse][0x%p]"), app));
+  NX_VERIFY(app, return);
+  CORE_LOG(L3, (_T("[HandleErrorResponse][0x%p] app:%s code:%08X msg:%s"), app, code, message));
 
   ASSERT1(app);
   ASSERT1(FAILED(code));

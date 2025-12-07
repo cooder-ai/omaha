@@ -310,7 +310,7 @@ HRESULT StringUnescape(const CString& str_in, CString* str_out);
 // checks to ensure that the string is correct.
 // Tests for overflow and non-int strings.
 bool String_StringToDecimalIntChecked(const TCHAR* str, int* value);
-
+bool String_StringToDecimalInt64Checked(const TCHAR* str, int64_t* value);
 // Converts a string to a bool.
 HRESULT String_StringToBool(const TCHAR* str, bool* value);
 

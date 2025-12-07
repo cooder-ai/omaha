@@ -94,7 +94,7 @@ HRESULT Model::CheckForUpdate(AppBundle* app_bundle) {
 }
 
 HRESULT Model::Download(AppBundle* app_bundle) {
-  CORE_LOG(L3, (_T("[Model::Download][0x%p]"), app_bundle));
+  CORE_LOG(L3, (_T("[UPDATE][Model::Download][0x%p]"), app_bundle));
 
   __mutexScope(lock_);
 

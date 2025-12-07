@@ -198,7 +198,8 @@ HRESULT RegKey::Open(HKEY hKeyParent,
 HRESULT RegKey::Open(const TCHAR * full_key_name, REGSAM sam_desired) {
   ASSERT1(full_key_name);
   CString key_name(full_key_name);
-
+  UTIL_LOG(L1, (_T("RegKey Open key_name:%s opt:%08X"), key_name, sam_desired));
+  XConsoleLog(_T("RegKey open key_name:%s"), key_name);
   RootKeyInfo info = GetRootKeyInfo(&key_name);
   if (!info.key) {
     ASSERT(false, (_T("unable to get root key for %s"), full_key_name));
@@ -462,8 +463,8 @@ HRESULT RegKey::GetValueStaticHelper(const TCHAR * full_key_name,
       if (hr == S_OK) {
         hr = temp_res;
       } else {
-        UTIL_LOG(L5, (_T("[Failed to read reg value: %s:%s]"),
-                      full_key_name, value_name));
+        UTIL_LOG(L5, (_T("[Failed to read reg value: %s:%s] err:%08X"),
+                      full_key_name, value_name, GetLastError()));
       }
     } else {
       UTIL_LOG(L5, (_T("[reg value does not exist: %s]"), key_name));

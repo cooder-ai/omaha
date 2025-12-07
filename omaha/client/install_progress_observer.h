@@ -91,7 +91,7 @@ struct AppCompletionInfo {
                         is_canceled(false),
                         is_noupdate(false) {}
 
-#ifdef DEBUG
+//#ifdef DEBUG
   CString ToString() const {
     CString result;
     SafeCStringFormat(&result,
@@ -101,7 +101,7 @@ struct AppCompletionInfo {
         post_install_launch_command_line);
     return result;
   }
-#endif
+//#endif
 };
 
 struct ObserverCompletionInfo {
@@ -113,7 +113,7 @@ struct ObserverCompletionInfo {
   explicit ObserverCompletionInfo(CompletionCodes code)
       : completion_code(code) {}
 
-#ifdef DEBUG
+//#ifdef DEBUG
   CString ToString() const {
     CString result;
     SafeCStringFormat(&result, _T("[ObserverCompletionInfo][code=%d][text=%s]"),
@@ -123,7 +123,7 @@ struct ObserverCompletionInfo {
     }
     return result;
   }
-#endif
+//#endif
 };
 
 // TODO(omaha3): This is bundle-centric. Add support for individual app-updates

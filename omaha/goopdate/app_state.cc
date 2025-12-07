@@ -127,10 +127,12 @@ void AppState::Cancel(App* app) {
 void AppState::Error(App* app,
                      const ErrorContext& error_context,
                      const CString& message) {
+  NX_VERIFY(app, return);
+
   ASSERT1(app);
   ASSERT1(app->model()->IsLockedByCaller());
-  CORE_LOG(LE, (_T("[AppState::Error][0x%p][0x%08x][%s]"),
-      app, error_context.error_code, message));
+  CORE_LOG(LE, (_T("[AppState::Error] app:%s err_code:%08X msg:%s"),
+    app->app_guid_string(), error_context.error_code, message));
 
   app->SetError(error_context, message);
   ChangeState(app, new AppStateError);

@@ -525,7 +525,7 @@ HRESULT App::GetInstallProgress(LONG* install_progress_percentage,
                                 kRegValueInstallerProgress,
                                 &progress_percent);
   if (FAILED(hr)) {
-    CORE_LOG(LE, (_T("[App::GetInstallProgress failed][%#x]"), hr));
+    CORE_LOG(LE, (_T("[App::GetInstallProgress failed][%#x] app_id_key_name:%s err:%08X"), hr, app_id_key_name, GetLastError()));
     return hr;
   }
 
@@ -539,12 +539,14 @@ HRESULT App::GetInstallProgress(LONG* install_progress_percentage,
 }
 
 HRESULT App::ResetInstallProgress() {
+  NXLOG_FUNCTION;
   ASSERT1(model()->IsLockedByCaller());
 
   const CString base_key_name(ConfigManager::Instance()->registry_client_state(
       app_bundle_->is_machine()));
   const CString app_id_key_name(AppendRegKeyPath(base_key_name,
                                                  app_guid_string()));
+  CORE_LOG(L3, (_T("ResetInstallProgress app_id_key_name:"), app_id_key_name));
   return RegKey::DeleteValue(app_id_key_name, kRegValueInstallerProgress);
 }
 

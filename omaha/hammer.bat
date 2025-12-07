@@ -4,7 +4,7 @@ setlocal
 
 rem -- Set all environment variables used by Hammer and Omaha. --
 
-call "%ProgramFiles%\Microsoft Visual Studio\2022\Community\VC\Auxiliary\Build\vcvarsall.bat" amd64_x86 10.0.22621.0 || (SET ERRORLINE=7&& goto :error)
+call "%ProgramFiles%\Microsoft Visual Studio\2022\Professional\VC\Auxiliary\Build\vcvarsall.bat" amd64_x86 10.0.22621.0 || (SET ERRORLINE=7&& goto :error)
 
 :: VS2003/VC71 is 1310 (not supported by the current build).
 :: VS2005/VC80 is 1400 (not supported by the current build).
@@ -42,6 +42,13 @@ goto set_env_variables
 
 :vc170
 set OMAHA_MSC_VER=1930
+
+:: Set VS2022 specific environment variables
+set "VCToolsInstallDir=C:\Program Files\Microsoft Visual Studio\2022\Professional\VC\Tools\MSVC\14.44.35207\"
+set "VCToolsRedistDir=C:\Program Files\Microsoft Visual Studio\2022\Professional\VC\Redist\MSVC\14.44.35207\"
+set "VS170COMNTOOLS=C:\Program Files\Microsoft Visual Studio\2022\Professional\Common7\Tools\"
+set "VCINSTALLDIR=C:\Program Files\Microsoft Visual Studio\2022\Professional\VC\"
+
 goto set_env_variables
 :set_env_variables
 
@@ -49,7 +56,8 @@ goto set_env_variables
 
 :: Hammer does not need this variable but the unit tests do.
 if not defined OMAHA_PSEXEC_DIR (
-  set "OMAHA_PSEXEC_DIR=%ProgramFiles(x86)%\pstools"
+::  set "OMAHA_PSEXEC_DIR=%ProgramFiles(x86)%\pstools"
+  set "OMAHA_PSEXEC_DIR=C:\pstools"
 )
 echo OMAHA_PSEXEC_DIR: %OMAHA_PSEXEC_DIR%
 
@@ -75,8 +83,8 @@ echo OMAHA_PROTOBUF_BIN_DIR: %OMAHA_PROTOBUF_BIN_DIR%
 if not defined OMAHA_PROTOBUF_SRC_DIR (
   set OMAHA_PROTOBUF_SRC_DIR=C:\protobuf\src
 )
+set OMAHA_PROTOBUF_SRC_DIR=C:\protobuf\src
 echo OMAHA_PROTOBUF_SRC_DIR: %OMAHA_PROTOBUF_SRC_DIR%
-
 :: Directory where Python (python.exe) is installed.
 if not defined OMAHA_PYTHON_DIR (
   set OMAHA_PYTHON_DIR=C:\Python27
@@ -85,13 +93,14 @@ echo OMAHA_PYTHON_DIR: %OMAHA_PYTHON_DIR%
 
 :: Directory in WiX where candle.exe and light.exe are installed.
 if not defined OMAHA_WIX_DIR (
-  set "OMAHA_WIX_DIR=%WIX%\bin"
+::  set "OMAHA_WIX_DIR=%WIX%\bin"
+  set "OMAHA_WIX_DIR=C:\Program Files (x86)\WiX Toolset v3.11\bin"
 )
 echo OMAHA_WIX_DIR: %OMAHA_WIX_DIR%
 
 :: Root directory of the WTL installation.
 if not defined OMAHA_WTL_DIR (
-  set OMAHA_WTL_DIR=C:\wtl\files
+  set OMAHA_WTL_DIR=C:\wtl
 )
 echo OMAHA_WTL_DIR: %OMAHA_WTL_DIR%
 
@@ -109,6 +118,7 @@ echo OMAHA_WINDOWS_SDK_10_0_VERSION: %OMAHA_WINDOWS_SDK_10_0_VERSION%
 if not defined OMAHA_SIGNTOOL_SDK_DIR (
   set OMAHA_SIGNTOOL_SDK_DIR="%WindowsSdkVerBinPath%\x86"
 )
+set OMAHA_SIGNTOOL_SDK_DIR="C:\\Program Files (x86)\\Windows Kits\\10\\bin\\10.0.22621.0\\x86"
 echo OMAHA_SIGNTOOL_SDK_DIR: %OMAHA_SIGNTOOL_SDK_DIR%
 
 :: Directory of Scons (http://www.scons.org/).
@@ -123,6 +133,12 @@ if not defined SCT_DIR (
 )
 echo SCT_DIR: %SCT_DIR%
 
+:: Directory of the Google's Software Construction Toolkit.
+if not defined OMAHA_TOOLPATH (
+  set "OMAHA_TOOLPATH=%~dp0site_scons\site_tools"
+)
+echo OMAHA_TOOLPATH: %OMAHA_TOOLPATH%
+
 set "PROXY_CLSID_TARGET=%~dp0proxy_clsids.txt"
 set "CUSTOMIZATION_UT_TARGET=%~dp0common\omaha_customization_proxy_clsid.h"
 
@@ -133,6 +149,25 @@ set "PYTHONPATH=%OMAHA_PYTHON_DIR%"
 :: Make sure we're using Python from the install location above:
 set PATH=%OMAHA_PYTHON_DIR%;%PATH%
 
+:: if skip signing, set skip_signing=1
+::set skip_signing=1
+
+echo target: "%SCT_DIR%\hammer.bat"
+echo params: %*
+echo ""
+echo "=== Debug Info ==="
+echo VisualStudioVersion: %VisualStudioVersion%
+echo OMAHA_MSC_VER: %OMAHA_MSC_VER%
+echo OMAHA_SIGNTOOL_SDK_DIR: %OMAHA_SIGNTOOL_SDK_DIR%
+echo VCToolsInstallDir: %VCToolsInstallDir%
+echo VCToolsRedistDir: %VCToolsRedistDir%
+echo VS170COMNTOOLS: %VS170COMNTOOLS%
+echo VCINSTALLDIR: %VCINSTALLDIR%
+echo CC: %CC%
+echo CXX: %CXX%s
+echo OMAHA_WTL_DIR: %OMAHA_WTL_DIR%
+::echo skip_signing: %skip_signing%
+echo "=================="
 call "%SCT_DIR%\hammer.bat" %* || (SET ERRORLINE=132&&goto :error)
 
 if /i {%1} == {-c} (

@@ -110,8 +110,8 @@ HRESULT WinHttpAdapter::OpenRequest(const TCHAR* verb,
     return hr;
   }
 
-  NET_LOG(L3, (_T("[WinHttpAdapter::OpenRequest][0x%p][0x%x]"),
-              this, request_handle_));
+  NET_LOG(L3, (_T("[WinHttpAdapter::OpenRequest][0x%p][0x%x] url:%s"),
+              this, request_handle_, uri));
 
   HttpClient::StatusCallback old_callback =
       http_client_->SetStatusCallback(request_handle_,

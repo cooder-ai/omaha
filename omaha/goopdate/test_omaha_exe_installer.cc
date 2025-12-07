@@ -96,6 +96,7 @@ CString RemoveInstallerDataArgument(const CString& cmd_line) {
 }  // namespace
 
 int WINAPI _tWinMain(HINSTANCE, HINSTANCE, LPTSTR cmd_line, int) {
+  OutputDebugString(_T("test_omaha main enter"));
   int argument_count = 0;
   LPTSTR* argument_list = ::CommandLineToArgvW(cmd_line, &argument_count);
   scoped_hlocal scoped_argument_list(argument_list);

@@ -54,6 +54,12 @@ import os
 import sys
 
 import omaha_version_utils
+import logging
+logging.basicConfig(
+  level=logging.DEBUG,
+  format='%(asctime)s-%(levelname)s-%(filename)s-%(message)s',
+  datefmt='%Y-%m-%d %H:%M:%S'
+)
 
 # Build the "Google Update", the Google-specific version of Omaha.
 # TODO(omaha): Set based on an environment variable and/or Hammer arg.
@@ -65,13 +71,13 @@ _is_google_update_build = False
 # These values must be changed when customizing open source Omaha.
 # You may also wish to replace the language-neutral constants in the individual
 # *generated_resources_*.rc files with localized strings.
-_FULL_COMPANY_NAME = 'BraveSoftware Inc.'
-_SHORT_COMPANY_NAME = 'BraveSoftware'
-_PATH_COMPANY_NAME = 'BraveSoftware'
+_FULL_COMPANY_NAME = 'Mainfunc Inc.'
+_SHORT_COMPANY_NAME = 'GensparkSoftware'
+_PATH_COMPANY_NAME = 'GensparkSoftware'
 _PRODUCT_NAME = 'Update'
-_COMPANY_DOMAIN_BASE = 'brave'
-_COMPANY_DOMAIN = _COMPANY_DOMAIN_BASE + '.com'
-_MAIN_EXE_BASE_NAME = 'BraveUpdate'
+_COMPANY_DOMAIN_BASE = 'Genspark'
+_COMPANY_DOMAIN = _COMPANY_DOMAIN_BASE + '.ai'
+_MAIN_EXE_BASE_NAME = 'GensparkUpdate'
 # TODO(omaha): Use this throughout the build files where goopdate and
 # goopdateres are referenced.
 _MAIN_DLL_BASE_NAME = 'goopdate'
@@ -97,12 +103,13 @@ _OMAHA_COPYRIGHT_STRING_ENGLISH = ''
 # The set of expected values are in omaha_version_utils.
 # Defaults to VC160 (Visual Studio 2019) if the environment variable is not
 # specified.
-_msc_ver = int(os.getenv('OMAHA_MSC_VER', "1920"))
+_msc_ver = int(os.getenv('OMAHA_MSC_VER', "1930"))
 
 _sdk_dir = os.getenv('WindowsSdkDir', os.getenv('OMAHA_PLATFORM_SDK_DIR'))
 if (_sdk_dir is None):
     _sdk_dir = ('$GOOGLE3/third_party/%s/files' %
-   { omaha_version_utils.VC160:'windows_sdk/windows_sdk_10',
+   { omaha_version_utils.VC170:'windows_sdk/windows_sdk_10',
+     omaha_version_utils.VC160:'windows_sdk/windows_sdk_10',
      omaha_version_utils.VC150:'windows_sdk/windows_sdk_10',
      omaha_version_utils.VC140:'windows_sdk/windows_sdk_10',
      omaha_version_utils.VC120:'windows_sdk_8_1',
@@ -111,8 +118,13 @@ if (_sdk_dir is None):
 
 _sdk_version = os.getenv('OMAHA_WINDOWS_SDK_10_0_VERSION', None)
 _wtl_dir = os.getenv('OMAHA_WTL_DIR', '$GOOGLE3/third_party/wtl/files')
-_signtool_path = ('python "$MAIN_DIR/tools/retry.py" 10 5 \"%s/%s\"' %
-                  (os.getenv('OMAHA_SIGNTOOL_SDK_DIR'), 'signtool.exe'))
+
+sign_exe = os.path.join(os.getenv('OMAHA_SIGNTOOL_SDK_DIR'), 'signtool.exe')
+
+digicerttool_sign_exe = os.path.join(os.getenv('DIGICERT_KEYLOCKER_TOOLS_DIR'), 'smctl.exe')
+
+_signtool_path = ('python "$MAIN_DIR/tools/retry.py" 6 15 \"%s"' %
+                  (sign_exe))
 
 # Windows is the only environment we bulid for, so create a specialized base
 # environment for Windows.
@@ -145,6 +157,9 @@ win_env = Environment(
         'component_targets_msvs',
         'omaha_builders',
     ],
+    toolpath=[
+      os.getenv('OMAHA_TOOLPATH', ""),
+    ],
     msc_ver = _msc_ver,
 
     # Visual Studio 2008 does not ship the sign tool. Use the sign tool from
@@ -152,8 +167,10 @@ win_env = Environment(
     # Remove this if http://code.google.com/p/swtoolkit/issues/detail?id=16 is
     # fixed.
     SIGNTOOL = _signtool_path,
+    DIGICERT_SIGN_TOOL = ('python "$MAIN_DIR/tools/retry.py" 6 30 \"%s"' %
+                  (digicerttool_sign_exe)),
 )
-
+win_env['ENV'].update(os.environ)
 win_env['ENV']['GOROOT'] = os.getenv('GOROOT',
                                      win_env.subst('$MAIN_DIR') +
                                      '\\..\\third_party\\go\\files')
@@ -262,7 +279,21 @@ AddOption(
     type='string',
     default='$MAIN_DIR/standalone'
 )
+AddOption(
+    '--signing_mode',
+    action='store',
+    type='string',
+    default='test',
+    help='the mode of signing. "none", "test", "production"'
+)
 
+AddOption(
+    '--digicert_sign_keypair',
+    action='store',
+    type='string',
+    default=None,
+    help='the keypair of digicert'
+)
 # Declare various boolean states.
 DeclareBit('is_google_update_build', 'True if building Google Update')
 DeclareBit('official_installers', 'Building using checked-in binaries')
@@ -286,7 +317,8 @@ DeclareBit('verify_payload_authenticode_signature',
            'Whether to verify the Authenticode signature of payloads')
 DeclareBit('use_authenticode_machine_store',
            'Use the machine store, instead of the user store, of certificates')
-
+DeclareBit('skip_signing',
+           'Skip signing')
 # Build official installers if --official_installers is on the command line.
 win_env.SetBitFromOption('official_installers', False)
 
@@ -314,6 +346,9 @@ win_env.SetBitFromOption('msvs', False)
 # Do not build the unit tests if the bit is set.
 win_env.SetBitFromOption('no-tests', False)
 
+# Skip signing if --skip_signing is on the command line.
+win_env.SetBitFromOption('skip_signing', False)
+
 # Set if this is a Google build, otherwise, it is an open source build.
 if _is_google_update_build:
   win_env.SetBits('is_google_update_build')
@@ -333,6 +368,9 @@ if win_env.Bit('all'):
 if win_env.Bit('build_three_versions'):
   win_env.ClearBits('build_two_versions')
 
+signing_mode = GetOption('signing_mode')
+win_env['signing_mode'] = signing_mode
+win_env['DIGICERT_SIGN_KEYPAIR'] = GetOption('digicert_sign_keypair')
 # Allow use of command-line-specified certificates to sign with, but
 # only if we're not on the build server.
 if not win_env.Bit('build_server'):
@@ -555,6 +593,7 @@ win_env.AppendUnique(
         '/wd5267',  # definition of implicit copy constructor/assignment
                     # operator for 'type' is deprecated because it has a
                     # user-provided assignment operator/copy constructor
+        '/wd4388',  # '>=': signed/unsigned mismatch (VS2022 ATL warning)
         #
         # Disable static analysis warnings.
         #
@@ -1008,22 +1047,23 @@ windows64_debug_env.Append(BUILD_GROUPS = ['default'])
 # Build the variants listed above.
 # This step will call each of the SConscripts (build.scons) listed,
 # once for each variant currently being built.
-if GetOption('x64'):
-  print 'Using 64 bit environments.'
-  _environments = [
-      windows64_debug_env,
-      windows64_optimized_env,
-      ]
-else:
-  _environments = [
-      windows_debug_env,
-      windows_optimized_env,
-      windows_coverage_env,
-      ]
+if not win_env.Bit('msvs'):  # Skip building if generating VS project
+  if GetOption('x64'):
+    print 'Using 64 bit environments.'
+    _environments = [
+        windows64_debug_env,
+        windows64_optimized_env,
+        ]
+  else:
+    _environments = [
+        windows_debug_env,
+        windows_optimized_env,
+        windows_coverage_env,
+        ]
 
-BuildEnvironments(_environments)
+  BuildEnvironments(_environments)
 
-if 'HAMMER_RUNS_TESTS' in os.environ.keys():
+if 'HAMMER_RUNS_TESTS' in os.environ.keys() and not win_env.Bit('msvs'):
   # Hammer sets the default target to 'scons-out'. This causes run_* aliases
   # to also be built, which means the tests run by default. To avoid this, clear
   # Default and set the default to just build the programs.

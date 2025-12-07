@@ -1,4 +1,4 @@
-// Copyright 2003-2010 Google Inc.
+﻿// Copyright 2003-2010 Google Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -25,7 +25,8 @@
 using std::string;
 
 namespace omaha {
-
+#pragma warning(push)
+#pragma warning(disable : 4428 4820 4819)
 TEST(StringTest, IntToString) {
   ASSERT_STREQ(String_Int64ToString(0, 10), L"0");
   ASSERT_STREQ(String_Int64ToString(1, 10), L"1");
@@ -1191,6 +1192,6 @@ TEST(StringTest, WideToUtf8Vector) {
   WideToUtf8Vector(multibytes, &out);
   EXPECT_EQ(8, out.size());
 }
-
+#pragma warning(pop)
 }  // namespace omaha
 

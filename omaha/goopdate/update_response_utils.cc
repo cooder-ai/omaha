@@ -226,6 +226,8 @@ CString GetAppResponseStatus(const xml::response::App& app) {
 HRESULT BuildApp(const xml::UpdateResponse* update_response,
                  HRESULT code,
                  App* app) {
+  NX_VERIFY(update_response, return E_INVALIDARG);
+  NX_VERIFY(app, return E_INVALIDARG);
   ASSERT1(update_response);
   ASSERT1(SUCCEEDED(code) || code == GOOPDATE_E_NO_UPDATE_RESPONSE);
   ASSERT1(app);
@@ -233,6 +235,10 @@ HRESULT BuildApp(const xml::UpdateResponse* update_response,
   AppVersion* next_version = app->next_version();
 
   const CString& app_id = app->app_guid_string();
+  if (next_version) {
+    CORE_LOG(L3, (_T("BuildApp app:%s next_version:%s"), app_id,
+                  next_version->version()));
+  }
 
   const xml::response::App* response_app(GetApp(update_response->response(),
                                                 app_id));
@@ -254,6 +260,8 @@ HRESULT BuildApp(const xml::UpdateResponse* update_response,
   for (size_t i = 0; i < update_check.urls.size(); ++i) {
     HRESULT hr = next_version->AddDownloadBaseUrl(update_check.urls[i]);
     if (FAILED(hr)) {
+      CORE_LOG(LE, (_T("[AddDownloadBaseUrl failed] err:0x%x url:%s"), hr,
+                    update_check.urls[i]));
       return hr;
     }
   }
@@ -263,8 +271,11 @@ HRESULT BuildApp(const xml::UpdateResponse* update_response,
         update_check.install_manifest.packages[i]);
     HRESULT hr = next_version->AddPackage(package.name,
                                           package.size,
+                                          package.hash_sha1,
                                           package.hash_sha256);
     if (FAILED(hr)) {
+      CORE_LOG(LE, (_T("[AddPackage failed] err:0x%x name:%s size:%lld hash:%s hash256:%s"), hr,
+                    package.name, package.size, package.hash_sha1, package.hash_sha256));
       return hr;
     }
   }
@@ -272,6 +283,7 @@ HRESULT BuildApp(const xml::UpdateResponse* update_response,
   if (!app->untrusted_data().IsEmpty()) {
     HRESULT hr = ValidateUntrustedData(response_app->data);
     if (FAILED(hr)) {
+      CORE_LOG(LE, (_T("ValidateUntrustedData hr:%08X"), hr));
       return hr;
     }
   }
@@ -281,6 +293,7 @@ HRESULT BuildApp(const xml::UpdateResponse* update_response,
                               app->server_install_data_index(),
                               &server_install_data);
   if (FAILED(hr)) {
+    CORE_LOG(LE, (_T("GetInstallData hr:%08X"), hr));
     return hr;
   }
   app->set_server_install_data(server_install_data);
@@ -307,6 +320,8 @@ xml::UpdateResponseResult GetResult(const xml::UpdateResponse* update_response,
                                     const CString& app_name,
                                     const CString& language) {
   ASSERT1(update_response);
+  CORE_LOG(L3, (_T("UpdateResponseResult GetResult appid:%s app_name:%s"),
+                appid, app_name));
   const xml::response::App* response_app(GetApp(update_response->response(),
                                                 appid));
 

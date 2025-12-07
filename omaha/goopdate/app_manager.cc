@@ -224,40 +224,53 @@ bool AppManager::IsAppOemInstalledAndEulaAccepted(const CString& app_id) const {
 }
 
 HRESULT AppManager::RunRegistrationUpdateHook(const CString& app_id) const {
+  CORE_LOG(L3, (_T("[UPDATE]AppManager::RunRegistrationUpdateHook app_id:%s ")
+                _T("is_machine_:%d"),
+                app_id, is_machine_));
   GUID app_guid = GUID_NULL;
   HRESULT hr = StringToGuidSafe(app_id, &app_guid);
   if (FAILED(hr)) {
+    CORE_LOG(LE, (_T("[UPDATE] StringToGuidSafe failed app_id:%s err:0x%08X"), app_id, hr));
     return hr;
   }
   RegKey client_key;
   hr = OpenClientKey(app_guid, &client_key);
   if (FAILED(hr)) {
+    CORE_LOG(
+        LE,
+        (_T("[UPDATE] OpenClientKey failed app_id:%s is_machine:%d err:0x%08X"),
+         app_id, is_machine_, hr));
     return hr;
   }
 
   CString hook_clsid_str;
   hr = client_key.GetValue(kRegValueUpdateHookClsid, &hook_clsid_str);
   if (FAILED(hr)) {
+    CORE_LOG(LE, (_T("[UPDATE] GetValue failed app_id:%s is_machine:%d err:0x%08X"),
+                  app_id, is_machine_, hr));
     return hr;
   }
   GUID hook_clsid = GUID_NULL;
   hr = StringToGuidSafe(hook_clsid_str, &hook_clsid);
   if (FAILED(hr)) {
+    CORE_LOG(LE, (_T("[UPDATE] StringToGuidSafe failed app_id:%s is_machine:%d err:0x%08X"),
+                  app_id, is_machine_, hr));
     return hr;
   }
 
-  CORE_LOG(L3, (_T("[Update Hook Clsid][%s][%s]"), app_id, hook_clsid_str));
+  CORE_LOG(
+      L3, (_T("[UPDATE] app_id:%s hook_clsid_str:%s"), app_id, hook_clsid_str));
 
   CComPtr<IRegistrationUpdateHook> registration_hook;
   hr = registration_hook.CoCreateInstance(hook_clsid);
   if (FAILED(hr)) {
-    CORE_LOG(LE, (_T("[IRegistrationUpdateHook CoCreate failed][0x%x]"), hr));
+    CORE_LOG(LE, (_T("[UPDATE] IRegistrationUpdateHook CoCreate failed app_id:%s is_machine:%d err:0x%08X"), app_id, is_machine_, hr));
     return hr;
   }
 
   hr = registration_hook->UpdateRegistry(CComBSTR(app_id), is_machine_);
   if (FAILED(hr)) {
-    CORE_LOG(LE, (_T("[registration_hook UpdateRegistry failed][0x%x]"), hr));
+    CORE_LOG(LE, (_T("[UPDATE] registration_hook UpdateRegistry failed app_id:%s err:0x%08X"), app_id, hr));
     return hr;
   }
 
@@ -334,8 +347,12 @@ CString AppManager::GetClientStateMediumKeyName(const GUID& app_guid) const {
 // Assumes the registry access lock is held.
 HRESULT AppManager::OpenClientKey(const GUID& app_guid,
                                   RegKey* client_key) const {
-  ASSERT1(client_key);
-  return client_key->Open(GetClientKeyName(app_guid), KEY_READ);
+  NX_VERIFY(client_key, return E_INVALIDARG);
+  CString keyName = GetClientKeyName(app_guid);
+  CORE_LOG(L2, (_T("OpenClientKey machine:%d guid:%s key_name:%s"),
+                is_machine_, GuidToString(app_guid),
+                keyName));
+  return client_key->Open(keyName, KEY_READ);
 }
 
 // Assumes the registry access lock is held.
@@ -344,6 +361,8 @@ HRESULT AppManager::OpenClientStateKey(const GUID& app_guid,
                                        RegKey* client_state_key) const {
   ASSERT1(client_state_key);
   CString key_name = GetClientStateKeyName(app_guid);
+  CORE_LOG(L2, (_T("OpenClientKey machine:%d guid:%s key_name:%s"),
+    is_machine_, GuidToString(app_guid), key_name));
   return client_state_key->Open(key_name, sam_desired);
 }
 
@@ -358,9 +377,11 @@ HRESULT AppManager::CreateClientStateKey(const GUID& app_guid,
   // ASSERT1(::GetCurrentThreadId() == registry_access_lock_.GetOwner());
 
   const CString key_name = GetClientStateKeyName(app_guid);
+  CORE_LOG(L2, (_T("CreateClientStateKey guid:%s key_name:%s"), GuidToString(app_guid),
+                key_name));
   HRESULT hr = client_state_key->Create(key_name);
   if (FAILED(hr)) {
-    CORE_LOG(L3, (_T("[RegKey::Create failed][0x%08x]"), hr));
+    CORE_LOG(L3, (_T("[RegKey::Create failed] key_name:%s err:0x%08x"), key_name, hr));
     return hr;
   }
 
@@ -375,7 +396,7 @@ HRESULT AppManager::CreateClientStateKey(const GUID& app_guid,
   const CString medium_key_name = GetClientStateMediumKeyName(app_guid);
   hr = RegKey::CreateKey(medium_key_name);
   if (FAILED(hr)) {
-    CORE_LOG(L3, (_T("[RegKey::Create ClientStateMedium failed][0x%08x]"), hr));
+    CORE_LOG(L3, (_T("[RegKey::Create ClientStateMedium failed key_name:%s err:0x%08x"), medium_key_name, hr));
     return hr;
   }
 
@@ -910,12 +931,14 @@ void AppManager::ReadInstallerResultApiValues(
   ASSERT1(installer_extra_code1);
   ASSERT1(installer_result_uistring);
   ASSERT1(installer_success_launch_cmd);
-
+  CORE_LOG(L3, (_T("[update]ReadInstallerResultApiValues app_id:%s"),
+                GuidToString(app_guid)));
   __mutexScope(registry_access_lock_);
 
   RegKey client_state_key;
   HRESULT hr = OpenClientStateKey(app_guid, KEY_READ, &client_state_key);
   if (FAILED(hr)) {
+    CORE_LOG(LE, (_T("[InstallerResult in registry failed err:%08X"), hr));
     return;
   }
 
@@ -958,6 +981,8 @@ void AppManager::ReadInstallerResultApiValues(
 
 void AppManager::ClearInstallerResultApiValues(const GUID& app_guid) {
   const CString client_state_key_name = GetClientStateKeyName(app_guid);
+  CORE_LOG(L3, (_T("[update]ClearInstallerResultApiValues app_id:%s key:%s"),
+                GuidToString(app_guid), client_state_key_name));
   const CString update_key_name =
       ConfigManager::Instance()->registry_update(is_machine_);
 
@@ -1175,8 +1200,8 @@ HRESULT AppManager::ResetCurrentStateKey(const CString& app_guid) {
 }
 
 HRESULT AppManager::WriteStateValue(const App& app, CurrentState state_value) {
-  CORE_LOG(L2, (_T("[AppManager::WriteStateValue][%s]"),
-                app.app_guid_string()));
+  CORE_LOG(L2, (_T("[AppManager::WriteStateValue][%s] current_state:%d"),
+                app.app_guid_string(), int(state_value)));
 
   return RegKey::SetValue(GetCurrentStateKeyName(app.app_guid_string()),
                           kRegValueStateValue,
@@ -1187,12 +1212,9 @@ HRESULT AppManager::WriteDownloadProgress(const App& app,
                                           uint64 bytes_downloaded,
                                           uint64 bytes_total,
                                           LONG download_time_remaining_ms) {
-  CORE_LOG(L2, (_T("[AppManager::WriteDownloadProgress][%s]"),
-                app.app_guid_string()));
-
-  if (bytes_total <= 0) {
-    return E_INVALIDARG;
-  }
+  CORE_LOG(L2, (_T("[AppManager::WriteDownloadProgress][%s] bytes_downloaded:%lld bytes_total:%lld"),
+                app.app_guid_string(), bytes_downloaded, bytes_total));
+  NX_VERIFY(bytes_total > 0, return E_INVALIDARG);
 
   int download_progress_percentage =
       static_cast<int>(100ULL * bytes_downloaded / bytes_total);
@@ -1202,9 +1224,7 @@ HRESULT AppManager::WriteDownloadProgress(const App& app,
   HRESULT hr = RegKey::SetValue(current_state_key_name,
                                 kRegValueDownloadTimeRemainingMs,
                                 static_cast<DWORD>(download_time_remaining_ms));
-  if (FAILED(hr)) {
-    return hr;
-  }
+  NX_VERIFY(SUCCEEDED(hr), return hr);
 
   return RegKey::SetValue(current_state_key_name,
                           kRegValueDownloadProgressPercent,
@@ -1214,8 +1234,9 @@ HRESULT AppManager::WriteDownloadProgress(const App& app,
 HRESULT AppManager::WriteInstallProgress(const App& app,
                                          LONG install_progress_percentage,
                                          LONG install_time_remaining_ms) {
-  CORE_LOG(L2, (_T("[AppManager::WriteInstallProgress][%s]"),
-                app.app_guid_string()));
+  CORE_LOG(L2, (_T("[AppManager::WriteInstallProgress][%s] install_progress_percentage:%d install_time_remaining_ms:%d"),
+            app.app_guid_string(), install_progress_percentage,
+            install_time_remaining_ms));
 
   const CString current_state_key_name(
       GetCurrentStateKeyName(app.app_guid_string()));
@@ -1223,6 +1244,9 @@ HRESULT AppManager::WriteInstallProgress(const App& app,
                                 kRegValueInstallTimeRemainingMs,
                                 static_cast<DWORD>(install_time_remaining_ms));
   if (FAILED(hr)) {
+    CORE_LOG(LE,
+             (_T("[AppManager::WriteInstallProgress][%s] key:%s failed err:%08X hr:%08X"),
+             app.app_guid_string(), current_state_key_name, GetLastError(), hr));
     return hr;
   }
 

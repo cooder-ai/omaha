@@ -20,7 +20,7 @@
 #include "omaha/base/file.h"
 #include "omaha/base/path.h"
 #include "omaha/base/utils.h"
-
+#include "base/logging.h"
 using omaha::CreateDir;
 using omaha::ConcatenatePath;
 using omaha::File;
@@ -29,6 +29,7 @@ using omaha::GetDirectoryFromPath;
 using omaha::GetFileFromPath;
 
 int _tmain(int argc, TCHAR* argv[]) {
+  XConsoleLog(_T("apply tag enter"));
   if (argc != 4 && argc != 5) {
     _tprintf(_T("Incorrect number of arguments!\n"));
     _tprintf(_T("Usage: ApplyTag <signed_file> <outputfile> <tag> [append]\n"));

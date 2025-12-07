@@ -16,6 +16,7 @@
 
 #include "omaha/mi_exe_stub/tar.h"
 #include <windows.h>
+#include "base/logging.h"
 #pragma warning(push)
 // C4310: cast truncates constant value
 #pragma warning(disable : 4310)
@@ -45,6 +46,7 @@ Tar::~Tar() {
 }
 
 bool Tar::ExtractToDir() {
+  NXLOG_FUNCTION;
   bool done = false;
   do {
     if (!ExtractOneFile(&done)) {

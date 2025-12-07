@@ -23,8 +23,10 @@
 #include "omaha/base/omaha_version.h"
 #include "omaha/base/utils.h"
 #include "omaha/crashhandler/crash_handler.h"
-
-int WINAPI _tWinMain(HINSTANCE, HINSTANCE, LPTSTR, int) {
+#include "base/logging.h"
+int WINAPI _tWinMain(HINSTANCE, HINSTANCE, LPTSTR pszCommandline, int) {
+  XConsoleLog(_T("crashhandler main enter cmdline:%s"), pszCommandline);
+  OPT_LOG(L2, (_T("crashhandler main enter cmdline:%s"), pszCommandline));
   omaha::EnableSecureDllLoading();
 
   bool is_system_process = false;

@@ -57,31 +57,27 @@ const TCHAR* const kGoopdateServer = _T("tools.") COMPANY_DOMAIN;
 // Update checks.
 // The channel for update checks is secured by using CUP to sign the messages.
 // It does not depend solely on https security in any case.
-const TCHAR* const kUrlUpdateCheck =
-    _T("https://updates.bravesoftware.com/service/update2");
+constexpr bool use_cup_for_update_checks = false;
+const TCHAR* const kUrlUpdateCheck = _T("https://omaha-server.genspark.ai/service/update2");
 
 // Pings.
-const TCHAR* const kUrlPing =
-  _T("https://updates.bravesoftware.com/service/update2");
+const TCHAR* const kUrlPing = _T("https://omaha-server.genspark.ai/service/update2");
 
 // The urls below never fall back to http.
 //
 // Crash reports.
-const TCHAR* const kUrlCrashReport =
-    _T("https://updates.bravesoftware.com/cr/report");
+//const TCHAR* const kUrlCrashReport = _T("https://updates.bravesoftware.com/cr/report");
+const TCHAR* const kUrlCrashReport = _T("https://omaha-server.genspark.ai/service/crash_report");
 
 // More information url.
 // Must allow query parameters to be appended to it.
-const TCHAR* const kUrlMoreInfo =
-    _T("https://updates.bravesoftware.com/support/installer/?");
+const TCHAR* const kUrlMoreInfo = _T("https://omaha-server.genspark.ai/support/installer/?");
 
 // Code Red check url.
-const TCHAR* const kUrlCodeRedCheck =
-    _T("https://updates.bravesoftware.com/service/check2");
+const TCHAR* const kUrlCodeRedCheck = _T("https://omaha-server.genspark.ai/service/check2");
 
 // Usage stats url.
-const TCHAR* const kUrlUsageStatsReport =
-    _T("https://updates.bravesoftware.com/tbproxy/usagestats");
+const TCHAR* const kUrlUsageStatsReport = _T("https://omaha-server.genspark.ai/tbproxy/usagestats");
 
 // App logo.
 const TCHAR* const kUrlAppLogo =

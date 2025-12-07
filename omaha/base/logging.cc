@@ -67,6 +67,7 @@
 #include "omaha/base/time.h"
 #include "omaha/base/utils.h"
 
+void XConsoleLog(const wchar_t* format, ...);
 namespace omaha {
 
 namespace {
@@ -89,6 +90,7 @@ bool IsReparsePoint(HANDLE file) {
 }
 
 bool IsEnabledLogToFile() {
+  XConsoleLog(_T("RegPath:%s"), REG_UPDATE_DEV);
   HKEY key = NULL;
   int res = ::RegOpenKeyEx(HKEY_LOCAL_MACHINE,
                            REG_UPDATE_DEV,
@@ -297,6 +299,8 @@ void Logging::UpdateCatAndLevel(const wchar_t* cat_name, LogCategory cat) {
   }
   category_list_[cat].enabled = (log_level != 0);
   category_list_[cat].log_level = static_cast<LogLevel>(log_level);
+//  XConsoleLog(_T("config cat:%s level:%d enable:%d"), cat_name,
+//              category_list_[cat].log_level, category_list_[cat].enabled);
 }
 
 void Logging::ReadLoggingSettings() {
@@ -322,6 +326,12 @@ void Logging::ReadLoggingSettings() {
         kDefaultLogToOutputDebug,
         config_file) == 0 ? false : true;
 
+    log_to_file_ = ::GetPrivateProfileInt(
+                       kConfigSectionLoggingSettings, kConfigAttrLogToFile,
+                                          kDefaultLogToFile,
+                               config_file) == 0
+            ? false
+            : true;
     append_to_file_ = ::GetPrivateProfileInt(
         kConfigSectionLoggingSettings,
         kConfigAttrAppendToFile,
@@ -333,7 +343,9 @@ void Logging::ReadLoggingSettings() {
     log_to_debug_out_ = kDefaultLogToOutputDebug;
     append_to_file_ = kDefaultAppendToFile;
   }
-
+  XConsoleLog(_T("logging_enabled:%d to_debug_out:%d to_file:%d append_to_file:%d show_time:%d"),
+      logging_enabled_, log_to_debug_out_, log_to_file_, append_to_file_,
+      show_time_);
   if (force_show_time_) {
     show_time_ = true;
   }
@@ -399,6 +411,7 @@ void Logging::ConfigureETWLogWriter() {
 }
 
 void Logging::ConfigureFileLogWriter() {
+  XConsoleLog(_T("ConfigureFileLogWriter"));
   if (!log_to_file_) {
     return;
   }
@@ -407,9 +420,10 @@ void Logging::ConfigureFileLogWriter() {
   if (file_log_writer_ == NULL) {
     CString path = GetLogFilePath();
     if (path.IsEmpty()) {
+      XConsoleLog(_T("no file log"));
       return;
     }
-
+    XConsoleLog(L"file log path:%s", path);
     // Extract the final target directory.
     CString log_file_dir = GetDirectoryFromPath(path);
     if (!File::Exists(log_file_dir)) {
@@ -471,6 +485,7 @@ void Logging::UnconfigureLogging() {
 }
 
 bool Logging::InternalInitialize() {
+  OutputDebugString(_T("InternalInitialize"));
   __try {
     if (logging_shutdown_ == true) {
       OutputDebugString(SPRINTF(L"LOG_SYSTEM: [%s]: ERROR - "
@@ -1415,6 +1430,42 @@ void OverrideConfigLogWriter::OutputMessage(const OutputInfo* output_info) {
 }
 
 }  // namespace omaha
+void XConsoleLog(const TCHAR* format, ...) {
+  const int kMaxLogLength = 20480;
+  TCHAR buffer[kMaxLogLength] = {0};
+  size_t offset = 0;
 
+  SYSTEMTIME system_time = {0};
+  GetLocalTime(&system_time);
+
+  int time_len = _stprintf_s(
+      buffer + offset, kMaxLogLength - offset,
+      _T("[%02d/%02d/%02d %02d:%02d:%02d.%03d] "), system_time.wMonth,
+      system_time.wDay, system_time.wYear % 100, system_time.wHour,
+      system_time.wMinute, system_time.wSecond, system_time.wMilliseconds);
+  if (time_len > 0) {
+    offset += time_len;
+  }
+
+  va_list args;
+  va_start(args, format);
+  int msg_len =
+      _vstprintf_s(buffer + offset, kMaxLogLength - offset, format, args);
+  va_end(args);
+
+  if (msg_len > 0) {
+    offset += msg_len;
+  }
+
+  if (offset < kMaxLogLength - 1) {
+    buffer[offset] = L'\n';
+    buffer[offset + 1] = L'\0';
+  } else {
+    buffer[kMaxLogLength - 2] = L'\n';
+    buffer[kMaxLogLength - 1] = L'\0';
+  }
+
+  OutputDebugString(buffer);
+}
 #endif  // LOGGING
 

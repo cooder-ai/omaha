@@ -344,7 +344,7 @@ HRESULT NetworkRequestImpl::DoSend(int* http_status_code,
   ASSERT1(response_headers);
   ASSERT1(response);
 
-  OPT_LOG(L3, (_T("[Send][url=%s][request=%s][filename=%s]"),
+  OPT_LOG(L3, (_T("[DoSend][url=%s][request=%s][filename=%s]"),
           url_,
           BufferToPrintableString(request_buffer_, request_buffer_length_),
           filename_));

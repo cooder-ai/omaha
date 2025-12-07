@@ -120,6 +120,16 @@ class Timer {
 
 // lint -e{31}   Redefinition of symbol
 __forceinline time64 Timer::GetRdtscCounter() {
+#ifdef _M_ARM64
+#pragma message("DEBUG: Compiling for ARM64 target")
+#elif defined(_M_X64)
+#pragma message("DEBUG: Compiling for X64 target")
+#elif defined(_M_IX86)
+#pragma message("DEBUG: Compiling for X86 target")
+#else
+#pragma message("DEBUG: Unknown target architecture")
+#endif
+
 #ifdef ARCH_CPU_ARM64
   // Note: This simple implementation likely has the limitations described in
   // https://chromium.googlesource.com/chromium/src/+/

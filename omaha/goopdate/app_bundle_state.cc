@@ -73,6 +73,7 @@ HRESULT AppBundleState::Download(AppBundle* app_bundle) {
 }
 
 HRESULT AppBundleState::Install(AppBundle* app_bundle) {
+  CORE_LOG(L3, (_T("[UPDATE]AppBundleState::Install")));
   return HandleInvalidStateTransition(app_bundle, _T(__FUNCTION__));
 }
 

@@ -684,7 +684,7 @@ HRESULT Install(bool is_interactive,
   ASSERT1(is_machine);
   ASSERT1(has_ui_been_displayed);
 
-  CORE_LOG(L2, (_T("[Install][%d][%d][%s]"),
+  CORE_LOG(L2, (_T("[UPDATE] Install machine:%d interactive:%d cmdline:%s"),
                 *is_machine, is_interactive, install_cmd_line));
   ++metric_setup_install_total;
   if (is_install_elevated_instance) {
@@ -724,7 +724,7 @@ HRESULT Install(bool is_interactive,
                                        &exit_code);
 
     if (FAILED(hr)) {
-      CORE_LOG(LE, (_T("[DoElevation failed][%s][0x%08x]"),
+      CORE_LOG(LE, (_T("[DoElevation failed cmdline:%s err:0x%08X"),
                     install_cmd_line, hr));
 
       bool attempt_per_user_install = false;

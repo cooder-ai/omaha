@@ -106,6 +106,8 @@ GoogleUpdate::~GoogleUpdate() {
 }
 
 HRESULT GoogleUpdate::Main() {
+  OutputDebugString(_T("GoogleUpdate Main"));
+  OPT_LOG(L2, (_T("GoogleUpdate Main cmdline:%s"), ::GetCommandLine()));
   HRESULT hr = E_FAIL;
   if (!ParseCommandLine(::GetCommandLine(), &hr)) {
     // This was either /RegServer or /UnregServer. Return early.

@@ -27,21 +27,25 @@
 #include "omaha/common/config_manager.h"
 #include "omaha/common/const_goopdate.h"
 #include "omaha/common/experiment_labels.h"
-
+#include "base/logging.h"
 namespace omaha {
 
 namespace app_registry_utils {
 
 CString GetAppClientsKey(bool is_machine, const CString& app_guid) {
-  return AppendRegKeyPath(
+  CString strClientKey = AppendRegKeyPath(
       ConfigManager::Instance()->registry_clients(is_machine),
       app_guid);
+  CORE_LOG(L3, (_T("[GetAppClientsKey][%s]"), strClientKey));
+  return strClientKey;
 }
 
 CString GetAppClientStateKey(bool is_machine, const CString& app_guid) {
-  return AppendRegKeyPath(
+  CString strClientKey = AppendRegKeyPath(
       ConfigManager::Instance()->registry_client_state(is_machine),
       app_guid);
+  CORE_LOG(L3, (_T("[GetAppClientsKey][%s]"), strClientKey));
+  return strClientKey;
 }
 
 CString GetAppClientStateMediumKey(bool is_machine, const CString& app_guid) {

@@ -45,8 +45,15 @@ def BuildCOMForwarder(cmd_line_switch,
           '/ENTRY:wWinMainCRTStartup',
       ],
       LIBS=[
+          '$LIB_DIR/base.lib',
           com_forwarder_env['crt_libs'][com_forwarder_env.Bit('debug')],
+          com_forwarder_env['atls_libs'][com_forwarder_env.Bit('debug')],
           'shlwapi.lib',
+          'userenv.lib',
+          'wtsapi32.lib',
+          'netapi32.lib',
+          'version.lib',
+          'psapi.lib',
       ],
   )
   # The resource file used is the same as the one for GoogleUpdate.exe.
@@ -74,8 +81,8 @@ def BuildCOMForwarder(cmd_line_switch,
 
 
 # Build the broker/legacy on-demand/WebPlugin forwarders.
-BuildCOMForwarder('/broker', 'BraveUpdateBroker', False)
-BuildCOMForwarder('/ondemand', 'BraveUpdateOnDemand', False)
+BuildCOMForwarder('/broker', 'GensparkUpdateBroker', False)
+BuildCOMForwarder('/ondemand', 'GensparkUpdateOnDemand', False)
 
 
 def BuildCOMRegisterShell64():
@@ -97,7 +104,7 @@ def BuildCOMRegisterShellNon32Bit(com_register_shell_env, suffix):
           '/Zl',
       ],
       LINKFLAGS=[
-          '/ENTRY:WinMainCRTStartup',
+          '/ENTRY:wWinMainCRTStartup',
       ],
       LIBS=[
           '$LIB_DIR/base_%s.lib' % suffix,
@@ -129,7 +136,7 @@ def BuildCOMRegisterShellNon32Bit(com_register_shell_env, suffix):
   # Add an icon, a manifest, and a version to the exe.
   # The resource file used is the same as the one for GoogleUpdate.exe.
   # The version resource used is the same as the one for goopdate.dll.
-  signed_exe_name = 'BraveUpdateComRegisterShell' + suffix.title()
+  signed_exe_name = 'GensparkUpdateComRegisterShell' + suffix.title()
   com_register_shell_res = com_register_shell_env.RES(
                                '%s.res' % signed_exe_name,
                                '../google_update/resource.rc')
@@ -241,7 +248,7 @@ def BuildGoogleUpdateHandlerDll(handler_env,
       LIBS = [
           handler_env.GetMultiarchLibName('base'),
           handler_env.GetMultiarchLibName('goopdate_lib'),
-          handler_env.GetMultiarchLibName('security'),
+    handler_env.GetMultiarchLibName('security'),
           handler_env['atls_libs'][env.Bit('debug')],
           handler_env['crt_libs'][handler_env.Bit('debug')],
           'psapi.lib',
@@ -393,9 +400,9 @@ if env.Bit('has_device_management'):
       ],
    )
   dm_proto_lib = proto_env.ComponentStaticLibraryMultiarch(
-      'dm_proto',
-      proto_outputs + ['dm_messages.cc'],
-  )
+    'dm_proto',
+    proto_outputs + ['dm_messages.cc'],
+)
 
 gd_env = env.Clone()
 

@@ -21,7 +21,7 @@
 #include <map>
 
 #include "omaha/base/utils.h"
-
+#include "base/logging.h"
 typedef void (*DebugeeFunction)(void);
 typedef std::map<std::wstring, DebugeeFunction> DebugeeMap;
 DebugeeMap debugee_map;
@@ -169,6 +169,7 @@ void InitDebugees() {
 }
 
 int WINAPI _tWinMain(HINSTANCE, HINSTANCE, LPTSTR lpCommandLine, int) {
+  XConsoleLog(_T("crash_analyzer main enter cmdline:%s"), lpCommandLine);
   int argc = 0;
   LPWSTR* argv = ::CommandLineToArgvW(lpCommandLine, &argc);
   if (!argv || argc != 2)

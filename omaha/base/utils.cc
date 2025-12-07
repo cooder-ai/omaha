@@ -1178,11 +1178,17 @@ HRESULT CallEntryPoint0(const TCHAR* dll_path,
 
 // Register a DLL
 HRESULT RegisterDll(const TCHAR* dll_path) {
+  UTIL_LOG(L1, (_T("[RegisterDll] Attempting to register DLL: %s"), dll_path));
+  
   HRESULT hr = S_OK;
   HRESULT hr_call = CallEntryPoint0(dll_path, "DllRegisterServer", &hr);
   if (SUCCEEDED(hr_call)) {
+    UTIL_LOG(L1, (_T("[RegisterDll] Successfully registered DLL: %s"), dll_path));
     return hr;
   }
+  
+  UTIL_LOG(LE, (_T("[RegisterDll] Failed to register DLL: %s, hr_call=0x%x, hr=0x%x"), 
+                dll_path, hr_call, hr));
   return hr_call;
 }
 
@@ -1198,11 +1204,14 @@ HRESULT UnregisterDll(const TCHAR* dll_path) {
 
 // Register/unregister an EXE
 HRESULT RegisterOrUnregisterExe(const TCHAR* exe_path, const TCHAR* cmd_line) {
+  NXLOG_FUNCTION;
   ASSERT1(exe_path);
   ASSERT1(cmd_line);
 
   // cmd_line parameter really contains the arguments to be passed
   // on the process creation command line.
+  UTIL_LOG(L1, (_T("RegisterOrUnregisterExe exe_path:%s cmdline:%s"), exe_path,
+                cmd_line));
   PROCESS_INFORMATION pi = {0};
   HRESULT hr = System::StartProcessWithArgsAndInfo(exe_path, cmd_line, &pi);
   if (FAILED(hr)) {
@@ -1233,27 +1242,32 @@ HRESULT RegisterOrUnregisterExe(const TCHAR* exe_path, const TCHAR* cmd_line) {
 
 // Register a COM Local Server
 HRESULT RegisterServer(const TCHAR* exe_path) {
+  SETUP_LOG(L1, (_T("RegisterServer exe_path"), exe_path));
   return RegisterOrUnregisterExe(exe_path, _T("/RegServer"));
 }
 
 // Unregister a COM Local Server
 HRESULT UnregisterServer(const TCHAR* exe_path) {
+  SETUP_LOG(L1, (_T("UnregisterServer exe_path"), exe_path));
   return RegisterOrUnregisterExe(exe_path, _T("/UnregServer"));
 }
 
 // Register a Service
 HRESULT RegisterService(const TCHAR* exe_path) {
+  SETUP_LOG(L1, (_T("RegisterService exe_path"), exe_path));
   return RegisterOrUnregisterExe(exe_path, _T("/Service"));
 }
 
 // Unregister a Service
 HRESULT UnregisterService(const TCHAR* exe_path) {
+  SETUP_LOG(L1, (_T("UnregisterService exe_path"), exe_path));
   // Unregistering a service is via UnregServer
   return RegisterOrUnregisterExe(exe_path, _T("/UnregServer"));
 }
 
 // Adapted from gds installer/install/work_list.cpp: InstallServiceExecutable
 HRESULT RunService(const TCHAR* service_name) {
+  SETUP_LOG(L1, (_T("RunService exe_path"), service_name));
   scoped_service manager(::OpenSCManager(NULL,  // local machine
                                          NULL,  // ServicesActive database
                                          STANDARD_RIGHTS_READ));

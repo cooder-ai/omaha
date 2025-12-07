@@ -72,9 +72,10 @@ HRESULT AppBundleStateInitialized::Stop(AppBundle* app_bundle) {
 HRESULT AppBundleStateInitialized::CreateApp(AppBundle* app_bundle,
                                              const CString& app_id,
                                              App** app) {
-  CORE_LOG(L3, (_T("[AppBundleStateInitialized::CreateApp][0x%p]"),
-                app_bundle));
-  ASSERT1(app_bundle);
+  NX_VERIFY(app_bundle, return E_INVALIDARG);
+  NX_VERIFY(app, return E_INVALIDARG);
+  CORE_LOG(L3, (_T("[AppBundleStateInitialized::CreateApp][0x%p] app_id:%s"),
+                app_bundle, app_id));
   ASSERT1(app);
   ASSERT1(app_bundle->model()->IsLockedByCaller());
 
@@ -134,12 +135,14 @@ HRESULT AppBundleStateInitialized::CreateApp(AppBundle* app_bundle,
 HRESULT AppBundleStateInitialized::CreateInstalledApp(AppBundle* app_bundle,
                                                       const CString& app_id,
                                                       App** app) {
-  CORE_LOG(L3, (_T("[AppBundleStateInitialized::CreateInstalledApp][0x%p]"),
-                app_bundle));
+  NX_VERIFY(app_bundle, return E_INVALIDARG);
+  NX_VERIFY(app, return E_INVALIDARG);
+  CORE_LOG(L3, (_T("[UPDATE]AppBundleStateInitialized::CreateInstalledApp [0x%p] app_id:%s"),
+                app_bundle, app_id));
   ASSERT1(app_bundle->model()->IsLockedByCaller());
 
   if (has_new_app_) {
-    CORE_LOG(LE, (_T("[CreateInstalledApp][New app already in bundle]")));
+    CORE_LOG(LE, (_T("[UPDATE]CreateInstalledApp New app already in bundle]")));
     return HandleInvalidStateTransition(app_bundle, _T(__FUNCTION__));
   }
 
@@ -147,12 +150,13 @@ HRESULT AppBundleStateInitialized::CreateInstalledApp(AppBundle* app_bundle,
   HRESULT hr = AppManager::Instance()->RunRegistrationUpdateHook(app_id);
   if (FAILED(hr)) {
     CORE_LOG(HRESULT_FROM_WIN32(ERROR_FILE_NOT_FOUND) == hr ? L3 : LW,
-             (_T("[RunRegistrationUpdateHook failed][%s][0x%x]"),
+             (_T("[UPDATE]RunRegistrationUpdateHook failed app_id:%s err:0x%08X"),
              app_id, hr));
   }
 
   hr = AddInstalledApp(app_bundle, app_id, app);
   if (FAILED(hr)) {
+    CORE_LOG(LE, (_T("[UPDATE]AddInstalledApp failed app_id:%s err:0x%08X"), app_id, hr));
     return hr;
   }
 
@@ -227,7 +231,7 @@ HRESULT AppBundleStateInitialized::CreateAllInstalledApps(
 // methods with asynchronous callbacks because CompleteAsyncCall() must not be
 // called before the state has been changed to busy.
 HRESULT AppBundleStateInitialized::CheckForUpdate(AppBundle* app_bundle) {
-  CORE_LOG(L3, (_T("[AppBundleStateInitialized::CheckForUpdate][0x%p]"),
+  CORE_LOG(L3, (_T("[UPDATE]AppBundleStateInitialized::CheckForUpdate 0x%p"),
                 app_bundle));
   ASSERT1(app_bundle);
   ASSERT1(app_bundle->model()->IsLockedByCaller());
@@ -242,7 +246,7 @@ HRESULT AppBundleStateInitialized::CheckForUpdate(AppBundle* app_bundle) {
 
   HRESULT hr = app_bundle->model()->CheckForUpdate(app_bundle);
   if (FAILED(hr)) {
-    CORE_LOG(LE, (_T("[CheckForUpdates failed][0x%x][0x%p]"), hr, app_bundle));
+    CORE_LOG(LE, (_T("[UPDATE][CheckForUpdates failed][0x%x][0x%p]"), hr, app_bundle));
     return hr;
   }
 
@@ -302,6 +306,7 @@ HRESULT AppBundleStateInitialized::DownloadPackage(
 HRESULT AppBundleStateInitialized::AddInstalledApp(AppBundle* app_bundle,
                                                    const CString& app_id,
                                                    App** app) {
+  NX_VERIFY(app_bundle, return E_INVALIDARG);
   ASSERT1(app_bundle);
   ASSERT1(app);
   ASSERT1(app_bundle->model()->IsLockedByCaller());
@@ -309,7 +314,7 @@ HRESULT AppBundleStateInitialized::AddInstalledApp(AppBundle* app_bundle,
   GUID app_guid = {0};
   HRESULT hr = StringToGuidSafe(app_id, &app_guid);
   if (FAILED(hr)) {
-    CORE_LOG(LE, (_T("[invalid app id][%s]"), app_id));
+    CORE_LOG(LE, (_T("[UPDATE] invalid app id app_id:%s err:%08X"), app_id, hr));
     return hr;
   }
 
@@ -317,7 +322,7 @@ HRESULT AppBundleStateInitialized::AddInstalledApp(AppBundle* app_bundle,
   // by AddApp() as well, but if we make the check here, we can return a proper
   // error code instead of failing to create the external updater mutex.)
   if (IsAppInBundle(app_bundle, app_guid)) {
-    CORE_LOG(LE, (_T("[App already in bundle][%s]"), app_id));
+    CORE_LOG(LE, (_T("[UPDATE]App already in bundle app_id:%s"), app_id));
     return GOOPDATE_E_CALL_UNEXPECTED;
   }
 
@@ -334,11 +339,11 @@ HRESULT AppBundleStateInitialized::AddInstalledApp(AppBundle* app_bundle,
       app_id, app_bundle->is_machine(), &external_updater_event);
   if (FAILED(hr)) {
     if (hr == GOOPDATE_E_APP_USING_EXTERNAL_UPDATER) {
-      OPT_LOG(LW, (_T("[Skipping app, external updater running][%s]"), app_id));
+      OPT_LOG(LW, (_T("[UPDATE]Skipping app, external updater running app_id:%s"), app_id));
       return hr;
     }
 
-    CORE_LOG(LE, (_T("[CreateExternalUpdaterActiveEvent failed][0x%x][%s][%d]"),
+    CORE_LOG(LE, (_T("[UPDATE]CreateExternalUpdaterActiveEvent failed err:0x%08X app_id:%s machine:%d"),
                   hr, app_id, app_bundle->is_machine()));
   }
 
@@ -348,12 +353,13 @@ HRESULT AppBundleStateInitialized::AddInstalledApp(AppBundle* app_bundle,
 
   hr = AppManager::Instance()->ReadAppPersistentData(local_app.get());
   if (FAILED(hr)) {
-    CORE_LOG(LE, (_T("[ReadAppPersistentData failed][0x%x][%s]"), hr, app_id));
+    CORE_LOG(LE, (_T("[UPDATE]ReadAppPersistentData failed err:0x%08x app_id:%s"), hr, app_id));
     return hr;
   }
 
   hr = AddApp(app_bundle, local_app.get());
   if (FAILED(hr)) {
+    CORE_LOG(LE, (_T("[UPDATE]AddApp failed err:0x%08x app_id:%s"), hr, app_id));
     return hr;
   }
 
@@ -364,12 +370,12 @@ HRESULT AppBundleStateInitialized::AddInstalledApp(AppBundle* app_bundle,
 
 // Fails if the app already exists in the bundle.
 HRESULT AppBundleStateInitialized::AddApp(AppBundle* app_bundle, App* app) {
-  ASSERT1(app_bundle);
-  ASSERT1(app);
+  NX_VERIFY(app_bundle, return E_INVALIDARG);
+  NX_VERIFY(app, return E_INVALIDARG);
   ASSERT1(app_bundle->model()->IsLockedByCaller());
 
   if (IsAppInBundle(app_bundle, app->app_guid())) {
-    CORE_LOG(LE, (_T("[App already in bundle][%s]"), app->app_guid_string()));
+    CORE_LOG(LE, (_T("[UPDATE]App already in bundle app_id:%s"), app->app_guid_string()));
     return GOOPDATE_E_CALL_UNEXPECTED;
   }
 

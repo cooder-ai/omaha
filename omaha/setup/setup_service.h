@@ -196,8 +196,9 @@ class SetupService {
   }
 
   static HRESULT DoInstallNewService(const TCHAR* service_cmd_line) {
+    NXLOG_FUNCTION;
     ASSERT1(service_cmd_line);
-
+    SETUP_LOG(L1, (_T("DoInstallNewService cmdline:%s"), service_cmd_line));
     scoped_service scm(::OpenSCManager(NULL, NULL, SC_MANAGER_ALL_ACCESS));
     if (!scm) {
       const DWORD error = ::GetLastError();

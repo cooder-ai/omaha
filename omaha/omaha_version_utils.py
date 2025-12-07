@@ -17,10 +17,10 @@
 
 """Constants and utilities related to Omaha and tools versions"""
 
-_ONECLICK_PLUGIN_NAME = 'npBraveOneClick'
-_UPDATE_PLUGIN_NAME = 'npBraveUpdate'
-_MAIN_EXE_BASE_NAME = 'BraveUpdate'
-_CRASH_HANDLER_NAME = 'BraveCrashHandler'
+_ONECLICK_PLUGIN_NAME = 'npGensparkOneClick'
+_UPDATE_PLUGIN_NAME = 'npGensparkUpdate'
+_MAIN_EXE_BASE_NAME = 'GensparkUpdate'
+_CRASH_HANDLER_NAME = 'GensparkCrashHandler'
 
 # List of languages that are fully supported in the current build.
 _OMAHA_LANGUAGES = [
@@ -99,7 +99,7 @@ VC120 = 1800  # VC2013/VC12
 VC140 = 1900  # VC2015/VC14
 VC150 = 1910  # VC2017 version 15.0-15.9 / VC14.1-14.16
 VC160 = 1920  # VC2019 version 16.0 / VC14.20
-VC170 = 1930  # VC2019 version 17.0 / VC14.30
+VC170 = 1930  # VC2022 version 17.0 / VC14.30
 
 
 def _IsSupportedOmaha2Version(omaha_version):

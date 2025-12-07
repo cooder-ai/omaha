@@ -19,9 +19,9 @@
 #pragma runtime_checks("", off)
 #include <windows.h>
 
-int __stdcall WinMain(HINSTANCE,
+int __stdcall _tWinMain(HINSTANCE,
                       HINSTANCE,
-                      LPSTR,
+                      LPTSTR,
                       int) {
   ::SleepEx(INFINITE, FALSE);
   return 0;

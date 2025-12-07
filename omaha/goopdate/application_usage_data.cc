@@ -103,6 +103,7 @@ HRESULT ApplicationUsageData::ProcessDidRun(const CString& app_guid) {
 
 HRESULT ApplicationUsageData::ProcessMachineDidRun(const CString& app_guid) {
   ASSERT1(is_machine_);
+  CORE_LOG(L3, (_T("ProcessMachineDidRun app:%s"), app_guid));
 
   // Logic is as follows:
   // for each user under HKU\<sid>
@@ -170,7 +171,7 @@ HRESULT ApplicationUsageData::ProcessMachineDidRun(const CString& app_guid) {
 
 HRESULT ApplicationUsageData::ProcessUserDidRun(const CString& app_guid) {
   ASSERT1(!is_machine_);
-
+  CORE_LOG(L3, (_T("ProcessUserDidRun app:%s"), app_guid));
   // Logic:
   // Pre/Post process HKCU\
   // if vista:

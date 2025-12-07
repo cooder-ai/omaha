@@ -18,8 +18,10 @@
 #include "omaha/base/omaha_version.h"
 #include "omaha/base/utils.h"
 #include "omaha/core/core_launcher.h"
-
-int WINAPI wWinMain(HINSTANCE, HINSTANCE, LPWSTR, int) {
+#include "base/logging.h"
+int WINAPI wWinMain(HINSTANCE, HINSTANCE, LPWSTR pszCmdline, int) {
+  XConsoleLog(_T("UpdateCore core main enter cmdline:%s"), pszCmdline);
+  CORE_LOG(L2, (L"core main enter cmdline:%s", pszCmdline));
   omaha::EnableSecureDllLoading();
 
   scoped_co_init init_com_apt(COINIT_MULTITHREADED);

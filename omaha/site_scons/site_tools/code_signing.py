@@ -30,7 +30,13 @@ If an empty timestamp server string is specified, there will be no timestamp.
 import optparse
 from SCons.compat._scons_optparse import OptionConflictError
 import SCons.Script
-
+import logging
+logging.basicConfig(
+  level=logging.DEBUG,
+  format='%(asctime)s-%(levelname)s-%(filename)s-%(message)s',
+  datefmt='%Y-%m-%d %H:%M:%S'
+)
+from signing_helper_win import need_sign_omaha
 
 def generate(env):
   # NOTE: SCons requires the use of this name, which fails gpylint.
@@ -50,6 +56,7 @@ def generate(env):
   env.SetDefault(
       # Path to Microsoft signtool.exe
       SIGNTOOL='"$THIRD_PARTY/code_signing/signtool.exe"',
+      DIGICERT_SIGN_TOOL='"$THIRD_PARTY/code_signing/smctl.exe"',
       # No certificate by default.
       CERTIFICATE_PATH='',
       # No sha1 certificate by default.
@@ -76,6 +83,7 @@ def generate(env):
       CERTIFICATE_HASH='5A9272CE76A9415A4A3A5002A2589A049312AA40',
       SHA1_CERTIFICATE_HASH='',
       SHA2_CERTIFICATE_HASH='',
+      DIGICERT_SIGN_KEYPAIR='',
   )
 
   # Setup Builder for Signing
@@ -99,39 +107,67 @@ def SignedBinaryGenerator(source, target, env, for_signature):
   source = source                # Silence gpylint.
   target = target                # Silence gpylint.
   for_signature = for_signature  # Silence gpylint.
-
+  skip_signing = False
+  if env.Bit('skip_signing'):
+    skip_signing = True
+    
+  # Check whitelist using Omaha signing helper - skip signing if not in whitelist
+  target_file = str(target[0])
+  if not need_sign_omaha(target_file):
+    logging.debug('[omaha_whitelist] Skipping %s (not in whitelist or already signed)', target_file)
+    commands = [
+        SCons.Script.Copy('$TARGET', '$SOURCE'),
+        SCons.Script.Chmod('$TARGET', 0o755),
+    ]
+    return commands
+  else:
+    logging.debug('[omaha_whitelist] Adding %s to signing queue', target_file)
+    
+  signing_mode = env.subst('$signing_mode')
+  logging.debug('[BUILD_STAGE] SignedBinaryGenerator source:%s target:%s skip_signing:%s signing_mode:%s',
+                source[0].path, target[0].path, skip_signing, signing_mode)
   # Alway copy and make writable.
   commands = [
       SCons.Script.Copy('$TARGET', '$SOURCE'),
       SCons.Script.Chmod('$TARGET', 0755),
   ]
-
-  # Only do signing if there is a certificate file or certificate name.
-  if env.subst('$CERTIFICATE_PATH') or env.subst('$CERTIFICATE_NAME') \
-      or env.subst('$CERTIFICATE_HASH'):
-    # The command used to do signing (target added on below).
-    signing_cmd = '$SIGNTOOL sign /fd SHA256'
-    # Add in certificate file if any.
-    if env.subst('$CERTIFICATE_PATH'):
-      signing_cmd += ' /f "$CERTIFICATE_PATH"'
-      # Add certificate password if any.
-      if env.subst('$CERTIFICATE_PASSWORD'):
-        signing_cmd += ' /p "$CERTIFICATE_PASSWORD"'
-    # Add certificate store if any.
-    if env.subst('$CERTIFICATE_NAME'):
+  if skip_signing:
+    return commands
+  if signing_mode == 'test':
+    # Only do signing if there is a certificate file or certificate name.
+    if env.subst('$CERTIFICATE_PATH') or env.subst('$CERTIFICATE_NAME') \
+        or env.subst('$CERTIFICATE_HASH'):
       # The command used to do signing (target added on below).
-      signing_cmd += ' /s "$CERTIFICATE_STORE" /n "$CERTIFICATE_NAME"'
-    # Add cert hash if any.
-    if env.subst('$CERTIFICATE_HASH'):
-      signing_cmd += ' /sha1 "$CERTIFICATE_HASH"'
-    if env.Bit('use_authenticode_machine_store'):
-      signing_cmd += ' /sm'
-    # Add timestamp server if any.
-    if env.subst('$TIMESTAMP_SERVER'):
-      signing_cmd += ' /t "$TIMESTAMP_SERVER"'
-    # Add in target name
-    signing_cmd += ' "$TARGET"'
-    # Add the signing to the list of commands to perform.
+      signing_cmd = '$SIGNTOOL sign /fd SHA256'
+      # Add in certificate file if any.
+      if env.subst('$CERTIFICATE_PATH'):
+        signing_cmd += ' /f "$CERTIFICATE_PATH"'
+        # Add certificate password if any.
+        if env.subst('$CERTIFICATE_PASSWORD'):
+          signing_cmd += ' /p "$CERTIFICATE_PASSWORD"'
+      # Add certificate store if any.
+      if env.subst('$CERTIFICATE_NAME'):
+        # The command used to do signing (target added on below).
+        signing_cmd += ' /s "$CERTIFICATE_STORE" /n "$CERTIFICATE_NAME"'
+      # Add cert hash if any.
+      if env.subst('$CERTIFICATE_HASH'):
+        signing_cmd += ' /sha1 "$CERTIFICATE_HASH"'
+      # Don't use /sm flag - certificate is in user store, not machine store
+      # if env.Bit('use_authenticode_machine_store'):
+      #   signing_cmd += ' /sm'
+      # Skip timestamp in test mode to avoid network issues
+      # if env.subst('$TIMESTAMP_SERVER'):
+      #   signing_cmd += ' /t "$TIMESTAMP_SERVER"'
+      # Add in target name
+      signing_cmd += ' "$TARGET"'
+      # Add the signing to the list of commands to perform.
+      commands.append(signing_cmd)
+  elif signing_mode == 'production':
+    signing_cmd = '$DIGICERT_SIGN_TOOL sign --keypair-alias %s --input "$TARGET"' % (
+      env.subst('$DIGICERT_SIGN_KEYPAIR')
+    )
+    # Log the actual signing operation
+    logging.info('[OMAHA_SIGNING] Will sign (production): %s', str(target[0]))
     commands.append(signing_cmd)
 
   return commands
@@ -141,13 +177,32 @@ def DualSignedBinaryGenerator(source, target, env, for_signature):
   source = source                # Silence gpylint.
   target = target                # Silence gpylint.
   for_signature = for_signature  # Silence gpylint.
-
+  skip_signing = False
+  if env.Bit('skip_signing'):
+    skip_signing = True
+    
+  # Check whitelist using Omaha signing helper - skip signing if not in whitelist
+  target_file = str(target[0])
+  if not need_sign_omaha(target_file):
+    logging.debug('[omaha_whitelist] DualSigned: Skipping %s (not in whitelist or already signed)', target_file)
+    commands = [
+        SCons.Script.Copy('$TARGET', '$SOURCE'),
+        SCons.Script.Chmod('$TARGET', 0755),
+    ]
+    return commands
+  else:
+    logging.debug('[omaha_whitelist] DualSigned: Adding %s to signing queue', target_file)
+    
+  signing_mode = env.subst('$signing_mode')
+  logging.debug('DualSignedBinaryGenerator source:%s target:%s skip_signing:%s signing_mode:%s',
+                source[0].path, target[0].path, skip_signing, signing_mode)
   # Alway copy and make writable.
   commands = [
       SCons.Script.Copy('$TARGET', '$SOURCE'),
       SCons.Script.Chmod('$TARGET', 0755),
   ]
-
+  if skip_signing:
+    return commands
   # Only do signing if there are certificate files or a certificate name. The
   # CERTIFICATE_NAME is expected to be the same for both SHA1 and SHA2.
   if (env.subst('$SHA1_CERTIFICATE_PATH') and
@@ -171,8 +226,8 @@ def DualSignedBinaryGenerator(source, target, env, for_signature):
       # Add certificate password if any.
       if env.subst('$SHA1_CERTIFICATE_PASSWORD'):
         sha1_signing_cmd += ' /p "$SHA1_CERTIFICATE_PASSWORD"'
-    # Add timestamp server if any.
-    if env.subst('$SHA1_TIMESTAMP_SERVER'):
+    # Add timestamp server if any - skip in test mode
+    if signing_mode != 'test' and env.subst('$SHA1_TIMESTAMP_SERVER'):
       sha1_signing_cmd += ' /t "$SHA1_TIMESTAMP_SERVER"'
     # Add issuer if any.
     if env.subst('$SHA1_CERTIFICATE_ISSUER'):
@@ -180,8 +235,9 @@ def DualSignedBinaryGenerator(source, target, env, for_signature):
     # Add cert hash if any.
     if env.subst('$SHA1_CERTIFICATE_HASH'):
       sha1_signing_cmd += ' /sha1 "$SHA1_CERTIFICATE_HASH"'
-    if env.Bit('use_authenticode_machine_store'):
-      sha1_signing_cmd += ' /sm'
+    # Don't use /sm flag - certificate is in user store, not machine store
+    # if env.Bit('use_authenticode_machine_store'):
+    #   sha1_signing_cmd += ' /sm'
     # Add in target name
     sha1_signing_cmd += ' "$TARGET"'
     # Add the SHA1 signing to the list of commands to perform.
@@ -198,8 +254,8 @@ def DualSignedBinaryGenerator(source, target, env, for_signature):
       # Add certificate password if any.
       if env.subst('$SHA2_CERTIFICATE_PASSWORD'):
         sha2_signing_cmd += ' /p "$SHA2_CERTIFICATE_PASSWORD"'
-    # Add timestamp server if any.
-    if env.subst('$SHA2_TIMESTAMP_SERVER'):
+    # Add timestamp server if any - skip in test mode
+    if signing_mode != 'test' and env.subst('$SHA2_TIMESTAMP_SERVER'):
       sha2_signing_cmd += ' /tr "$SHA2_TIMESTAMP_SERVER" /td "SHA256"'
     # Add issuer if any.
     if env.subst('$SHA2_CERTIFICATE_ISSUER'):
@@ -207,8 +263,9 @@ def DualSignedBinaryGenerator(source, target, env, for_signature):
     # Add cert hash if any.
     if env.subst('$SHA2_CERTIFICATE_HASH'):
       sha2_signing_cmd += ' /sha1 "$SHA2_CERTIFICATE_HASH"'
-    if env.Bit('use_authenticode_machine_store'):
-      sha2_signing_cmd += ' /sm'
+    # Don't use /sm flag - certificate is in user store, not machine store
+    # if env.Bit('use_authenticode_machine_store'):
+    #   sha2_signing_cmd += ' /sm'
     # Other options needed when adding a second, sha2 signature.
     sha2_signing_cmd += ' /as /fd "SHA256"'
     # Add in target name

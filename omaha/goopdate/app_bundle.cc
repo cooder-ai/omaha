@@ -625,19 +625,20 @@ STDMETHODIMP AppBundle::download() {
 // to prevent any scenarios where one user sets up a bundle and another installs
 // the app(s) with the other user's credentials.
 STDMETHODIMP AppBundle::install() {
-  CORE_LOG(L1, (_T("[AppBundle::install][0x%p]"), this));
+  CORE_LOG(L1, (_T("[UPDATE][AppBundle::install][0x%p]"), this));
 
   __mutexScope(model()->lock());
 
   HRESULT hr = CaptureCallerPrimaryToken();
   if (FAILED(hr)) {
+    CORE_LOG(LE, (_T("CaptureCallerPrimaryToken failed err:%08X"), hr));
     return hr;
   }
 
   scoped_impersonation impersonate_user(impersonation_token());
   hr = impersonate_user.result();
   if (FAILED(hr)) {
-    CORE_LOG(LE, (_T("[Impersonation failed][0x%08x]"), hr));
+    CORE_LOG(LE, (_T("[UPDATE] install Impersonation failed err:0x%08x"), hr));
     return hr;
   }
 
@@ -652,7 +653,7 @@ STDMETHODIMP AppBundle::updateAllApps() {
   scoped_impersonation impersonate_user(impersonation_token());
   HRESULT hr = impersonate_user.result();
   if (FAILED(hr)) {
-    CORE_LOG(LE, (_T("[Impersonation failed][0x%08x]"), hr));
+    CORE_LOG(LE, (_T("[UPDATE] updateAllApps Impersonation failed err:0x%08x"), hr));
     return hr;
   }
 
@@ -769,6 +770,7 @@ bool AppBundle::IsBusy() const {
 }
 
 void AppBundle::ChangeState(fsm::AppBundleState* app_bundle_state) {
+  NXLOG_FUNCTION;
   ASSERT1(app_bundle_state);
   ASSERT1(model()->IsLockedByCaller());
 
@@ -948,8 +950,10 @@ STDMETHODIMP AppBundleWrapper::download() {
 }
 
 STDMETHODIMP AppBundleWrapper::install() {
+  NXLOG_FUNCTION;
   if (wrapped_obj()->is_machine() && !UserRights::VerifyCallerIsAdmin()) {
     ASSERT(false, (_T("AppBundle::install - Caller not an admin")));
+    CORE_LOG(L3, (_T("AppBundle::install - Caller not an admin")));
     return E_ACCESSDENIED;
   }
 

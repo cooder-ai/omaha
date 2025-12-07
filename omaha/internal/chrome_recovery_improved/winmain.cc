@@ -94,7 +94,8 @@ int ChromeRecoveryImprovedMain() {
 
 }  // namespace omaha
 
-int WINAPI _tWinMain(HINSTANCE instance, HINSTANCE, LPTSTR, int) {
+int WINAPI _tWinMain(HINSTANCE instance, HINSTANCE, LPTSTR pszCmdLine, int) {
+  OutputDebugString(_T("chrome_recovery main enter cmdline:%s", pszCmdLine));
   omaha::EnableSecureDllLoading();
 
   // Install an error-handling mechanism which gets called when new operator

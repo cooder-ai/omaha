@@ -194,7 +194,7 @@ TEST_F(CrashReporterTest, DISABLED_Report_ProductCrash) {
 }
 
 // Tests generation of a minidump and uploading it to the staging server.
-// Disabled because Brave's update server rejects crash dumps.
+// Disabled because Genspark's update server rejects crash dumps.
 TEST_F(CrashReporterTest, DISABLED_WriteMinidump) {
   ASSERT_TRUE(!reporter_.crash_dir_.IsEmpty());
 

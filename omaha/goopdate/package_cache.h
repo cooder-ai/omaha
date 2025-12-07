@@ -67,13 +67,13 @@ class PackageCache {
 
   HRESULT Put(const Key& key,
               File* source_file,
-              const CString& hash);
+              const CString& hash, const CString& hash256);
 
   HRESULT Get(const Key& key,
               const CString& destination_file,
-              const CString& hash) const;
+              const CString& hash, const CString& hash256) const;
 
-  bool IsCached(const Key& key, const CString& hash) const;
+  bool IsCached(const Key& key, const CString& hash, const CString& hash256) const;
 
   HRESULT Purge(const Key& key);
 
@@ -98,7 +98,8 @@ class PackageCache {
   CString cache_root() const;
 
   static HRESULT VerifyHash(const CString& filename,
-                            const CString& expected_hash);
+                            const CString& expected_hash,
+                            const CString& expected_hash256);
 
  private:
   friend class PackageCacheTest;

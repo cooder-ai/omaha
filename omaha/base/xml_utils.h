@@ -181,6 +181,7 @@ HRESULT ReadBooleanAttribute(IXMLDOMNode* node,
 HRESULT ReadIntAttribute(IXMLDOMNode* node,
                          const TCHAR* attr_name,
                          int* value);
+HRESULT ReadInt64Attribute(IXMLDOMNode* node, const TCHAR* attr_name, int64_t* value);
 HRESULT ReadGuidAttribute(IXMLDOMNode* node,
                           const TCHAR* attr_name,
                           GUID* value);

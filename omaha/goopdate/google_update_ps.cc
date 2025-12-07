@@ -93,13 +93,24 @@ STDAPI DllGetClassObject(REFCLSID clsid, REFIID iid, void** ptr) {
 }
 
 STDAPI DllRegisterServer() {
+  CORE_LOG(L1, (_T("[DllRegisterServer] Starting COM registration...")));
+  
   HRESULT hr = omaha::_AtlModule.DllRegisterServer(false);
   if (FAILED(hr)) {
     CORE_LOG(LE, (_T("[DllRegisterServer failed][0x%x]"), hr));
     return hr;
   }
+  
+  CORE_LOG(L1, (_T("[DllRegisterServer] ATL module registration successful")));
 
-  return PrxDllRegisterServer();
+  HRESULT hr_prx = PrxDllRegisterServer();
+  if (FAILED(hr_prx)) {
+    CORE_LOG(LE, (_T("[DllRegisterServer] Proxy registration failed][0x%x]"), hr_prx));
+    return hr_prx;
+  }
+  
+  CORE_LOG(L1, (_T("[DllRegisterServer] COM registration completed successfully")));
+  return hr_prx;
 }
 
 STDAPI DllUnregisterServer() {

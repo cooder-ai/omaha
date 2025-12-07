@@ -70,6 +70,8 @@ void Ping::Initialize(bool is_machine,
                       const CString& session_id,
                       const CString& install_source,
                       const CString& request_id) {
+  CORE_LOG(L3, (_T("Ping::Initialize is_machine:%d session_id:%s install_source:%s request_id:%s"),
+                is_machine, session_id, install_source, request_id));
   is_machine_ = is_machine;
   request_id_ = request_id;
 
@@ -80,6 +82,7 @@ void Ping::Initialize(bool is_machine,
                                                  request_id));
   CString shell_version_string =
       goopdate_utils::GetInstalledShellVersion(is_machine);
+  CORE_LOG(L3, (_T(" shell_version_string:%s"), shell_version_string));
   if (!shell_version_string.IsEmpty()) {
     ping_request_->set_omaha_shell_version(shell_version_string);
   }
@@ -531,11 +534,9 @@ HRESULT Ping::SendString(bool is_machine,
                          const CString& request_string) {
   ASSERT1(ConfigManager::Instance()->CanUseNetwork(is_machine));
 
-  CORE_LOG(L3, (_T("[ping request string][%s]"), request_string));
-
   CString url;
   ConfigManager::Instance()->GetPingUrl(&url);
-
+  CORE_LOG(L3, (_T("[ping request string][%s][%s]"), url, request_string));
   // Impersonate the user if the caller is machine, running as local system,
   // and a user is logged on to the system.
   scoped_handle impersonation_token(
@@ -545,14 +546,14 @@ HRESULT Ping::SendString(bool is_machine,
   WebServicesClient web_service_client(is_machine);
   HRESULT hr(web_service_client.Initialize(url, headers, false));
   if (FAILED(hr)) {
-    CORE_LOG(LE, (_T("[WebServicesClient::Initialize failed][0x%08x]"), hr));
+    CORE_LOG(LE, (_T("[WebServicesClient::Initialize failed][0x%08x] err:%08X"), hr, GetLastError()));
     return hr;
   }
 
   std::unique_ptr<xml::UpdateResponse> response(xml::UpdateResponse::Create());
   hr = web_service_client.SendString(false, &request_string, response.get());
   if (FAILED(hr)) {
-    CORE_LOG(LE, (_T("[WebServicesClient::SendString failed][0x%08x]"), hr));
+    CORE_LOG(LE, (_T("[WebServicesClient::SendString failed][0x%08x] err:%08X"), hr, GetLastError()));
     return hr;
   }
 

@@ -476,6 +476,7 @@ void GoopdateImpl::HandleError(HRESULT hr, bool has_ui_been_displayed) {
 HRESULT GoopdateImpl::Main(HINSTANCE instance,
                            const TCHAR* cmd_line,
                            int cmd_show) {
+  OutputDebugStringA("omaha Main");
   ++metric_goopdate_main;
 
   HRESULT hr = DoMain(instance, cmd_line, cmd_show);
@@ -559,6 +560,7 @@ HRESULT GoopdateImpl::Main(HINSTANCE instance,
 HRESULT GoopdateImpl::DoMain(HINSTANCE instance,
                              const TCHAR* cmd_line,
                              int cmd_show) {
+  OutputDebugStringA("omaha DoMain");
   module_instance_ = instance;
   cmd_line_ = cmd_line;
   cmd_show_ = cmd_show;

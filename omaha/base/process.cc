@@ -142,7 +142,7 @@ HRESULT Process::RestartWithEnvironment(HANDLE runas_token,
   } else {
     UTIL_LOG(LE, (_T("[Process Restart failed][%s][0x%x]"), command_line_, hr));
   }
-
+  CORE_LOG(L3, (_T("new process id:"), process_id_));
   return hr;
 }
 
@@ -187,6 +187,7 @@ bool Process::WaitUntilDead(uint32 timeout_msec) {
   ASSERT1(timeout_msec);
 
   if (!get(process_)) {
+    CORE_LOG(L3, (_T("invalid process")));
     return false;
   }
 

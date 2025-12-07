@@ -21,7 +21,7 @@
 #include "omaha/common/update3_utils.h"
 #include "goopdate/omaha3_idl.h"
 #include "omaha/goopdate/job_observer.h"
-
+#include "base/logging.h"
 namespace omaha {
 
 namespace internal {
@@ -30,6 +30,8 @@ namespace {
 
 HRESULT CreateJobObserverForOnDemand(DWORD job_observer_git_cookie,
                                      JobObserverCOMDecorator** job_observer) {
+  OutputDebugString(L"CreateJobObserverForOnDemand");
+  CORE_LOG(L2, (L"CreateJobObserverForOnDemand"));
   ASSERT1(job_observer);
   *job_observer = NULL;
 
@@ -58,6 +60,8 @@ HRESULT CreateJobObserverForOnDemand(DWORD job_observer_git_cookie,
 }  // namespace
 
 HRESULT DoOnDemand(bool is_machine, OnDemandParameters on_demand_params) {
+  OutputDebugString(L"DoOnDemand");
+  CORE_LOG(L2, (L"DoOnDemand"));
   CComPtr<JobObserverCOMDecorator> job_observer;
   HRESULT hr = internal::CreateJobObserverForOnDemand(
       on_demand_params.job_observer_git_cookie, &job_observer);

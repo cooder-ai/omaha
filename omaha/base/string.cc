@@ -1805,7 +1805,38 @@ bool String_StringToDecimalIntChecked(const TCHAR* str, int* value) {
 
   return true;
 }
+bool String_StringToDecimalInt64Checked(const TCHAR* str, int64_t* value) {
+  ASSERT1(str);
+  ASSERT1(value);
 
+  if (_set_errno(0)) {
+    return false;
+  }
+
+  TCHAR* end_ptr = NULL;
+  *value = _tcstoll(str, &end_ptr, 10);
+  ASSERT1(end_ptr);
+
+  if (errno) {
+    ASSERT1(ERANGE == errno);
+    // Overflow or underflow.
+    return false;
+  } else if (*value == 0) {
+    // The value returned could be an error code. tcsltol returns
+    // zero when it cannot convert the string. However we need to
+    // distinguish a real zero. Thus check to see if end_ptr is not the start
+    // of the string (str is not an empty string) and is pointing to a '\0'.
+    // If not, we have an error.
+    if ((str == end_ptr) || (*end_ptr != '\0')) {
+      return false;
+    }
+  } else if (*end_ptr != '\0') {
+    // The end_ptr is pointing at a character that is
+    // not the end of the string. Only part of the string could be converted.
+    return false;
+  }
+  return true;
+}
 HRESULT String_StringToBool(const TCHAR* str, bool* value) {
   ASSERT1(str);
   ASSERT1(value);

@@ -19,9 +19,9 @@
 
 // This file implements a tiny program that puts up a MessageBox and exits.
 // It's useful for generating test installation targets.
-int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE, LPSTR, int) {
-  TCHAR my_path[MAX_PATH];
-  char ver_buf[2048];
+int WINAPI _tWinMain(HINSTANCE hInstance, HINSTANCE, LPTSTR, int) {
+  TCHAR my_path[MAX_PATH] = {0};
+  TCHAR ver_buf[2048] = {0};
   VS_FIXEDFILEINFO *ffi = NULL;
   UINT ver_len = 0;
   GetModuleFileName(hInstance, my_path, MAX_PATH);

@@ -59,7 +59,7 @@ class Package
   virtual void OnRequestBegin();
   virtual void OnRequestRetryScheduled(time64 next_download_retry_time);
 
-  void SetFileInfo(const CString& filename, uint64 size, const CString& hash);
+  void SetFileInfo(const CString& filename, uint64 size, const CString& hash, const CString& hash256);
 
   // Returns the name of the file specified in the manifest.
   CString filename() const;
@@ -67,7 +67,7 @@ class Package
   uint64 expected_size() const;
   // Returns expected file hashes.
   CString expected_hash() const;
-
+  CString expected_hash256() const;
   uint64 bytes_downloaded() const;
 
   time64 next_download_retry_time() const;
@@ -85,7 +85,7 @@ class Package
   CString filename_;
   uint64 expected_size_;
   CString expected_hash_;
-
+  CString expected_hash256_;
   int bytes_downloaded_;
   int bytes_total_;
   time64 next_download_retry_time_;

@@ -41,7 +41,7 @@
 #include <atlpath.h>
 #include <atlsimpcoll.h>
 #include <memory>
-
+#include <string>
 #pragma warning(push)
 // C4310: cast truncates constant value
 #pragma warning(disable : 4310)
@@ -57,7 +57,7 @@
 
 #include "omaha/base/system_info.h"
 #include "omaha/base/utils.h"
-#include "omaha/common/brave_referral_code_utils.h"
+#include "omaha/common/genspark_referral_code_utils.h"
 #include "omaha/common/const_cmd_line.h"
 #include "omaha/mi_exe_stub/process.h"
 #include "omaha/mi_exe_stub/mi.grh"
@@ -68,6 +68,7 @@ extern "C" {
 #include "third_party/lzma/files/C/LzmaDec.h"
 }
 
+#include "base/logging.h"
 namespace omaha  {
 
 // Resource ID of the goopdate payload inside the meta-installer.
@@ -102,25 +103,31 @@ void SafeCStringAppendCmdLine(CString* cmd_line, LPCTSTR cmd_line_format, ...) {
 // The function assumes that the extractor has already been opened.
 // The buffer must be deleted by the caller. Returns NULL if the file is not
 // tagged or the tag could not be read.
-char* ReadTag(TagExtractor* extractor) {
+std::string ReadTag(TagExtractor* extractor) {
+  NXLOG_FUNCTION;
   const int kMaxTagLength = 0x10000;  // 64KB
 
   int tag_buffer_size = 0;
   if (!extractor->ExtractTag(NULL, &tag_buffer_size)) {
-    return NULL;
+    CORE_LOG(LE, (_T("ReadTag ExtractTag failed err:%d"), ::GetLastError()));
+    return "";
   }
   if (!tag_buffer_size || (tag_buffer_size >= kMaxTagLength)) {
-    return NULL;
+    CORE_LOG(LE, (_T("ReadTag tag_buffer_size invalid:%d"), tag_buffer_size));
+    return "";
   }
 
   std::unique_ptr<char[]> tag_buffer(new char[tag_buffer_size]);
   if (!tag_buffer.get()) {
-    return NULL;
+    CORE_LOG(LE,
+             (_T("ReadTag new tag_buffer failed err:%d"), ::GetLastError()));
+    return "";
   }
 
   if (!extractor->ExtractTag(tag_buffer.get(), &tag_buffer_size)) {
     _ASSERTE(false);
-    return NULL;
+    CORE_LOG(LE, (_T("ReadTag ExtractTag failed err:%d"), ::GetLastError()));
+    return "";
   }
 
   // Do a check of the tag string. The double quote '"'
@@ -128,32 +135,36 @@ char* ReadTag(TagExtractor* extractor) {
   for (const char* tag_char = tag_buffer.get(); *tag_char; ++tag_char) {
     if (*tag_char == '"') {
       _ASSERTE(false);
-      return NULL;
+      CORE_LOG(LE, (_T("ReadTag tag contains invalid character '\"'")));
+      return "";
     }
   }
-
-  return tag_buffer.release();
+  std::string tag((const char*)tag_buffer.get(), tag_buffer_size);
+  return tag;
 }
 
 // Extract the tag containing the extra information written by the server.
 // The memory returned by the function will have to be freed using delete[]
 // operator.
-char* ExtractTag(const TCHAR* module_file_name) {
+std::string ExtractTag(const TCHAR* module_file_name) {
   if (!module_file_name) {
-    return NULL;
+    CORE_LOG(L2, (_T("ExtractTag empty module_file_name")));
+    return "";
   }
 
   TagExtractor extractor;
   if (!extractor.OpenFile(module_file_name)) {
-    return NULL;
+    CORE_LOG(LE, (_T("ExtractTag OpenFailed Failed err:%d module_file_name:%s"),
+                  ::GetLastError(), module_file_name));
+    return "";
   }
-  char* ret = ReadTag(&extractor);
+  std::string tag = ReadTag(&extractor);
   extractor.CloseFile();
 
-  return ret;
+  return tag;
 }
 
-char* GetTag(HINSTANCE instance) {
+std::string GetTag(HINSTANCE instance) {
   // Get this module file name.
   TCHAR module_file_name[MAX_PATH] = {};
   DWORD len = ::GetModuleFileName(instance,
@@ -161,7 +172,8 @@ char* GetTag(HINSTANCE instance) {
                                   arraysize(module_file_name));
   if (len == 0 || len >= arraysize(module_file_name)) {
     _ASSERTE(false);
-    return NULL;
+    CORE_LOG(LE, (_T("GetModuleFileName failed err:%d"), ::GetLastError()));
+    return "";
   }
 
   return ExtractTag(module_file_name);
@@ -186,11 +198,14 @@ class MetaInstaller {
   }
 
   int ExtractAndRun() {
+    NXLOG_FUNCTION;
     if (CreateUniqueTempDirectory() != 0) {
+      CORE_LOG(LE, (_T("CreateUniqueTempDirectory failed err:%d"), ::GetLastError()));
       return -1;
     }
     scoped_hfile tarball_file(ExtractTarballToTempLocation());
     if (!valid(tarball_file)) {
+      CORE_LOG(LE, (_T("ExtractTarballToTempLocation failed err:%d"), ::GetLastError()));
       return -1;
     }
 
@@ -198,10 +213,12 @@ class MetaInstaller {
     Tar tar(temp_dir_, get(tarball_file), true);
     tar.SetCallback(TarFileCallback, this);
     if (!tar.ExtractToDir()) {
+      CORE_LOG(LE, (_T("ExtractToDir failed temp_dir:%s err:%d"), temp_dir_, ::GetLastError()));
       return -1;
     }
 
     if (!CopyMetainstallerToTempLocation()) {
+      CORE_LOG(LE, (_T("CopyMetainstallerToTempLocation failed err:%d"), ::GetLastError()));
       return -1;
     }
 
@@ -221,31 +238,38 @@ class MetaInstaller {
       CString command_line(exe_path_);
       ::PathQuoteSpaces(CStrBuf(command_line, MAX_PATH));
 
-      std::unique_ptr<char[]> tag(GetTag(instance_));
+      std::string tag = GetTag(instance_);
+      if(tag.empty()) {
+        tag = "appguid={C00DE021-0309-4188-9661-8FD809111080}&appname=Genspark-Release&needsadmin=prefers&ap=genspark";
+      }
       if (cmd_line_.IsEmpty()) {
         // Run-by-user case.
-        if (!tag.get()) {
+        if (tag.empty()) {
           _ASSERTE(!_T("Must provide arguments with untagged metainstaller."));
           HRESULT hr = GOOPDATE_E_UNTAGGED_METAINSTALLER;
           HandleError(hr);
+          CORE_LOG(LE, (_T("GetTag failed err:%d"), ::GetLastError()));
           return hr;
         }
-        const CString original_tag(tag.get());
+        const CString original_tag(tag.c_str());
         CString silent_tag;
         silent_tag.Format(_T("&%s"), kCmdLineSilent);
         const int silent_tag_len = silent_tag.GetLength();
         // If tag has silent tag, append \silent \install to command line.
         // Also silent tag is removed from tag list and assign it to |tag|
-        // buffer again. silent tag isn't recognized by brave updater.
+        // buffer again. silent tag isn't recognized by Genspark updater.
         if (original_tag.Right(silent_tag_len).CompareNoCase(silent_tag) == 0) {
+          tag.erase(tag.length() - silent_tag_len);
+          /* 
           const CString revised_tag =
               original_tag.Left(original_tag.GetLength() - silent_tag_len);
           const int revised_tag_len = revised_tag.GetLength();
           char *new_tag_buffer = new char[revised_tag_len + 1];
-          strncpy(new_tag_buffer, tag.get(), revised_tag_len);
+          strncpy(new_tag_buffer, tag.c_str(), revised_tag_len);
           new_tag_buffer[revised_tag_len] = NULL;
           tag.reset(new_tag_buffer);
-
+          */
+          CORE_LOG(L2, (_T("tag found tag:%s"), tag.c_str()));
           SafeCStringAppendCmdLine(&command_line, _T(" /%s /%s"),
                                    kCmdLineSilent,
                                    kCmdLineInstall);
@@ -257,18 +281,18 @@ class MetaInstaller {
         }
       } else {
         SafeCStringAppendCmdLine(&command_line, _T(" %s"), cmd_line_);
-
+        CORE_LOG(L2, (_T("command_line:%s"), command_line));
         CheckAndHandleRecoveryCase(&command_line);
       }
 
       const bool should_append_tag = !RemoveIgnoreTagSwitch(&command_line);
-      if (should_append_tag && tag.get()) {
-        CString tag_with_referral_code(tag.get());
+      if (should_append_tag && !tag.empty()) {
+        CString tag_with_referral_code(tag.c_str());
         tag_with_referral_code.AppendFormat(_T("&referral=%s"), referral_code_);
         SafeCStringAppendCmdLine(&command_line,
                                  _T(" \"%s\""), tag_with_referral_code);
       }
-
+      CORE_LOG(L2, (_T("command_line:%s"), command_line));
       RunAndWait(command_line, &exit_code_);
     }
     // Propagate up the exit code of the program we have run.
@@ -449,11 +473,14 @@ class MetaInstaller {
   }
 
   bool CopyMetainstallerToTempLocation() {
+    NXLOG_FUNCTION;
     CString module_path;
     DWORD result = ::GetModuleFileName(NULL,
                                        CStrBuf(module_path, MAX_PATH),
                                        MAX_PATH);
     if (!result || result >= MAX_PATH) {
+      CORE_LOG(LE, (_T("GetModuleFileName failed err:%d module_path:%s"),
+        ::GetLastError(), module_path));
       return false;
     }
 
@@ -461,6 +488,8 @@ class MetaInstaller {
     metainstaller_target_path.Append(kOmahaMetainstallerFileName);
 
     if (!::CopyFile(module_path, metainstaller_target_path, false)) {
+      CORE_LOG(LE, (_T("CopyFile failed err:%d module_path:%s metainstaller_target_path:%s"),
+        ::GetLastError(), module_path, metainstaller_target_path));
       return false;
     }
 
@@ -626,6 +655,7 @@ CString GetUiTitle() {
 }
 
 HRESULT HandleError(HRESULT result) {
+  NXLOG_FUNCTION;
   _ASSERTE(FAILED(result));
   CString msg_box_text;
 
@@ -647,8 +677,8 @@ HRESULT HandleError(HRESULT result) {
 }
 
 CString ReadAppGuidFromTag(HINSTANCE hInstance) {
-  std::unique_ptr<char[]> tag(omaha::GetTag(hInstance));
-  const CString original_tag(tag.get());
+  std::string tag(omaha::GetTag(hInstance));
+  const CString original_tag(tag.c_str());
 
   CString app_guid;
   const CString app_guid_prefix = _T("appguid=");
@@ -670,6 +700,7 @@ HRESULT StorePathToRegForPromoCode(LPSTR lpCmdLine) {
   // |kOmahaMetainstallerFileName| at tempdir is used.
   // In that case, command line is not empty.
   // So, we can only get original file name when this run is user initiated.
+  NXLOG_FUNCTION;
   if (!CString(lpCmdLine).IsEmpty())
     return S_OK;
 
@@ -685,7 +716,7 @@ HRESULT StorePathToRegForPromoCode(LPSTR lpCmdLine) {
   HKEY key;
   DWORD dw;
   if (RegCreateKeyEx(HKEY_CURRENT_USER,
-                     _T("Software\\BraveSoftware\\Promo"),
+                     _T("Software\\GensparkSoftware\\Promo"),
                      0,
                      NULL,
                      REG_OPTION_NON_VOLATILE,
@@ -724,16 +755,20 @@ CString GetReferralCodeFromModuleFileName() {
 }  // namespace omaha
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE, LPSTR lpCmdLine, int) {
+  XConsoleLog(_T("mi enter cmdline:%S"), lpCmdLine);
+  CORE_LOG(L2, (L"mi enter cmdline:%S", lpCmdLine));
   omaha::EnableSecureDllLoading();
 
   scoped_co_init init_com_apt;
   HRESULT hr(init_com_apt.hresult());
   if (FAILED(hr)) {
+    CORE_LOG(LE, (_T("init com failed hr:"), hr));
     return omaha::HandleError(hr);
   }
 
   hr = omaha::CheckOSRequirements();
   if (FAILED(hr)) {
+    CORE_LOG(LE, (_T("CheckOSRequirements failed hr:"), hr));
     return omaha::HandleError(hr);
   }
 

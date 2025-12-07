@@ -40,14 +40,14 @@ HRESULT AppBundleStateReady::Download(AppBundle* app_bundle) {
 }
 
 HRESULT AppBundleStateReady::Install(AppBundle* app_bundle) {
-  CORE_LOG(L3, (_T("[AppBundleStateReady::Install][0x%p]"), app_bundle));
+  CORE_LOG(L3, (_T("[UPDATE]AppBundleStateReady::Install][0x%p]"), app_bundle));
   ASSERT1(app_bundle);
   ASSERT1(app_bundle->model()->IsLockedByCaller());
   ASSERT1(!IsPendingNonBlockingCall(app_bundle));
 
   HRESULT hr = app_bundle->model()->DownloadAndInstall(app_bundle);
   if (FAILED(hr)) {
-    CORE_LOG(LE, (_T("[Install failed][0x%08x][0x%p]"), hr, app_bundle));
+    CORE_LOG(LE, (_T("[UPDATE][Install failed][0x%08x][0x%p]"), hr, app_bundle));
     return hr;
   }
 
@@ -57,7 +57,7 @@ HRESULT AppBundleStateReady::Install(AppBundle* app_bundle) {
 
 // Remains in this state since there is nothing to pause.
 HRESULT AppBundleStateReady::Pause(AppBundle* app_bundle) {
-  CORE_LOG(L3, (_T("[AppBundleStateReady::Pause][0x%p]"), app_bundle));
+  CORE_LOG(L3, (_T("[UPDATE][AppBundleStateReady::Pause][0x%p]"), app_bundle));
   UNREFERENCED_PARAMETER(app_bundle);
   return S_OK;
 }
@@ -65,7 +65,7 @@ HRESULT AppBundleStateReady::Pause(AppBundle* app_bundle) {
 // Remains in this state since the bundle is not paused. This might occur if
 // Pause() was called while in this state.
 HRESULT AppBundleStateReady::Resume(AppBundle* app_bundle) {
-  CORE_LOG(L3, (_T("[AppBundleStateReady::Resume][0x%p]"), app_bundle));
+  CORE_LOG(L3, (_T("[UPDATE][AppBundleStateReady::Resume][0x%p]"), app_bundle));
   UNREFERENCED_PARAMETER(app_bundle);
   return S_OK;
 }
@@ -73,7 +73,7 @@ HRESULT AppBundleStateReady::Resume(AppBundle* app_bundle) {
 HRESULT AppBundleStateReady::DownloadPackage(AppBundle* app_bundle,
                                              const CString& app_id,
                                              const CString& package_name) {
-  CORE_LOG(L3, (_T("[AppBundleStateReady::DownloadPackage][0x%p]"),
+  CORE_LOG(L3, (_T("[UPDATE][AppBundleStateReady::DownloadPackage][0x%p]"),
                 app_bundle));
 
   // TODO(omaha): There may need to be some check here that the app is

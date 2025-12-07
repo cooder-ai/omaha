@@ -55,11 +55,14 @@ extern "C" BOOL WINAPI DllMain(HINSTANCE instance, DWORD reason, void*) {
 // command line that is passed to WinMain by the CRT. Our command line
 // parsing code takes care of this difference.
 extern "C" int APIENTRY DllEntry(TCHAR* cmd_line, int cmd_show) {
-  OPT_LOG(L1, (_T("[DllEntry][%s]"), cmd_line));
-
+  TCHAR szUserName[MAX_PATH] = {0};
+  DWORD dwLen = _countof(szUserName);
+  GetUserName(szUserName, &dwLen);
   bool is_local_system =  false;
   HRESULT hr = omaha::IsSystemProcess(&is_local_system);
-  assert(SUCCEEDED(hr));   // Assert because we cannot display UI here.
+  OPT_LOG(L1, (_T("[DllEntry]is_admin:%d user:%s local_system:%d x64:%d cmdline:%s"),
+               IsUserAnAdmin(), szUserName, is_local_system, sizeof(HANDLE) == 8, cmd_line));
+  assert(SUCCEEDED(hr));  // Assert because we cannot display UI here.
   if (SUCCEEDED(hr)) {
     omaha::Goopdate goopdate(is_local_system);
     hr = goopdate.Main(dll_instance, cmd_line, cmd_show);

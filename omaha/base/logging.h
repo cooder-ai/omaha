@@ -25,6 +25,7 @@
 #include "omaha/base/synchronized.h"
 #include "omaha/base/time.h"
 
+void XConsoleLog(const TCHAR* format, ...);
 #ifdef LOGGING
 
 // Logging levels.
@@ -64,7 +65,7 @@ namespace omaha {
 #else
 #define kDefaultMaxLogFileSize          10000000    // 10MB
 #define kDefaultLogToFile               0
-#define kDefaultLogToOutputDebug        0
+#define kDefaultLogToOutputDebug        1
 #define kDefaultLogLevel                L1
 #endif
 
@@ -126,12 +127,12 @@ namespace omaha {
 #endif
 
 // Shortcuts for different logging categories - no need to specify the category.
-#define CORE_LOG(x, y)         LC_LOG_DEBUG(omaha::LC_CORE, x, y)
-#define NET_LOG(x, y)          LC_LOG_DEBUG(omaha::LC_NET, x, y)
-#define SERVICE_LOG(x, y)      LC_LOG_DEBUG(omaha::LC_SERVICE, x, y)
-#define SETUP_LOG(x, y)        LC_LOG_DEBUG(omaha::LC_SETUP, x, y)
-#define SHELL_LOG(x, y)        LC_LOG_DEBUG(omaha::LC_SHELL, x, y)
-#define UTIL_LOG(x, y)         LC_LOG_DEBUG(omaha::LC_UTIL, x, y)
+#define CORE_LOG(x, y) LC_LOG_OPT(omaha::LC_CORE, x, y)
+#define NET_LOG(x, y) LC_LOG_OPT(omaha::LC_NET, x, y)
+#define SERVICE_LOG(x, y) LC_LOG_OPT(omaha::LC_SERVICE, x, y)
+#define SETUP_LOG(x, y) LC_LOG_OPT(omaha::LC_SETUP, x, y)
+#define SHELL_LOG(x, y) LC_LOG_OPT(omaha::LC_SHELL, x, y)
+#define UTIL_LOG(x, y) LC_LOG_OPT(omaha::LC_UTIL, x, y)
 
 #define OPT_LOG(x, y)          LC_LOG_OPT(omaha::LC_OPT, x, y)
 #define REPORT_LOG(x, y)       LC_LOG_OPT(omaha::LC_REPORT, x, y)
@@ -162,6 +163,51 @@ enum LogCategory {
   LC_MAX_CAT
 };
 
+#ifdef UNICODE
+#ifndef WIDE_STRING
+#define WIDE_STRING2(str) L##str
+#define WIDE_STRING(str) WIDE_STRING2(str)
+#endif
+#else
+#ifndef WIDE_STRING
+#define WIDE_STRING2(str) ##str
+#define WIDE_STRING(str) WIDE_STRING2(str)
+#endif
+#endif
+
+
+#if defined(DISABLE_XLOG_FUNCTION) || defined(DISABLE_XLOG)
+#define NXLOG_FUNCTION __noop
+#else
+#define NXLOG_FUNCTION \
+  LC_LOG(omaha::LC_UTIL, L2, (L"FUNCTION: %s", WIDE_STRING(__FUNCTION__)));
+#endif
+#ifdef UNICODE
+#define NX_REPORT_ERROR(expr)                                         \
+  {                                                                   \
+    HRESULT _hr_ = ::GetLastError();                                  \
+    LC_LOG(omaha::LC_UTIL, LEVEL_ERROR, (_T("ASSERT(%s) LastError=0X%X @ %S(%d)"), \
+              WIDE_STRING(expr), _hr_, __FILE__, __LINE__));            \
+  }
+#else
+#define NX_REPORT_ERROR(expr)                                                  \
+  {                                                                            \
+    HRESULT _hr_ = ::GetLastError();                                           \
+    LC_LOG(omaha::LC_UTIL, LEVEL_ERROR,                                        \
+           (_T("ASSERT(%s) LastError=0X%X @ %s(%d)"), WIDE_STRING(expr), _hr_, \
+            __FILE__, __LINE__));                                              \
+  }
+
+#endif
+#define NX_VERIFY_BASE(expr, exprstr, statement) \
+  {                                              \
+    if (!(expr)) {                               \
+      NX_REPORT_ERROR(exprstr);                  \
+      statement;                                 \
+    }                                            \
+  }
+
+#define NX_VERIFY(expr, statement) NX_VERIFY_BASE(expr, #expr, statement)
 #define kCatEnabledField      L"Enabled"
 #define kCatLevelField        L"Level"
 

@@ -128,7 +128,7 @@ class BundleInstaller
           bundle_result(result),
           bundle_completion_message(message) {}
 
-#ifdef DEBUG
+//#ifdef DEBUG
     CString ToString() const {
       CString result;
       SafeCStringFormat(&result, _T("[BundleCompletionInfo][%d][0x%x][%s]"),
@@ -140,7 +140,7 @@ class BundleInstaller
       }
       return result;
     }
-#endif
+//#endif
   };
 
   // Does the work for PollServer.

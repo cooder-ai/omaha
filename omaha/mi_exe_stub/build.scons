@@ -57,6 +57,7 @@ for omaha_version_info in env['omaha_versions_info']:
           ],
       LINKFLAGS = [
           '/LARGEADDRESSAWARE',  # Enable addresses larger than 2 GB.
+          '/ENTRY:WinMainCRTStartup',
           ],
       RCFLAGS = [
           '/DVERSION_MAJOR=%d' % omaha_version_info.version_major,

@@ -214,17 +214,19 @@ HRESULT LaunchImpersonatedBrowser(BrowserType type, const CString& url) {
 HRESULT InternalCreateExternalUpdaterActiveEvent(const CString& app_id,
                                                  bool is_machine,
                                                  scoped_event* event_handle) {
+  
   CString event_name(kExternalUpdaterActivityPrefix);
   event_name += CString(app_id).MakeUpper();
-
+  CORE_LOG(L3, (_T("[UPDATE]InternalCreateExternalUpdaterActiveEvent app_id:%s machine:%d event_name:%s"),
+                app_id, is_machine, event_name));
   NamedObjectAttributes attr;
   GetNamedObjectAttributes(event_name, is_machine, &attr);
 
   ::SetLastError(ERROR_SUCCESS);
   HRESULT hr = CreateEvent(&attr, address(*event_handle));
   if (FAILED(hr)) {
-    CORE_LOG(LW, (_T("[CreateExternalUpdaterActiveEvent][CreateEvent failed]"),
-                  _T("[%d][%s][0x%08x]"), is_machine, attr.name, hr));
+    CORE_LOG(LE, (_T("[HTTP]CreateExternalUpdaterActiveEvent CreateEvent failed is_machine:%d event_name:%s hr:0x%08X"),
+      is_machine, attr.name, hr));
     return hr;
   }
 
@@ -797,7 +799,7 @@ HRESULT UnRegisterTypeLibForUser(REFGUID lib_id,
 CString GetCurrentVersionedName(bool is_machine,
                                 const TCHAR* value_name,
                                 const TCHAR* default_val) {
-  CORE_LOG(L3, (_T("[ConfigManager::GetCurrentVersionedName]")));
+  CORE_LOG(L3, (_T("[ConfigManager::GetCurrentVersionedName] value_name:%s defaule_val:%s"), value_name, default_val));
   ASSERT1(value_name && *value_name);
   ASSERT1(default_val && *default_val);
 
@@ -1311,8 +1313,8 @@ HRESULT OpenUniqueEventFromEnvironment(const CString& var_name,
 
 // The caller is responsible for resetting the event and closing the handle.
 HRESULT CreateEvent(NamedObjectAttributes* event_attr, HANDLE* event_handle) {
-  ASSERT1(event_handle);
-  ASSERT1(event_attr);
+  NX_VERIFY(event_attr, return E_INVALIDARG);
+  NX_VERIFY(event_handle, return E_INVALIDARG);
   ASSERT1(!event_attr->name.IsEmpty());
   *event_handle = ::CreateEvent(&event_attr->sa,
                                 true,   // manual reset
@@ -1321,7 +1323,7 @@ HRESULT CreateEvent(NamedObjectAttributes* event_attr, HANDLE* event_handle) {
 
   if (!*event_handle) {
     DWORD error = ::GetLastError();
-    CORE_LOG(LEVEL_ERROR, (_T("[::CreateEvent failed][%d]"), error));
+    CORE_LOG(LE, (_T("[UPDATE] CreateEvent failed err:%d name:%s"), error, event_attr->name));
     return HRESULT_FROM_WIN32(error);
   }
 
@@ -1544,7 +1546,7 @@ HRESULT GetMacHashesViaNDIS(std::vector<CString>* mac_hashes) {
   RegKey reg_key;
   HRESULT hr = reg_key.Open(kRegKeyNetworkCards, KEY_READ);
   if (FAILED(hr)) {
-    CORE_LOG(LW, (_T("[Failed to open][%s][%#x]"), kRegKeyNetworkCards, hr));
+    CORE_LOG(LW, (_T("[GetMacHashesViaNDIS Failed to open][%s][%#x]"), kRegKeyNetworkCards, hr));
     return hr;
   }
 
@@ -1555,25 +1557,25 @@ HRESULT GetMacHashesViaNDIS(std::vector<CString>* mac_hashes) {
     CString key_name;
     hr = reg_key.GetSubkeyNameAt(adapter_index, &key_name);
     if (FAILED(hr)) {
-      CORE_LOG(LW, (_T("[Failed to get sub key][%d][%#x]"), adapter_index, hr));
+      CORE_LOG(LW, (_T("[GetMacHashesViaNDIS Failed to get sub key]%d][%#x]"), adapter_index, hr));
       continue;
     }
 
     RegKey sub_key;
     hr = sub_key.Open(reg_key.Key(), key_name, KEY_READ);
     if (FAILED(hr)) {
-      CORE_LOG(LW, (_T("[Failed to open][%s][%#x]"), key_name.GetString(), hr));
+      CORE_LOG(LW, (_T("[GetMacHashesViaNDIS Failed to open sub_key:%s %08X"), key_name.GetString(), hr));
       continue;
     }
 
     CString adapter_name;
     hr = sub_key.GetValue(kRegValueAdapterServiceName, &adapter_name);
     if (FAILED(hr)) {
-      CORE_LOG(LW, (_T("[Failed to read][%s][%#x]"), key_name, hr));
+      CORE_LOG(LW, (_T("[GetMacHashesViaNDIS Failed to read key_name:%s err:%08X"), key_name, hr));
       continue;
     }
 
-    TCHAR device_name[MAX_PATH];
+    TCHAR device_name[MAX_PATH] = {0};
     _sntprintf_s(device_name,
                  arraysize(device_name),
                  arraysize(device_name) - 1,
@@ -1591,12 +1593,12 @@ HRESULT GetMacHashesViaNDIS(std::vector<CString>* mac_hashes) {
                                           NULL));
     if (!file_handle) {
       hr = HRESULTFromLastError();
-      CORE_LOG(LW, (_T("[Failed to open][%s][%#x]"), device_name, hr));
+      CORE_LOG(LW, (_T("GetMacHashesViaNDIS Failed to open device_name:%s err:%08X"), device_name, hr));
       continue;
     }
 
     DWORD query = OID_802_3_PERMANENT_ADDRESS;
-    char mac_address[6];
+    char mac_address[6] = {0};
     DWORD mac_size = sizeof(mac_address);
     if (!::DeviceIoControl(get(file_handle),
                            IOCTL_NDIS_QUERY_GLOBAL_STATS,
@@ -1608,7 +1610,7 @@ HRESULT GetMacHashesViaNDIS(std::vector<CString>* mac_hashes) {
                            NULL) ||
         mac_size != arraysize(mac_address)) {
       hr = HRESULTFromLastError();
-      CORE_LOG(LW, (_T("[Failed get mac address][%s][%#x]"), device_name, hr));
+      CORE_LOG(LW, (_T("GetMacHashesViaNDIS Failed get mac address device_name: %s %08X"), device_name, hr));
       continue;
     }
 

@@ -61,20 +61,21 @@ HRESULT AppBundleStateBusy::Stop(AppBundle* app_bundle) {
 }
 
 HRESULT AppBundleStateBusy::CompleteAsyncCall(AppBundle* app_bundle) {
-  CORE_LOG(L3, (_T("[AppBundleStateBusy::CompleteAsyncCall][0x%p]"),
-                app_bundle));
+  CORE_LOG(L3, (_T("[UPDATE]AppBundleStateBusy::CompleteAsyncCall")));
   ASSERT1(IsPendingNonBlockingCall(app_bundle));
   ChangeState(app_bundle, new AppBundleStateReady);
   return S_OK;
 }
 
 HRESULT AppBundleStateBusy::Download(AppBundle* app_bundle) {
+  CORE_LOG(L3, (_T("[UPDATE]AppBundleStateBusy::Download")));
   UNREFERENCED_PARAMETER(app_bundle);
   ASSERT1(IsPendingNonBlockingCall(app_bundle));
   return GOOPDATE_E_NON_BLOCKING_CALL_PENDING;
 }
 
 HRESULT AppBundleStateBusy::Install(AppBundle* app_bundle) {
+  CORE_LOG(L3, (_T("[UPDATE]AppBundleStateBusy::Install")));
   UNREFERENCED_PARAMETER(app_bundle);
   ASSERT1(IsPendingNonBlockingCall(app_bundle));
   return GOOPDATE_E_NON_BLOCKING_CALL_PENDING;
@@ -83,6 +84,9 @@ HRESULT AppBundleStateBusy::Install(AppBundle* app_bundle) {
 HRESULT AppBundleStateBusy::DownloadPackage(AppBundle* app_bundle,
                                             const CString& app_id,
                                             const CString& package_name) {
+  CORE_LOG(L3,
+           (_T("[UPDATE][AppBundleStateBusy::DownloadPackage app_id:%s package_name:%s"),
+             app_id, package_name));
   UNREFERENCED_PARAMETER(app_bundle);
   UNREFERENCED_PARAMETER(app_id);
   UNREFERENCED_PARAMETER(package_name);

@@ -28,9 +28,14 @@ import SCons.Action
 import SCons.Builder
 import SCons.Tool
 from subprocess import PIPE,Popen
-
+import logging
 import omaha_version_utils
 
+logging.basicConfig(
+  level=logging.DEBUG,
+  format='%(asctime)s-%(levelname)s-%(filename)s-%(message)s',
+  datefmt='%Y-%m-%d %H:%M:%S'
+)
 
 def OmahaCertificateTag(env, target, source):
   """Adds a superfluous certificate with a magic signature to an EXE or MSI.
@@ -46,7 +51,13 @@ def OmahaCertificateTag(env, target, source):
   Returns:
     Output node list from env.Command().
   """
-
+  skip_signing = False
+  if env.Bit('skip_signing'):
+    skip_signing = True
+  logging.debug('OmahaCertificateTag source:%s target:%s skip_signing:%s',
+                source, target, skip_signing)
+  if skip_signing:
+    return env.Command(target, source, SCons.Script.Copy('$TARGET', '$SOURCE'))
   certificate_tag = ('"' + env['ENV']['GOROOT'] + '/bin/go.exe' + '"' +
                      ' run ' +
                      '"$MAIN_DIR/../common/certificate_tag/certificate_tag.go"')
@@ -86,7 +97,13 @@ def OmahaCertificateTagForTesting(env,
   Returns:
     Output node list from env.Command().
   """
-
+  skip_signing = False
+  if env.Bit('skip_signing'):
+    skip_signing = True
+  logging.debug('OmahaCertificateTagForTesting source:%s target:%s skip_signing:%s',
+                source, target, skip_signing)
+  if skip_signing:
+    return env.Command(target, source, SCons.Script.Copy('$TARGET', '$SOURCE'))
   certificate_tag = ('"' + env['ENV']['GOROOT'] + '/bin/go.exe' + '"' +
                      ' run ' +
                      '"$MAIN_DIR/../common/certificate_tag/certificate_tag.go"')
@@ -124,7 +141,8 @@ def OmahaTagExe(env, target, source, tag):
   Returns:
     Output node list from env.Command().
   """
-
+  logging.debug('OmahaTagExe source:%s target:%s',
+                [str(s) for s in source], [str(t) for t in target])
   tag_exe = '$MAIN_DIR/internal/tools/ApplyTag.exe'
   tag_cmd = env.Command(
       target=target,
@@ -179,6 +197,8 @@ def OmahaBuildTestMsi(env, version, namespace, exe_name, wxs_template, msi_base_
     Output node list from env.Command().
   """
   msi_base_name = prefix + msi_base_name
+  logging.debug('OmahaBuildTestMsi version:%s, namespace:%s, exe_name:%s, wxs_template:%s, msi_base_name:%s, prefix:%s',
+               version, namespace[0], exe_name, wxs_template, msi_base_name, prefix)
   # Have to use 'copy' here because we are renaming the file, and it is being
   # renamed to match the final msi name to avoid collisions in the wixobj files.
   copy_target = env.Command(

@@ -105,7 +105,10 @@ class CryptoHash {
 
   DISALLOW_COPY_AND_ASSIGN(CryptoHash);
 };
-
+// Verifies that the files' SHA1 hash is the expected_hash. The hash is
+// base64 encoded.
+HRESULT VerifyFileHash(const std::vector<CString>& files,
+                       const CString& expected_hash);
 // Verifies that the files' SHA256 hash is the expected_hash. The hash is
 // hex-digit encoded.
 HRESULT VerifyFileHashSha256(const std::vector<CString>& files,

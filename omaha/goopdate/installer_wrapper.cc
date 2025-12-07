@@ -261,7 +261,8 @@ HRESULT InstallerWrapper::BuildCommandLineFromFilename(
     CString* executable_path,
     CString* command_line,
     InstallerType* installer_type) {
-  CORE_LOG(L3, (_T("[BuildCommandLineFromFilename]")));
+  CORE_LOG(L3, (_T("[update]BuildCommandLineFromFilename file_path:%s arguments:%s installer_data:%s"),
+    file_path, arguments, installer_data));
 
   ASSERT1(executable_path);
   ASSERT1(command_line);
@@ -278,7 +279,7 @@ HRESULT InstallerWrapper::BuildCommandLineFromFilename(
   // We use the App Installer's directory for the InstallerData file.
   CPath app_installer_directory(file_path);
   if (!app_installer_directory.RemoveFileSpec()) {
-    OPT_LOG(LE, (_T("[Does not appear to be a filename '%s']"), file_path));
+    CORE_LOG(LE, (_T("[update][Does not appear to be a filename '%s']"), file_path));
     return GOOPDATEINSTALL_E_FILENAME_INVALID;
   }
 
@@ -308,7 +309,7 @@ HRESULT InstallerWrapper::BuildCommandLineFromFilename(
       }
       *installer_type = CUSTOM_INSTALLER;
 
-      CORE_LOG(L2, (_T("[BuildCommandLineFromFilename][exe][%s][%s]"),
+      CORE_LOG(L2, (_T("[update][BuildCommandLineFromFilename][exe][%s][%s]"),
                     *executable_path, *command_line));
     } else if (0 == lstrcmpi(ext, _T("msi"))) {
       *executable_path = _T("msiexec");
@@ -317,18 +318,19 @@ HRESULT InstallerWrapper::BuildCommandLineFromFilename(
                                           enclosed_installer_data_file_path);
       *installer_type = MSI_INSTALLER;
 
-      CORE_LOG(L2, (_T("[BuildCommandLineFromFilename][msi][%s]"),
+      CORE_LOG(L2, (_T("[update][BuildCommandLineFromFilename][msi][%s]"),
                     *command_line));
     } else {
       *executable_path = _T("");
       *command_line = _T("");
       *installer_type = UNKNOWN_INSTALLER;
 
-      OPT_LOG(LE, (_T("[Unsupported extension '%s' in %s]"), ext, file_path));
+      CORE_LOG(LE, (_T("[update][Unsupported extension '%s' in %s]"), ext,
+                    file_path));
       return GOOPDATEINSTALL_E_FILENAME_INVALID;
     }
   } else {
-    OPT_LOG(LE, (_T("[No extension found in %s]"), file_path));
+    CORE_LOG(LE, (_T("[update][No extension found in %s]"), file_path));
     return GOOPDATEINSTALL_E_FILENAME_INVALID;
   }
 
@@ -348,7 +350,9 @@ HRESULT InstallerWrapper::ExecuteAndWaitForInstaller(
     const CString& untrusted_data,
     int install_priority,
     InstallerResultInfo* result_info) {
-  CORE_LOG(L3, (_T("[InstallerWrapper::ExecuteAndWaitForInstaller]")));
+  CORE_LOG(L3, (_T("[update][InstallerWrapper::ExecuteAndWaitForInstaller] app_guid:%s executeable_path:%s cmd_line:%s language:%s untrusted_data:%s install_priority:%d"),
+                GuidToString(app_guid), executable_path, command_line, language,
+                untrusted_data, install_priority));
   ASSERT1(result_info);
   ASSERT1(num_tries_when_msi_busy_ >= 1);
 
@@ -370,7 +374,7 @@ HRESULT InstallerWrapper::ExecuteAndWaitForInstaller(
 
     if (0 < num_tries) {
       // Retrying - wait between attempts.
-      CORE_LOG(L1, (_T("[Retrying][%d]"), num_tries));
+      CORE_LOG(L1, (_T("[update][Retrying][%d]"), num_tries));
       ::Sleep(retry_delay);
       retry_delay *= 2;  // Double the retry delay next time.
     }
@@ -385,11 +389,11 @@ HRESULT InstallerWrapper::ExecuteAndWaitForInstaller(
                                       install_priority,
                                       result_info);
     if (FAILED(hr)) {
-      CORE_LOG(LE, (_T("[DoExecuteAndWaitForInstaller failed][0x%08x]"), hr));
+      CORE_LOG(LE, (_T("[update][DoExecuteAndWaitForInstaller failed][0x%08x]"), hr));
       return hr;
     }
-    CORE_LOG(L1, (_T("[Installer result][%d][%d][%s]"),
-                  result_info->type, result_info->code, result_info->text));
+    CORE_LOG(L1, (_T("[update]installer result type:%d code:%d text:%s cmdline:%s"),
+                  result_info->type, result_info->code, result_info->text, command_line));
     ASSERT1(result_info->type != INSTALLER_RESULT_UNKNOWN);
 
     if ((INSTALLER_RESULT_ERROR_MSI == result_info->type ||
@@ -437,7 +441,7 @@ HRESULT InstallerWrapper::DoExecuteAndWaitForInstaller(
     const CString& untrusted_data,
     int install_priority,
     InstallerResultInfo* result_info) {
-  OPT_LOG(L1, (_T("[Running installer][%s][%s][%s]"),
+  OPT_LOG(L1, (_T("[update][Running installer exe:%s cmdline:%s app_id:%s"),
                executable_path, command_line, GuidToString(app_guid)));
   ASSERT1(result_info);
 
@@ -467,12 +471,12 @@ HRESULT InstallerWrapper::DoExecuteAndWaitForInstaller(
                                       user_token,
                                       &env_block.front());
   if (FAILED(hr)) {
-    OPT_LOG(LE, (_T("[p.Start fail][0x%08x][%s][%s]"),
+    CORE_LOG(LE, (_T("[update][p.Start fail] err:0x%08x path:%s cmdline:%s"),
         hr, executable_path, command_line));
     set_error_extra_code1(static_cast<int>(hr));
     return GOOPDATEINSTALL_E_INSTALLER_FAILED_START;
   }
-
+  CORE_LOG(L3, (_T("installer pid:%d"), p.GetId()));
   if (install_priority != INSTALL_PRIORITY_HIGH) {
     VERIFY1(::SetPriorityClass(p.GetHandle(), BELOW_NORMAL_PRIORITY_CLASS));
   }
@@ -493,7 +497,7 @@ HRESULT InstallerWrapper::DoExecuteAndWaitForInstaller(
   hr = GetInstallerResult(app_guid, installer_type, p, language, result_info);
 
   if (result_info->type != INSTALLER_RESULT_SUCCESS) {
-    OPT_LOG(LE, (_T("[Installer failed][%s][%s][%u]"),
+    OPT_LOG(LE, (_T("[update][Installer failed][%s][%s][%u]"),
                  executable_path, command_line, result_info->code));
   }
 
@@ -505,24 +509,28 @@ HRESULT InstallerWrapper::GetInstallerResult(const GUID& app_guid,
                                              const Process& p,
                                              const CString& language,
                                              InstallerResultInfo* result_info) {
-  CORE_LOG(L3, (_T("[InstallerWrapper::GetInstallerResult]")));
+  CORE_LOG(L3, (_T("[update][InstallerWrapper::GetInstallerResult]")));
   ASSERT1(result_info);
-
+  const CString app_guid_string = GuidToString(app_guid);
   HRESULT hr = S_OK;
   uint32 exit_code = 0;
   if (p.Running()) {
-    OPT_LOG(LEVEL_WARNING, (_T("[Installer has timed out]")));
+    CORE_LOG(LEVEL_WARNING, (_T("[update]Installer has timed out app_id:%s"),
+                             app_guid_string));
     hr = GOOPDATEINSTALL_E_INSTALLER_TIMED_OUT;
     exit_code = static_cast<uint32>(hr);
   } else {
     hr = GetInstallerExitCode(p, &exit_code);
     if (FAILED(hr)) {
-      CORE_LOG(LEVEL_ERROR, (_T("[GetInstallerExitCode failed][0x%08x]"), hr));
+      CORE_LOG(LE,
+               (_T("[update]GetInstallerExitCode failed app_id:%s err:0x%08X"),
+                app_guid_string, hr));
       return hr;
     }
     hr = S_OK;
   }
-
+  CORE_LOG(L3,
+           (_T("[update] app_id:%s exit code:%d"), app_guid_string, exit_code));
   GetInstallerResultHelper(app_guid,
                            installer_type,
                            exit_code,
@@ -541,6 +549,8 @@ void InstallerWrapper::GetInstallerResultHelper(
     uint32 result_code,
     const CString& language,
     InstallerResultInfo* result_info) {
+  const CString app_guid_string = GuidToString(app_guid);
+  CORE_LOG(L3, (_T("GetInstallerResultHelper app_id:%s, "), app_guid_string));
   ASSERT1(result_info);
 
   AppManager::InstallerResult installer_result =
@@ -557,8 +567,8 @@ void InstallerWrapper::GetInstallerResultHelper(
       &result.extra_code1,
       &result.text,
       &result.post_install_launch_command_line);
-  OPT_LOG(L1, (_T("[InstallerResult][%s][%u]"),
-               GuidToString(app_guid), installer_result));
+  OPT_LOG(L1,
+          (_T("[update]InstallerResult] app_id:%s install_result_code:%u"), app_guid_string, (int)installer_result));
 
   switch (installer_result) {
     case AppManager::INSTALLER_RESULT_SUCCESS:
@@ -654,7 +664,7 @@ HRESULT InstallerWrapper::CheckApplicationRegistration(
     const CString& previous_version,
     bool is_update) const {
   const CString app_guid_string = GuidToString(app_guid);
-  CORE_LOG(L2, (_T("[InstallerWrapper::CheckApplicationRegistration][%s]"),
+  CORE_LOG(L2, (_T("[update]InstallerWrapper::CheckApplicationRegistration app_id:%s"),
                 app_guid_string));
   ASSERT(!::IsEqualGUID(kGoopdateGuid, app_guid),
          (_T("Probably do not want to call this method for Omaha")));
@@ -663,13 +673,12 @@ HRESULT InstallerWrapper::CheckApplicationRegistration(
     return GOOPDATEINSTALL_E_INSTALLER_DID_NOT_WRITE_CLIENTS_KEY;
   }
 
-  CORE_LOG(L2, (_T("[CheckApplicationRegistration]")
-                _T("[guid=%s][registered=%s][expected=%s][previous=%s]"),
+  CORE_LOG(L2, (_T("[update]CheckApplicationRegistration app_id:%s registered:%s expected:%s previous=%s"),
                 app_guid_string, registered_version, expected_version,
                 previous_version));
 
   if (!expected_version.IsEmpty() && registered_version != expected_version) {
-    OPT_LOG(LE, (_T("[Registered version does not match expected][%s][%s][%s]"),
+    OPT_LOG(LE, (_T("[update]Registered version does not match expected app_id:%s registered_version:%s expected_version:%s"),
                  app_guid_string, registered_version, expected_version));
     // This is expected if a newer version is already installed. Do not fail
     // here in that case. This only works for four-element version strings.
@@ -700,7 +709,7 @@ HRESULT InstallerWrapper::CheckApplicationRegistration(
            (_T("expected_version should be > previous_version when ")
             _T("is_update - possibly a bad update rule.")));
 
-    OPT_LOG(LE, (_T("[Installer did not change version][%s][%s]"),
+    OPT_LOG(LE, (_T("[update]Installer did not change version app_id:%s pre_version:%s"),
                  app_guid_string, previous_version));
     return GOOPDATEINSTALL_E_INSTALLER_DID_NOT_CHANGE_VERSION;
   }
@@ -718,7 +727,7 @@ HRESULT InstallerWrapper::DoInstallApp(HANDLE user_token,
                                        const CString& untrusted_data,
                                        int install_priority,
                                        InstallerResultInfo* result_info) {
-  CORE_LOG(L1, (_T("[InstallerWrapper::DoInstallApp][%s][%s][%s]"),
+  CORE_LOG(L1, (_T("[update]InstallerWrapper::DoInstallApp app_Id%s installer_path:%s args:%s"),
                GuidToString(app_guid), installer_path, arguments));
   ASSERT1(result_info);
 
@@ -742,7 +751,8 @@ HRESULT InstallerWrapper::DoInstallApp(HANDLE user_token,
                                             &installer_type);
 
   if (FAILED(hr)) {
-    CORE_LOG(LW, (_T("[BuildCommandLineFromFilename failed][0x%08x]"), hr));
+    CORE_LOG(LW, (_T("[update]BuildCommandLineFromFilename failed app_id:%s err:0x%08x"),
+         GuidToString(app_guid), hr));
     ASSERT1(GOOPDATEINSTALL_E_FILENAME_INVALID == hr);
     return hr;
   }
@@ -762,13 +772,13 @@ HRESULT InstallerWrapper::DoInstallApp(HANDLE user_token,
   }
 
   if (FAILED(hr)) {
-    CORE_LOG(LE, (_T("[ExecuteAndWaitForInstaller failed][0x%08x][%s]"),
-                  hr, GuidToString(app_guid)));
+    CORE_LOG(LE, (_T("[update]ExecuteAndWaitForInstaller failed app_id:%s err:0x%08x"),
+                  GuidToString(app_guid), hr));
     return hr;
   }
 
   if (result_info->type != INSTALLER_RESULT_SUCCESS) {
-    CORE_LOG(LE, (_T("[Installer failed][%d]"), result_info->type));
+    CORE_LOG(LE, (_T("[update]Installer failed appid:%s err:%d"), GuidToString(app_guid), result_info->type));
     return GOOPDATEINSTALL_E_INSTALLER_FAILED;
   }
 

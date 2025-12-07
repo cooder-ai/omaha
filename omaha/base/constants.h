@@ -158,13 +158,14 @@ const TCHAR* const kTemporaryFilenamePrefix = _T("gup");
 // Omaha's app ID
 //
 // TODO(omaha): Rename all of these "Omaha".
-#define GOOPDATE_APP_ID _T("{B131C935-9BE6-41DA-9599-1F776BEB8019}")
+#define GOOPDATE_APP_ID _T("{84911B8C-4071-4F5E-B33F-4136CEB7B1E2}")
 const TCHAR* const kGoogleUpdateAppId = GOOPDATE_APP_ID;
-const GUID kGoopdateGuid = {0xB131C935, 0x9BE6, 0x41DA,
-                            {0x95, 0x99, 0x1F, 0x77, 0x6B, 0xEB, 0x80, 0x19}};
+const GUID kGoopdateGuid = 
+{ 0x84911b8c, 0x4071, 0x4f5e, { 0xb3, 0x3f, 0x41, 0x36, 0xce, 0xb7, 0xb1, 0xe2 } };
 
 // Chrome AppIDs
-#define CHROME_APP_ID _T("{8A69D345-D564-463C-AFF1-A69D9E530F96}")
+//#define CHROME_APP_ID _T("{8A69D345-D564-463C-AFF1-A69D9E530F96}")
+#define CHROME_APP_ID _T("{C00DE021-0309-4188-9661-8FD809111080}")
 const TCHAR* const kChromeAppId = CHROME_APP_ID;
 
 #if defined(HAS_DEVICE_MANAGEMENT) && defined(HAS_LEGACY_DM_CLIENT)

@@ -448,6 +448,9 @@ void Worker::CheckForUpdate(std::shared_ptr<AppBundle> app_bundle) {
 // TODO(omaha): Unit test this by mocking update_check_client.
 void Worker::CheckForUpdateHelper(AppBundle* app_bundle,
                                   bool* is_check_successful) {
+  NX_VERIFY(app_bundle, return);
+  NX_VERIFY(is_check_successful, return);
+  CORE_LOG(L2, (_T("CheckForUpdateHelper app:%s"), app_bundle->session_id()));
   ASSERT1(app_bundle);
   ASSERT1(is_check_successful);
   *is_check_successful = false;
@@ -935,6 +938,10 @@ void Worker::DoPreUpdateCheck(AppBundle* app_bundle,
 HRESULT Worker::DoUpdateCheck(AppBundle* app_bundle,
                               const xml::UpdateRequest* update_request,
                               xml::UpdateResponse* update_response) {
+  NX_VERIFY(app_bundle, return E_INVALIDARG);
+  NX_VERIFY(update_request, return E_INVALIDARG);
+  NX_VERIFY(update_response, return E_INVALIDARG);
+  CORE_LOG(L2, (_T("Worker::DoUpdateCheck")));
   ASSERT1(app_bundle);
   ASSERT1(update_request);
   ASSERT1(update_response);
@@ -1006,6 +1013,7 @@ HRESULT Worker::DoUpdateCheck(AppBundle* app_bundle,
 void Worker::DoPostUpdateCheck(AppBundle* app_bundle,
                                HRESULT update_check_result,
                                xml::UpdateResponse* update_response) {
+  NXLOG_FUNCTION;
   ASSERT1(app_bundle);
   ASSERT1(update_response);
 

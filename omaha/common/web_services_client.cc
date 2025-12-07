@@ -48,7 +48,7 @@ WebServicesClient::WebServicesClient(bool is_machine)
 }
 
 WebServicesClient::~WebServicesClient() {
-  CORE_LOG(L3, (_T("[WebServicesClient::~WebServicesClient]")));
+  CORE_LOG(L3, (_T("[HTTP;WebServicesClient::~WebServicesClient]")));
 
   delete lock_;
   omaha::interlocked_exchange_pointer(&lock_, static_cast<Lockable*>(NULL));
@@ -57,7 +57,7 @@ WebServicesClient::~WebServicesClient() {
 HRESULT WebServicesClient::Initialize(const CString& url,
                                       const HeadersVector& headers,
                                       bool use_cup) {
-  CORE_LOG(L3, (_T("[WebServicesClient::Initialize][%s][%d]"), url, use_cup));
+  CORE_LOG(L3, (_T("[HTTP;WebServicesClient::Initialize][%s][%d]"), url, use_cup));
 
   omaha::interlocked_exchange_pointer(&lock_,
                                       static_cast<Lockable*>(new LLock));
@@ -108,24 +108,27 @@ HRESULT WebServicesClient::CreateRequest() {
 HRESULT WebServicesClient::Send(bool is_foreground,
                                 const xml::UpdateRequest* update_request,
                                 xml::UpdateResponse* update_response) {
-  CORE_LOG(L3, (_T("[WebServicesClient::Send]")));
+  NX_VERIFY(update_request, return E_INVALIDARG);
+  NX_VERIFY(update_response, return E_INVALIDARG);
+  CORE_LOG(L3,
+           (_T("[HTTP;WebServicesClient::Send] is_foreground:%d url:%s"), is_foreground, original_url_));
   ASSERT1(update_request);
   ASSERT1(update_response);
 
   if (!ConfigManager::Instance()->CanUseNetwork(is_machine_)) {
-    CORE_LOG(LE, (_T("[WebServicesClient::Send][network use prohibited]")));
+    CORE_LOG(LE, (_T("[HTTP;WebServicesClient::Send][network use prohibited] url:%s"), original_url_));
     return GOOPDATE_E_CANNOT_USE_NETWORK;
   }
 
   CString request_string;
   HRESULT hr = update_request->Serialize(&request_string);
   if (FAILED(hr)) {
-    CORE_LOG(LE, (_T("[Serialize failed][0x%x]"), hr));
+    CORE_LOG(LE, (_T("[HTTP;Serialize failed] url:%s err:0x%08x"), original_url_, hr));
     return hr;
   }
 
   ASSERT1(!request_string.IsEmpty());
-
+  CORE_LOG(L2, (_T("[HTTP;]Send use_cup:%d request:%s url:%s"), use_cup_, request_string, original_url_));
   __mutexBlock(lock_) {
     update_request_headers_.clear();
     if (!update_request->IsEmpty()) {
@@ -146,7 +149,7 @@ HRESULT WebServicesClient::Send(bool is_foreground,
 HRESULT WebServicesClient::SendString(bool is_foreground,
                                       const CString* request_string,
                                       xml::UpdateResponse* update_response) {
-  CORE_LOG(L3, (_T("[WebServicesClient::SendString]")));
+  CORE_LOG(L3, (_T("[HTTP;WebServicesClient::SendString]")));
   ASSERT1(request_string);
   ASSERT1(update_response);
 
@@ -165,7 +168,10 @@ HRESULT WebServicesClient::SendStringWithFallback(
     bool is_foreground,
     const CString* request_string,
     xml::UpdateResponse* update_response) {
-  CORE_LOG(L3, (_T("[WebServicesClient::SendStringWithFallback]")));
+  NX_VERIFY(request_string, return E_INVALIDARG);
+  NX_VERIFY(update_response, return E_INVALIDARG);
+  CORE_LOG(L3, (_T("[HTTP;WebServicesClient::SendStringWithFallback] url:%s use_cup:%d request:%s"),
+    original_url_, use_cup_, *request_string));
 
   ASSERT1(request_string);
   ASSERT1(update_response);
@@ -180,8 +186,7 @@ HRESULT WebServicesClient::SendStringWithFallback(
   }
 
   const CStringA utf8_request_string(WideToUtf8(*request_string));
-  CORE_LOG(L3, (_T("[sending web services request as UTF-8][%S]"),
-      utf8_request_string));
+  CORE_LOG(L3, (_T("[HTTP;sending web services request as UTF-8] url:%s"), original_url_));
 
   HRESULT hr = SendStringInternal(original_url_,
                                   utf8_request_string,
@@ -191,30 +196,30 @@ HRESULT WebServicesClient::SendStringWithFallback(
     ssl_result_ = hr;
   }
 
-  CORE_LOG(L3, (_T("[first request returned 0x%x]"), hr));
+  CORE_LOG(L3, (_T("[HTTP;first request returned 0x%x] url:%s"), hr, original_url_));
 
   if (SUCCEEDED(hr)) {
     return hr;
   }
 
   if (retry_after_sec_ > 0) {
-    CORE_LOG(L3, (_T("[retry after was received, don't fallback to http]")));
+    CORE_LOG(L3, (_T("[HTTP;retry after was received, don't fallback to http] url:%s"), original_url_));
     return hr;
   }
   if (hr == GOOPDATE_E_CANCELLED) {
-    CORE_LOG(L3, (_T("[the request was canceled, don't fallback to http]")));
+    CORE_LOG(L3, (_T("[HTTP;the request was canceled, don't fallback to http] url:%s"), original_url_));
     return hr;
   }
   if (IsHttpUrl(original_url_)) {
-    CORE_LOG(L3, (_T("[http request already failed, don't fallback to http]")));
+    CORE_LOG(L3, (_T("[HTTP;http request already failed, don't fallback to http] url:%s"), original_url_));
     return hr;
   }
   if (use_encryption) {
-    CORE_LOG(L3, (_T("[encryption required, don't fallback to http]")));
+    CORE_LOG(L3, (_T("[HTTP;encryption required, don't fallback to http] url:%s"), original_url_));
     return hr;
   }
 
-  CORE_LOG(L3, (_T("[fallback to the http url]")));
+  CORE_LOG(L3, (_T("[HTTP;fallback to the http url] url:%s"), original_url_));
   HRESULT hr_fallback = SendStringInternal(MakeHttpUrl(original_url_),
                                            utf8_request_string,
                                            update_response);
@@ -223,7 +228,7 @@ HRESULT WebServicesClient::SendStringWithFallback(
   }
 
   // Return the error of the first request when the fallback has failed too.
-  CORE_LOG(L3, (_T("[fallback to the http url returned 0x%x]"), hr_fallback));
+  CORE_LOG(LE, (_T("[HTTP;fallback to the http url returned 0x%x] url:%s"), hr_fallback, original_url_));
   return hr;
 }
 
@@ -231,11 +236,15 @@ HRESULT WebServicesClient::SendStringInternal(
     const CString& actual_url,
     const CStringA& utf8_request_string,
     xml::UpdateResponse* update_response) {
-  CORE_LOG(L3, (_T("[actual_url is %s]"), actual_url));
+  CORE_LOG(
+      L3,
+      (_T("[HTTP] SendStringInternalactual url:%s use_cup:%d request:%S"),
+       actual_url, use_cup_, (const char*)utf8_request_string));
 
   // Each attempt to send a request is using its own network client.
   HRESULT hr = CreateRequest();
   if (FAILED(hr)) {
+    CORE_LOG(LE, (_T("[CreateRequest failed] url:%s err:0x%08x"), actual_url, hr));
     return hr;
   }
 
@@ -243,9 +252,9 @@ HRESULT WebServicesClient::SendStringInternal(
   hr = network_request_->PostUtf8String(actual_url,
                                         utf8_request_string,
                                         &response_buffer);
-  CORE_LOG(L3, (_T("[the request returned 0x%x]"), hr));
+  CORE_LOG(L3, (_T("[HTTP] the request returned 0x%x"), hr));
   const CString response_string(Utf8BufferToWideChar(response_buffer));
-  CORE_LOG(L3, (_T("[response received][%s]"), response_string));
+  CORE_LOG(L3, (_T("[HTTP] Response url:%s response:%s"), actual_url, response_string));
 
   // Save the values of the custom headers if the values are found.
   CaptureCustomHeaderValues();
@@ -255,11 +264,11 @@ HRESULT WebServicesClient::SendStringInternal(
   if (IsHttpsUrl(actual_url)) {
     retry_after_sec_ =
         std::min(FindHttpHeaderValueInt(kHeaderXRetryAfter), kSecondsPerDay);
-    CORE_LOG(L3, (_T("[retry_after_sec_][%d]"), retry_after_sec_));
+    CORE_LOG(L3, (_T("[HTTP] retry_after_sec_ url:%s [%d]"), actual_url, retry_after_sec_));
   }
 
   if (FAILED(hr)) {
-    CORE_LOG(L3, (_T("[PostUtf8String failed][0x%x]"), hr));
+    CORE_LOG(LE, (_T("[HTTP]PostUtf8String failed url:%s err:0x%08x"), actual_url, hr));
     return hr;
   }
 
@@ -268,7 +277,7 @@ HRESULT WebServicesClient::SendStringInternal(
   ASSERT1(is_http_success());
   hr = update_response->Deserialize(response_buffer);
   if (FAILED(hr)) {
-    CORE_LOG(L3, (_T("[Deserialize failed][0x%x]"), hr));
+    CORE_LOG(LE, (_T("[HTTP]Deserialize failed url:%s err:0x%08x"), actual_url, hr));
     // If we received a 200 response that doesn't successfully parse, one
     // possibility is that we were redirected or DNS-poisoned by a captive
     // portal, and the body is actually an HTML login/eula page. Check the
@@ -280,8 +289,8 @@ HRESULT WebServicesClient::SendStringInternal(
     // call to PostUtf8String call will return OMAHA_NET_E_CAPTIVEPORTAL.
     if (NULL == stristrW(response_string, L"<response") &&
         NULL != stristrW(response_string, L"<html")) {
-      CORE_LOG(LE, (_T("[HTML body detected - possibly a captive portal]")));
-      hr = OMAHA_NET_E_CAPTIVEPORTAL;
+      CORE_LOG(LE, (_T("[HTTP] HTML body detected - possibly a captive portal url:%s"), actual_url));
+      hr = OMAHA_NET_E_CAPTIVEPORTAL; 
     }
 
     return hr;
@@ -302,7 +311,7 @@ void WebServicesClient::CaptureCustomHeaderValues() {
 }
 
 void WebServicesClient::Cancel() {
-  CORE_LOG(L3, (_T("[WebServicesClient::Cancel]")));
+  CORE_LOG(L3, (_T("[HTTP]WebServicesClient::Cancel")));
   if (network_request_.get()) {
     network_request_->Cancel();
   }
@@ -377,11 +386,11 @@ CString WebServicesClient::FindHttpHeaderValue(const CString& all_headers,
   std::vector<CString> headers;
   TextToLines(all_headers, _T("\r\n"), &headers);
   for (CStrVecIter it = headers.begin(); it != headers.end(); ++it) {
-    UTIL_LOG(L6, (_T("[WebServicesClient::FindHttpHeaderValue][%s]"), *it));
+    UTIL_LOG(L6, (_T("[HTTP]WebServicesClient::FindHttpHeaderValue %s"), *it));
     CString name, value;
     if (ParseNameValuePair(*it, _T(':'), &name, &value)) {
       if (name.Trim().CompareNoCase(search_name) == 0) {
-        UTIL_LOG(L6, (_T("[WebServicesClient::FindHttpHeaderValue][found]")));
+        UTIL_LOG(L6, (_T("[HTTP]WebServicesClient::FindHttpHeaderValue found")));
         return value.Trim();
       }
     }

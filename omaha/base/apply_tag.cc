@@ -24,7 +24,7 @@
 
 #include "omaha/base/utils.h"
 #include "omaha/base/extractor.h"
-
+#include "base/logging.h"
 namespace omaha {
 
 // TODO(omaha3): There is duplication between this code and the Extractor class.
@@ -48,6 +48,8 @@ HRESULT ApplyTag::Init(const TCHAR* signed_exe_file,
                        int tag_string_length,
                        const TCHAR* tagged_file,
                        bool append) {
+  CORE_LOG(L2, (_T("ApplyTag Init signed_exe_file:%s, tag:%S tagged_file:%s"),
+                signed_exe_file, tag_string, tagged_file));
   ASSERT1(signed_exe_file);
   ASSERT1(tag_string);
   ASSERT1(tagged_file);
@@ -58,6 +60,7 @@ HRESULT ApplyTag::Init(const TCHAR* signed_exe_file,
 
   // Check the tag_string for invalid characters.
   if (!IsValidTagString(tag_string)) {
+    CORE_LOG(LE, (_T("invald tag string")));
     return E_INVALIDARG;
   }
 
@@ -75,6 +78,7 @@ HRESULT ApplyTag::EmbedTagString() {
                                        FILE_SHARE_READ,
                                        &input_file_buffer);
   if (FAILED(hr)) {
+    CORE_LOG(LE, (_T("EmbedTagString ReadEntireFileShareMode failed hr:%d err:%s"), hr, GetLastError()));
     return hr;
   }
 
@@ -83,10 +87,13 @@ HRESULT ApplyTag::EmbedTagString() {
   if (!append_ && prev_tag_string_length_) {
     // If there is a previous tag and the append flag is not set, then
     // we should error out.
+    CORE_LOG(LE, (_T("EmbedTagString append:%d prev_tag:%d"), append_,
+                  prev_tag_string_length_));
     return APPLYTAG_E_ALREADY_TAGGED;
   }
 
   if (!CreateBufferToWrite()) {
+    CORE_LOG(LE, (_T("EmbedTagString CreateBufferToWrite failed err:%d"), GetLastError()));
     return E_FAIL;
   }
 
@@ -99,6 +106,8 @@ HRESULT ApplyTag::EmbedTagString() {
   // Applying tags require the file be signed with Authenticode and have a
   // padded certificate that contains kMagicBytes.
   if (!ApplyTagToBuffer()) {
+    CORE_LOG(LE, (_T("EmbedTagString ApplyTagToBuffer failed err:%d"),
+                  GetLastError()));
     return APPLYTAG_E_NOT_SIGNED;
   }
 
@@ -176,6 +185,7 @@ bool ApplyTag::CreateBufferToWrite() {
 }
 
 bool ApplyTag::ApplyTagToBuffer() {
+  NXLOG_FUNCTION;
   uint32 peheader = GetUint32(&buffer_data_.front() + kPEHeaderOffset);
   uint32 kCertDirAddressOffset = 152;
   uint32 kCertDirInfoSize = 4 + 4;
@@ -201,9 +211,7 @@ bool ApplyTag::ApplyTagToBuffer() {
                                cert_dir_end,
                                kMagicBytes,
                                kMagicBytes + kMagicBytesLen);
-  if (mc >= cert_dir_end) {
-    return false;
-  }
+  NX_VERIFY(!(mc >= cert_dir_end), return false);
 
   // Copy the tag buffer.
   copy(tag_buffer_.begin(), tag_buffer_.end(),

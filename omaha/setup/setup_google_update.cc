@@ -117,6 +117,8 @@ HRESULT VerifyCOMLocalServerRegistration(bool is_machine) {
 
 HRESULT RegisterOrUnregisterService(bool register_server,
                                     CString service_path) {
+  SETUP_LOG(L2, (_T("[RegisterOrUnregisterService][register_server=%d] service_path:%s"),
+       register_server, service_path));
   EnclosePath(&service_path);
 
   CommandLineBuilder builder(

@@ -392,7 +392,7 @@ class PackageElementHandler : public ElementHandler {
       return hr;
     }
 
-    hr = ReadIntAttribute(node, xml::attribute::kSize, &install_package.size);
+    hr = ReadInt64Attribute(node, xml::attribute::kSize, &install_package.size);
     if (FAILED(hr)) {
       return hr;
     }
@@ -690,14 +690,15 @@ class UpdateCheckElementHandler : public ElementHandler {
     InstallPackage install_package;
     install_package.name = package_name;
     install_package.is_required = true;
-    hr = ReadIntAttribute(node, xml::attribute::kSize, &install_package.size);
+    hr = ReadInt64Attribute(node, xml::attribute::kSize, &install_package.size);
     if (FAILED(hr)) {
       return hr;
     }
-    hr = ReadStringAttribute(node,
-                             xml::attribute::kHash,
+    hr = ReadStringAttribute(node, xml::attribute::kHash,
                              &install_package.hash_sha1);
-    if (FAILED(hr)) {
+    HRESULT hr2 = ReadStringAttribute(node, xml::attribute::kHashSha256,
+                             &install_package.hash_sha256);
+    if (FAILED(hr) && FAILED(hr2)) {
       return hr;
     }
 
@@ -889,6 +890,11 @@ HRESULT XmlParser::BuildRequestElement() {
                            kXmlNamespace,
                            xml::attribute::kProtocol,
                            request_->protocol_version);
+  if (FAILED(hr)) {
+    return hr;
+  }
+  hr = AddXMLAttributeNode(element, kXmlNamespace, xml::attribute::kVersion,
+                           request_->omaha_version);
   if (FAILED(hr)) {
     return hr;
   }

@@ -84,15 +84,15 @@ size_t AppVersion::GetNumberOfPackages() const {
 }
 
 HRESULT AppVersion::AddPackage(const CString& filename,
-                               uint32 size,
-                               const CString& hash) {
-  if (hash.IsEmpty()) {
+                               int64_t size,
+                               const CString& hash1, const CString& hash256) {
+  if (hash1.IsEmpty() && hash256.IsEmpty()) {
     return E_INVALIDARG;
   }
 
   __mutexScope(model()->lock());
   Package* package = new Package(this);
-  package->SetFileInfo(filename, size, hash);
+  package->SetFileInfo(filename, (uint64)size, hash1, hash256);
   packages_.push_back(package);
   return S_OK;
 }

@@ -52,8 +52,7 @@ HRESULT HelpUrlBuilder::BuildUrl(const std::vector<AppResult>& app_results,
     return hr;
   }
 
-  *help_url = _T("https://support.brave.app/");
-
+  *help_url = _T("https://www.genspark.ai/browser");
   return S_OK;
 }
 

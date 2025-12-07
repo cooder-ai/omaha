@@ -125,7 +125,7 @@ def BuildCrashHandler(local_env):
 
   # Change the name of the executable based on the architecture, and
   # change the names of the objects to prevent collisions.
-  exe_name = 'BraveCrashHandler%s' % res_suffix.title()
+  exe_name = 'GensparkCrashHandler%s' % res_suffix.title()
   unsigned_crash_handler = gch_env.ComponentProgram(
       prog_name='%s_unsigned.exe' % exe_name,
       source=gch_inputs,

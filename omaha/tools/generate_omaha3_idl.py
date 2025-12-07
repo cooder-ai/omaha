@@ -21,6 +21,7 @@ import subprocess
 import getopt
 import os
 import sys
+import uuid
 
 
 def _GetStatusOutput(cmd):
@@ -37,10 +38,7 @@ def _GetStatusOutput(cmd):
 
 
 def _GenerateGuid():
-  (status, guid) = _GetStatusOutput("uuidgen.exe /c")
-  if status != 0:
-    raise SystemError("Failed to get GUID: %s" % guid)
-  return guid
+    return str(uuid.uuid4())
 
 
 def _GenerateIDLText(idl_template):

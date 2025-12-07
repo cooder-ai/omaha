@@ -776,6 +776,27 @@ HRESULT ReadIntAttribute(IXMLDOMNode* node,
   }
   return S_OK;
 }
+HRESULT ReadInt64Attribute(IXMLDOMNode* node,
+                         const TCHAR* attr_name,
+                         int64_t* value) {
+  CORE_LOG(L4, (_T("[ReadInt64Attribute][%s]"), attr_name));
+  ASSERT1(node);
+  ASSERT1(attr_name);
+  ASSERT1(value);
+
+  CComBSTR node_value;
+  HRESULT hr = ReadAttribute(node, attr_name, &node_value);
+  if (FAILED(hr)) {
+    CORE_LOG(LE, (_T("[ReadAttribute failed][%s][0x%x]"), attr_name, hr));
+    return hr;
+  }
+
+  if (!String_StringToDecimalInt64Checked(static_cast<const TCHAR*>(node_value),
+                                        value)) {
+    return GOOPDATEXML_E_STRTOUINT;
+  }
+  return S_OK;
+}
 
 HRESULT ReadGuidAttribute(IXMLDOMNode* node,
                           const TCHAR* attr_name,

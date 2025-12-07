@@ -20,7 +20,7 @@
 #include "omaha/common/const_cmd_line.h"
 #include "omaha/common/update3_utils.h"
 #include "omaha/common/lang.h"
-
+#include "base/logging.h"
 namespace omaha {
 
 namespace {
@@ -382,18 +382,22 @@ AppBundleWeb::~AppBundleWeb() {
 }
 
 STDMETHODIMP AppBundleWeb::initialize() {
+  NXLOG_FUNCTION;
   return app_bundle_->initialize();
 }
 
 STDMETHODIMP AppBundleWeb::checkForUpdate() {
+  NXLOG_FUNCTION;
   return app_bundle_->checkForUpdate();
 }
 
 STDMETHODIMP AppBundleWeb::download() {
+  NXLOG_FUNCTION;
   return app_bundle_->download();
 }
 
 STDMETHODIMP AppBundleWeb::install() {
+  NXLOG_FUNCTION;
   if (!has_installed_app_ &&
       update3web_->is_machine_install() &&
       !UserRights::TokenIsAdmin(update3web_->impersonation_token())) {
@@ -405,14 +409,17 @@ STDMETHODIMP AppBundleWeb::install() {
 }
 
 STDMETHODIMP AppBundleWeb::pause() {
+  NXLOG_FUNCTION;
   return app_bundle_->pause();
 }
 
 STDMETHODIMP AppBundleWeb::resume() {
+  NXLOG_FUNCTION;
   return app_bundle_->resume();
 }
 
 STDMETHODIMP AppBundleWeb::cancel() {
+  NXLOG_FUNCTION;
   if (!has_installed_app_ &&
       update3web_->is_machine_install() &&
       !UserRights::TokenIsAdmin(update3web_->impersonation_token())) {
@@ -424,6 +431,7 @@ STDMETHODIMP AppBundleWeb::cancel() {
 }
 
 STDMETHODIMP AppBundleWeb::downloadPackage(BSTR app_id, BSTR package_name) {
+  NXLOG_FUNCTION;
   CORE_LOG(L1, (_T("[AppBundleWeb::downloadPackage][%s][%s]"),
                 app_id, package_name));
 
@@ -437,6 +445,7 @@ STDMETHODIMP AppBundleWeb::downloadPackage(BSTR app_id, BSTR package_name) {
 }
 
 STDMETHODIMP AppBundleWeb::get_currentState(VARIANT* current_state) {
+  NXLOG_FUNCTION;
   return app_bundle_->get_currentState(current_state);
 }
 
@@ -444,6 +453,7 @@ AppWeb::AppWeb() {
 }
 
 HRESULT AppWeb::Init(IApp* app) {
+  NXLOG_FUNCTION;
   app_ = app;
   return S_OK;
 }
@@ -621,10 +631,10 @@ HRESULT Update3WebBase::FinalConstruct() {
 
   if (!primary_token_.GetProcessToken(TOKEN_ALL_ACCESS)) {
     hr = HRESULTFromLastError();
-    CORE_LOG(LE, (_T("[Update3WebBase::FC][GetProcessToken failed][%#x]"), hr));
+    CORE_LOG(LE, (_T("[GetCallerToken::FC][GetProcessToken failed][%#x]"), hr));
     return hr;
-  }
 
+  }
   return S_OK;
 }
 

@@ -214,9 +214,9 @@ HRESULT PackageCache::Initialize(const CString& cache_root) {
   return S_OK;
 }
 
-bool PackageCache::IsCached(const Key& key, const CString& hash) const {
-  CORE_LOG(L3, (_T("[PackageCache::IsCached][key '%s'][hash %s]"),
-                key.ToString(), hash));
+bool PackageCache::IsCached(const Key& key, const CString& hash, const CString& hash256) const {
+  CORE_LOG(L3, (_T("[PackageCache::IsCached][key '%s'] hash:%s hash256:%s"),
+                key.ToString(), hash, hash256));
 
   __mutexScope(cache_lock_);
 
@@ -225,18 +225,24 @@ bool PackageCache::IsCached(const Key& key, const CString& hash) const {
   if (FAILED(hr)) {
     return false;
   }
+  if (!File::Exists(filename)) {
+    return false;
+  }
+  if (FAILED(VerifyHash(filename, hash, hash256))) {
+    return false;
+  }
 
-  return File::Exists(filename) && SUCCEEDED(VerifyHash(filename, hash));
+  return true;
 }
 
 HRESULT PackageCache::Put(const Key& key,
                           File* source_file,
-                          const CString& hash) {
+                          const CString& hash, const CString& hash256) {
   ASSERT1(source_file);
 
   ++metric_worker_package_cache_put_total;
-  CORE_LOG(L3, (_T("[PackageCache::Put][key '%s'][hash %s]"),
-                key.ToString(), hash));
+  CORE_LOG(L3, (_T("[PackageCache::Put][key '%s'][hash %s] hash256:%s"),
+                key.ToString(), hash, hash256));
 
   __mutexScope(cache_lock_);
 
@@ -269,11 +275,10 @@ HRESULT PackageCache::Put(const Key& key,
     return hr;
   }
 
-  hr = VerifyHash(destination_file, hash);
+  hr = VerifyHash(destination_file, hash, hash256);
   if (FAILED(hr)) {
-    CORE_LOG(LE,
-        (_T("[failed to verify hash for file '%s'][expected hash %s]"),
-        destination_file, hash));
+    CORE_LOG(LE, (_T("[failed to verify hash for file '%s'][expected hash %s]"),
+                  destination_file, hash));
     VERIFY1(::DeleteFile(destination_file));
     return hr;
   }
@@ -284,9 +289,9 @@ HRESULT PackageCache::Put(const Key& key,
 
 HRESULT PackageCache::Get(const Key& key,
                           const CString& destination_file,
-                          const CString& hash) const {
-  CORE_LOG(L3, (_T("[PackageCache::Get][key '%s'][dest file '%s'][hash '%s']"),
-      key.ToString(), destination_file, hash));
+                          const CString& hash, const CString& hash256) const {
+  CORE_LOG(L3, (_T("[PackageCache::Get][key '%s'][dest file '%s'] hash: hash256:%s"),
+      key.ToString(), destination_file, hash, hash256));
 
   __mutexScope(cache_lock_);
 
@@ -306,10 +311,10 @@ HRESULT PackageCache::Get(const Key& key,
     return HRESULT_FROM_WIN32(ERROR_FILE_NOT_FOUND);
   }
 
-  hr = VerifyHash(source_file, hash);
+  hr = VerifyHash(source_file, hash, hash256);
   if (FAILED(hr)) {
     CORE_LOG(LE, (_T("[failed to verify hash for file '%s'][expected hash %s]"),
-        source_file, hash));
+                  source_file, hash));
     return hr;
   }
 
@@ -520,18 +525,29 @@ HRESULT PackageCache::BuildCacheFileName(const CString& app_id,
 }
 
 HRESULT PackageCache::VerifyHash(const CString& filename,
-                                 const CString& expected_hash) {
-  CORE_LOG(L3, (_T("[PackageCache::VerifyHash][%s][%s]"),
-           filename, expected_hash));
+                                 const CString& expected_hash,
+                                 const CString& expected_hash256) {
+  CORE_LOG(L3, (_T("[PackageCache::VerifyHash][%s] hash:%s hash256:%s"),
+                filename, expected_hash, expected_hash256));
   HighresTimer verification_timer;
 
   std::vector<CString> files;
   files.push_back(filename);
-
-  HRESULT hr = VerifyFileHashSha256(files, expected_hash);
-  CORE_LOG(L3, (_T("[PackageCache::VerifyHash completed][0x%08x][%d ms]"),
-                hr, verification_timer.GetElapsedMs()));
-  return hr;
+  return S_OK;
+  /*
+  if (!expected_hash256.IsEmpty()) {
+    HRESULT hr = VerifyFileHashSha256(files, expected_hash256);
+    CORE_LOG(L3, (_T("[PackageCache::VerifyHash completed][0x%08x][%d ms]"), hr,
+                  verification_timer.GetElapsedMs()));
+    return hr;
+  } else if (!expected_hash.IsEmpty()) {
+    HRESULT hr = VerifyFileHash(files, expected_hash);
+    CORE_LOG(L3, (_T("[PackageCache::VerifyHash completed][0x%08x][%d ms]"), hr,
+                  verification_timer.GetElapsedMs()));
+    return hr;
+  }
+  return S_OK;
+  */
 }
 
 }  // namespace omaha

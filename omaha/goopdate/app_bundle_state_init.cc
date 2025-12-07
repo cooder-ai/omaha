@@ -19,11 +19,11 @@
 #include "omaha/base/logging.h"
 #include "omaha/base/user_rights.h"
 #include "omaha/base/utils.h"
-#include "omaha/common/config_manager.h"
+#include "omaha/common/config_manager.h" 
 #include "omaha/common/web_services_client.h"
 #include "omaha/goopdate/app_bundle_state_initialized.h"
 #include "omaha/goopdate/model.h"
-
+#include "omaha/base/const_addresses.h"
 namespace omaha {
 
 namespace fsm {
@@ -92,6 +92,7 @@ HRESULT AppBundleStateInit::put_sessionId(AppBundle* app_bundle,
 // TODO(omaha): Enforce ordering - initialize must be called before any other
 // non-property functions. This code must move to AppBundleStateInit.
 HRESULT AppBundleStateInit::Initialize(AppBundle* app_bundle) {
+  NX_VERIFY(app_bundle, return E_INVALIDARG);
   CORE_LOG(L3, (_T("[AppBundleStateInit::Initialize][0x%p]"), app_bundle));
   ASSERT1(app_bundle);
   ASSERT1(app_bundle->model()->IsLockedByCaller());
@@ -115,9 +116,10 @@ HRESULT AppBundleStateInit::Initialize(AppBundle* app_bundle) {
   CString update_check_url;
   VERIFY_SUCCEEDED(
       ConfigManager::Instance()->GetUpdateCheckUrl(&update_check_url));
+  CORE_LOG(L3, (_T("[AppBundleStateInit::Initialize ][0x%p] check_url:%s"), app_bundle, update_check_url));
   auto web_service_client = std::make_unique<WebServicesClient>(
       app_bundle->is_machine());
-  hr = web_service_client->Initialize(update_check_url, HeadersVector(), true);
+  hr = web_service_client->Initialize(update_check_url, HeadersVector(), use_cup_for_update_checks);
   if (FAILED(hr)) {
     CORE_LOG(LE, (_T("[Update check client init failed][0x%08x]"), hr));
     return hr;

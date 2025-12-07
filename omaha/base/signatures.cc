@@ -71,6 +71,7 @@ CryptDetails::HashInterface* CreateHasher() {
 
 }  // namespace CryptDetails
 
+
 HRESULT CryptoHash::Compute(const TCHAR* filepath,
                             uint64 max_len,
                             std::vector<byte>* hash_out) {
@@ -235,13 +236,17 @@ HRESULT CryptoHash::ComputeOrValidate(const std::vector<byte>& buffer_in,
     return S_OK;
   }
 }
+HRESULT VerifyFileHash(const std::vector<CString>&,
+                       const CString&) {
+  return S_OK;
+}
 
 HRESULT VerifyFileHashSha256(const std::vector<CString>& files,
-                             const CString& expected_hash) {
+                             const CString& expected_hash256) {
   ASSERT1(!files.empty());
 
   std::vector<uint8> hash_vector;
-  if (!SafeHexStringToVector(expected_hash, &hash_vector)) {
+  if (!SafeHexStringToVector(expected_hash256, &hash_vector)) {
     return E_INVALIDARG;
   }
 

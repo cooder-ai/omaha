@@ -570,20 +570,22 @@ HRESULT CreateForOnDemand(bool is_machine,
                           HANDLE impersonation_token,
                           HANDLE primary_token,
                           IAppBundle** app_bundle) {
-  CORE_LOG(L2, (_T("[bundle_creator::CreateForOnDemand]")));
+  CORE_LOG(L2, (_T("[UPDATE][bundle_creator::CreateForOnDemand app_id:%s install_source:%s session_id:%s machine:%d"),
+    app_id, install_source, session_id, is_machine));
   ASSERT1(app_bundle);
 
   CComPtr<IGoogleUpdate3> server;
   HRESULT hr = update3_utils::CreateGoogleUpdate3Class(is_machine, &server);
   if (FAILED(hr)) {
-    CORE_LOG(LE, (_T("[CreateGoogleUpdate3Class failed][0x%x]"), hr));
+    CORE_LOG(LE, (_T("[UPDATE]CreateGoogleUpdate3Class failed app_id:%s machine:%d err:0x%08X"), app_id, is_machine, hr));
     return hr;
   }
 
   CComPtr<IAppBundle> app_bundle_ptr;
   hr = update3_utils::CreateAppBundle(server, &app_bundle_ptr);
   if (FAILED(hr)) {
-    CORE_LOG(LE, (_T("[CreateAppBundle failed][0x%x]"), hr));
+    CORE_LOG(LE, (_T("[UPDATE]CreateAppBundle failed app_id:%s machine:%d err:0x%08X"),
+                  app_id, is_machine, hr));
     return hr;
   }
 
@@ -598,6 +600,8 @@ HRESULT CreateForOnDemand(bool is_machine,
   // requirements only when calling out on this interface.
   hr = update3_utils::SetProxyBlanketAllowImpersonate(app_bundle_ptr);
   if (FAILED(hr)) {
+    CORE_LOG(LE, (_T("[UPDATE]SetProxyBlanketAllowImpersonate failed app_id:%s machine:%d err:0x%08X"),
+                  app_id, is_machine, hr));
     return hr;
   }
 
@@ -607,7 +611,8 @@ HRESULT CreateForOnDemand(bool is_machine,
         reinterpret_cast<ULONG_PTR>(primary_token),
         ::GetCurrentProcessId());
     if (FAILED(hr)) {
-      CORE_LOG(LE, (_T("[put_altTokens failed][0x%x]"), hr));
+      CORE_LOG(LE, (_T("[UPDATE]put_altTokens failed app_id:%s machine:%d err:0x%08X"),
+                app_id, is_machine, hr));
       return hr;
     }
   }
@@ -631,6 +636,8 @@ HRESULT CreateForOnDemand(bool is_machine,
 
   hr = app_bundle_ptr->initialize();
   if (FAILED(hr)) {
+    CORE_LOG(LE, (_T("[UPDATE]initialize failed app_id:%s machine:%d err:0x%08X"),
+              app_id, is_machine, hr));
     return hr;
   }
 
@@ -639,7 +646,9 @@ HRESULT CreateForOnDemand(bool is_machine,
                                          app_bundle_ptr,
                                          &app);
   if (FAILED(hr)) {
-    CORE_LOG(LE, (_T("[CreateInstalledApp failed][0x%x]"), hr));
+    CORE_LOG(LE,
+             (_T("[UPDATE]CreateInstalledApp failed app_id:%s machine:%d err:0x%08X"),
+              app_id, is_machine, hr));
     return hr;
   }
 

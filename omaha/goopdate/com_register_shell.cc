@@ -101,7 +101,8 @@ HRESULT RegisterOrUnregisterProxies64(bool is_machine, bool is_register) {
 
 }  // namespace omaha
 
-int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
+int WINAPI _tWinMain(HINSTANCE, HINSTANCE, LPTSTR cmdline, int) {
+  XConsoleLog(_T("com_register_shell main enter cmdline:%s"), cmdline);
   omaha::EnableSecureDllLoading();
 
   TCHAR* cmd_line = GetCommandLine();

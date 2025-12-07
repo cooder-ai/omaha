@@ -11,6 +11,7 @@ group("omaha") {
 }
 
 action("build_omaha_installer") {
+  print("build_omaha_installer")
   script="build_omaha.py"
 
   inputs = [ "build_omaha.py" ]
@@ -18,18 +19,18 @@ action("build_omaha_installer") {
   sources = [ "$root_out_dir/$brave_installer_exe" ]
 
   _install_switch = ""
-  _tag_app_name = "Brave-Release"
+  _tag_app_name = "Genspark-Release"
   if (brave_channel == "beta") {
     _install_switch = "--chrome-beta"
-    _tag_app_name = "Brave-Browser-Beta"
+    _tag_app_name = "Genspark-Browser-Beta"
   } else if (brave_channel == "dev") {
     _install_switch = "--chrome-dev"
-    _tag_app_name = "Brave-Browser-Dev"
+    _tag_app_name = "Genspark-Browser-Dev"
   } else if (brave_channel == "nightly") {
     _install_switch = "--chrome-sxs"
-    _tag_app_name = "Brave-Browser-Nightly"
+    _tag_app_name = "Genspark-Browser-Nightly"
   } else {
-    assert(brave_channel == "", "Unknown channel name")
+    #assert(brave_channel == "", "Unknown channel name")
   }
 
   out_dir = rebase_path(root_out_dir)
@@ -49,7 +50,11 @@ action("build_omaha_installer") {
     "--brave_full_version=$chrome_version_major.$brave_version_major.$brave_version_minor.$brave_version_build",
     "--tag_installdataindex=$tag_installdataindex",
   ]
-
+  if (skip_signing) {
+    args += [ "--skip_signing" ]
+  } else {
+    args += [ "--signing_mode=$signing_mode" ]
+  }
   outputs = [
     "$root_out_dir/$brave_stub_installer_exe",
     "$root_out_dir/$brave_standalone_installer_exe",

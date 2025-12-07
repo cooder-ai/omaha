@@ -20,7 +20,7 @@
 #include "base/basictypes.h"
 #include "omaha/base/constants.h"
 #include "omaha/common/const_cmd_line.h"
-
+#include "base/logging.h"
 // TODO(omaha): Use the base libraries instead of selectively pulling in
 // functionality such as HRESULTFromLastError(). May increase size, but the
 // resulting code quality may be worth it.
@@ -60,6 +60,8 @@ bool IsRunningFromStaging(const WCHAR* const command_line) {
 
 int WINAPI wWinMain(HINSTANCE instance, HINSTANCE previous_instance,
                     LPTSTR cmd_line, int show) {
+  XConsoleLog(_T("com_forwarder main enter cmdline:%s"), cmd_line);
+  CORE_LOG(L2, (L"UpdateBrokder enter cmdline:%s", cmd_line));
   EnableSecureDllLoading();
 
   UNREFERENCED_PARAMETER(instance);

@@ -306,7 +306,7 @@ HRESULT DownloadManager::GetPackage(const Package* package,
   const CString dest_file(ConcatenatePath(dir, package_name));
   CORE_LOG(L3, (_T("[destination file is '%s']"), dest_file));
 
-  HRESULT hr = package_cache()->Get(key, dest_file, package->expected_hash());
+  HRESULT hr = package_cache()->Get(key, dest_file, package->expected_hash(), package->expected_hash256());
   if (FAILED(hr)) {
     CORE_LOG(LE, (_T("[failed to get from cache][0x%08x]"), hr));
     return hr;
@@ -325,7 +325,7 @@ bool DownloadManager::IsPackageAvailable(const Package* package) const {
   CORE_LOG(L3, (_T("[DownloadManager::IsPackageAvailable][%s]"),
       key.ToString()));
 
-  return package_cache()->IsCached(key, package->expected_hash());
+  return package_cache()->IsCached(key, package->expected_hash(), package->expected_hash256());
 }
 
 // Attempts a package download by trying the fallback urls. It does not
@@ -355,7 +355,7 @@ HRESULT DownloadManager::DoDownloadPackage(Package* package, State* state) {
   OPT_LOG(L3, (_T("[DownloadManager::DoDownloadPackage][%s]"),
       key.ToString()));
 
-  if (!package_cache()->IsCached(key, package->expected_hash())) {
+  if (!package_cache()->IsCached(key, package->expected_hash(), package->expected_hash256())) {
     CORE_LOG(L3, (_T("[The package is not cached]")));
 
     // TODO(omaha3): May need to consider the DownloadPackage case. Also, we may
@@ -434,7 +434,7 @@ HRESULT DownloadManager::DoDownloadPackage(Package* package, State* state) {
     // final size. See the TODO in the unit tests.
   }
 
-  ASSERT1(package_cache()->IsCached(key, package->expected_hash()));
+  ASSERT1(package_cache()->IsCached(key, package->expected_hash(), package->expected_hash256()));
   return S_OK;
 }
 
@@ -528,12 +528,13 @@ HRESULT DownloadManager::CachePackage(const Package* package,
                                       const CString* source_file_path) {
   ASSERT1(package);
   ASSERT1(source_file);
-
+  
   const CString app_id(package->app_version()->app()->app_guid_string());
   const CString version(package->app_version()->version());
   const CString package_name(package->filename());
   PackageCache::Key key(app_id, version, package_name);
-
+  CORE_LOG(L3,
+           (_T("DownloadManager::CachePackage pack:%s version:%s"), app_id, version));
   HRESULT hr = E_UNEXPECTED;
 
   if (ConfigManager::Instance()->ShouldVerifyPayloadAuthenticodeSignature()) {
@@ -546,7 +547,7 @@ HRESULT DownloadManager::CachePackage(const Package* package,
   }
 
   hr = package_cache()->Put(
-      key, source_file, package->expected_hash());
+      key, source_file, package->expected_hash(), package->expected_hash256());
   if (hr != SIGS_E_INVALID_SIGNATURE) {
     if (FAILED(hr)) {
       set_error_extra_code1(static_cast<int>(hr));

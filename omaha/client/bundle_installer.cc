@@ -109,6 +109,8 @@ HRESULT GetCompletionInformation(IApp* app,
                                  CurrentState* current_state,
                                  AppCompletionInfo* completion_info,
                                  bool is_browser_type_supported) {
+  CORE_LOG(L2, (_T("GetCompletionInformation app:%s"),
+                GetAppDisplayName(app)));
   ASSERT1(app);
   ASSERT1(current_state);
   ASSERT1(completion_info);
@@ -128,7 +130,8 @@ HRESULT GetCompletionInformation(IApp* app,
   }
 
   completion_info->app_id = app_id;
-
+  CORE_LOG(L2, (_T("GetCompletionInformation app:%s id:%s"),
+                completion_info->display_name, completion_info->app_id));
   CComPtr<ICurrentState> icurrent_state;
   hr = update3_utils::GetAppCurrentState(app, current_state, &icurrent_state);
   if (FAILED(hr)) {

@@ -122,16 +122,17 @@ void Package::OnRequestRetryScheduled(time64 next_download_retry_time) {
 
 void Package::SetFileInfo(const CString& filename,
                           uint64 size,
-                          const CString& expected_hash) {
+                          const CString& expected_hash, const CString& expected_hash256) {
   __mutexScope(model()->lock());
 
   ASSERT1(!filename.IsEmpty());
   ASSERT1(0 < size);
-  ASSERT1(!expected_hash.IsEmpty());
+  ASSERT1(!(expected_hash.IsEmpty() && expected_hash256.IsEmpty()));
 
   filename_ = filename;
   expected_size_ = size;
   expected_hash_ = expected_hash;
+  expected_hash256_ = expected_hash256;
 }
 
 CString Package::filename() const {
@@ -147,10 +148,12 @@ uint64 Package::expected_size() const {
 
 CString Package::expected_hash() const {
   __mutexScope(model()->lock());
-  ASSERT1(!expected_hash_.IsEmpty());
   return expected_hash_;
 }
-
+CString Package::expected_hash256() const {
+  __mutexScope(model()->lock());
+  return expected_hash256_;
+}
 uint64 Package::bytes_downloaded() const {
   __mutexScope(model()->lock());
   return bytes_downloaded_;

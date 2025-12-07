@@ -160,7 +160,7 @@ bool GLock::Lock(DWORD dwMilliseconds) const {
   if (ret == WAIT_OBJECT_0) {
     return true;
   } else if (ret == WAIT_ABANDONED) {
-    UTIL_LOG(LE, (_T("[GLock::Lock - mutex was abandoned %s]"), name_));
+//    UTIL_LOG(LE, (_T("[GLock::Lock - mutex was abandoned %s]"), name_));
     return true;
   }
   return false;

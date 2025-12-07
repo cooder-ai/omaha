@@ -1,0 +1,3646 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="source">
+      <UniqueIdentifier>{6a723b53-2869-4504-a831-91d6895229dc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\base">
+      <UniqueIdentifier>{e1cd9b69-fa77-4ec6-a1b9-7780f75dc3fb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\base\libzip">
+      <UniqueIdentifier>{982fffe6-ec2f-4ba2-87a7-1b217ace745d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\base\logging">
+      <UniqueIdentifier>{7c1915f3-0ba8-4fcf-b50d-3c9d16085b5c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\base\security">
+      <UniqueIdentifier>{f0e25e9b-19b8-442d-a939-bce737d0b079}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\client">
+      <UniqueIdentifier>{170a8dcc-8f1e-4fe9-8281-0d736a5bce5c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\common">
+      <UniqueIdentifier>{0412ffde-a345-4800-a7bf-6cff5bc74d7c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\core">
+      <UniqueIdentifier>{6675f7e1-13e4-46e6-a546-8fc38f4c3dfd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\crashhandler">
+      <UniqueIdentifier>{ac11a04f-03fe-4c06-8ef4-bb06e3f9d443}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\enterprise">
+      <UniqueIdentifier>{a335f944-0617-4edb-a2d7-abde44f7324e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\enterprise\installer">
+      <UniqueIdentifier>{d4e5bbbf-2c1f-4529-be90-f62def5c08ae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\enterprise\installer\custom_actions">
+      <UniqueIdentifier>{5c0bf0b7-08c5-44d4-a24c-9d8beb3b5f44}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\enterprise\installer\test">
+      <UniqueIdentifier>{5d27bc62-0d16-48bc-b0c2-dd9fb1a645a0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\google_update">
+      <UniqueIdentifier>{ea50c5f7-678e-4804-9b3a-5885772af0cb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\goopdate">
+      <UniqueIdentifier>{84f14250-6b40-4492-aabc-7f7d4059c32c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\goopdate\resources">
+      <UniqueIdentifier>{5b06c636-c6a4-4525-936e-39b0eb2c01ad}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\goopdate\resources\goopdate_dll">
+      <UniqueIdentifier>{3e509a3e-70d2-4034-af7d-bdf227a5ba58}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\goopdate\resources\goopdateres">
+      <UniqueIdentifier>{829faeca-c7fd-4331-9709-2aa357860a58}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\installers">
+      <UniqueIdentifier>{e4bc7300-ac55-4b1d-bdb1-5359323ca471}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\internal">
+      <UniqueIdentifier>{87371608-8922-4aba-a97f-49148e51e7a4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\internal\chrome_recovery_improved">
+      <UniqueIdentifier>{f7526ab0-8c11-4d46-bc1e-157a9c03185c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\mi_exe_stub">
+      <UniqueIdentifier>{cce3e689-731c-47ff-b256-aa4e92dfa10a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\mi_exe_stub\x86_encoder">
+      <UniqueIdentifier>{e0e03566-b11b-4376-ae71-7f933994c2cc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\net">
+      <UniqueIdentifier>{90cfa9bf-dcfe-4e96-8473-1c7229e71825}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\recovery">
+      <UniqueIdentifier>{8ffba61a-da6e-40bb-9024-532109ec9e8e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\recovery\client">
+      <UniqueIdentifier>{133470ce-5266-432e-a742-f877b7b1b68d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\recovery\lib">
+      <UniqueIdentifier>{b0f1d0ae-f924-4b3b-91ed-f819206be4fc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\scons-out">
+      <UniqueIdentifier>{13b4d569-cd0f-401a-a72c-dd7414d52df5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\scons-out\dbg-win">
+      <UniqueIdentifier>{eac5d1b6-199f-4efe-8260-bf95fabc0154}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\scons-out\dbg-win\obj">
+      <UniqueIdentifier>{f0d7d099-eb5a-43d9-8714-463ded461b30}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\scons-out\dbg-win\obj\goopdate">
+      <UniqueIdentifier>{8969ecf6-084f-49ed-aeab-55eb808ed40d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\scons-out\dbg-win\obj\installers">
+      <UniqueIdentifier>{ef22580e-3f02-468e-be25-ea8f35b5d7cf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\scons-out\dbg-win\obj\standalone">
+      <UniqueIdentifier>{8bb61e01-0cfa-4e19-81df-5f7fc8f1bb74}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\scons-out\dbg-win\proto_files">
+      <UniqueIdentifier>{520d2d92-b4f1-4587-9a64-b66424ca08f4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\scons-out\dbg-win\proto_files\third_party">
+      <UniqueIdentifier>{89cbac51-0a96-4649-a58f-117f9b743675}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\scons-out\dbg-win\proto_files\third_party\chrome">
+      <UniqueIdentifier>{93d6f24a-605c-4301-bc80-78392b6ca422}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\scons-out\dbg-win\proto_files\third_party\chrome\files">
+      <UniqueIdentifier>{9ee35c76-0e37-488e-a4ee-2fd0639fb621}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\scons-out\dbg-win\proto_files\third_party\chrome\files\src">
+      <UniqueIdentifier>{f129de7f-7995-4abe-b165-0e9925332622}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\scons-out\dbg-win\proto_files\third_party\chrome\files\src\components">
+      <UniqueIdentifier>{1dcd8b85-e81b-4fad-94fd-7491cda83129}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\scons-out\dbg-win\proto_files\third_party\chrome\files\src\components\crx_file">
+      <UniqueIdentifier>{ffc630f5-4730-4a3b-b5a8-3f1dea85afe6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\scons-out\opt-win">
+      <UniqueIdentifier>{9d7a48f6-8b3f-48c9-8960-2cdbc958fd3c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\scons-out\opt-win\obj">
+      <UniqueIdentifier>{25c90950-c779-450b-bb10-c3f7754a9b72}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\scons-out\opt-win\obj\goopdate">
+      <UniqueIdentifier>{59679c10-603c-45a9-b306-3557e9b69250}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\scons-out\opt-win\obj\installers">
+      <UniqueIdentifier>{c48756de-b401-4266-acb9-72110c1af7e8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\scons-out\opt-win\obj\standalone">
+      <UniqueIdentifier>{9ebdd1f9-aa63-4061-8943-475ffcd9b73d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\scons-out\opt-win\proto_files">
+      <UniqueIdentifier>{b0630038-7fcc-4176-8da2-f6a640f01c4a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\scons-out\opt-win\proto_files\third_party">
+      <UniqueIdentifier>{533ad981-ad4c-4bd0-89b0-ce39f3ed844f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\scons-out\opt-win\proto_files\third_party\chrome">
+      <UniqueIdentifier>{87180460-8a4b-4a02-8277-ac775057fc8b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\scons-out\opt-win\proto_files\third_party\chrome\files">
+      <UniqueIdentifier>{bccf1ddb-2a0c-4322-97bb-9a4aea2bd3f6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\scons-out\opt-win\proto_files\third_party\chrome\files\src">
+      <UniqueIdentifier>{c228798c-de44-4ceb-b4ba-384f5ad06982}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\scons-out\opt-win\proto_files\third_party\chrome\files\src\components">
+      <UniqueIdentifier>{fd414202-81f2-47b0-9777-9282eb2aa80f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\scons-out\opt-win\proto_files\third_party\chrome\files\src\components\crx_file">
+      <UniqueIdentifier>{ee5c2c1b-321e-4dca-af65-ff0a33da5cab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\scons-out\opt-win\staging">
+      <UniqueIdentifier>{4606eaae-2872-434b-8d33-756c31d2f09b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\scons-out\opt-win\staging\idls">
+      <UniqueIdentifier>{91342209-6f3b-4970-96af-2b286bcfa60e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\service">
+      <UniqueIdentifier>{aa51ede1-57dd-486c-b68c-d15f0af1e820}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\setup">
+      <UniqueIdentifier>{bb8f0cc1-3013-4a14-891d-870eed119275}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\standalone">
+      <UniqueIdentifier>{bf7f8659-1067-4bf3-9f90-c7e6410d2c83}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\statsreport">
+      <UniqueIdentifier>{949c1985-ba69-4969-aaee-250a9c17eda4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\testing">
+      <UniqueIdentifier>{ef8260b0-018a-40f2-a93f-9bb60e280971}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\testing\ui">
+      <UniqueIdentifier>{e85474c7-dd84-441e-a7ca-8bf25a24ca0a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\third_party">
+      <UniqueIdentifier>{133d0a1b-3d63-4418-a1d3-ba31b694a437}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\third_party\chrome">
+      <UniqueIdentifier>{b2cbed05-b756-470e-99f7-a5eac63969dd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\third_party\chrome\files">
+      <UniqueIdentifier>{bdd027dc-c53e-480e-8066-3e853140929d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\third_party\chrome\files\src">
+      <UniqueIdentifier>{3db9fa2a-9c8f-4831-b0f2-5fa07c8d158b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\third_party\chrome\files\src\base">
+      <UniqueIdentifier>{5d3dd957-7985-4e54-8817-cc30df67d57c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\third_party\chrome\files\src\build">
+      <UniqueIdentifier>{0ee9b961-bef7-4b7f-b500-b745ca4783f5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\third_party\chrome\files\src\components">
+      <UniqueIdentifier>{4db76a84-ed58-4de4-9ee9-8d5190c8c41e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\third_party\chrome\files\src\components\crx_file">
+      <UniqueIdentifier>{2b388fd9-afc3-4d18-b5df-9141badd3434}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\third_party\chrome\files\src\crypto">
+      <UniqueIdentifier>{21a44033-5cbf-4ba6-bffa-21d7bade266a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\third_party\smartany">
+      <UniqueIdentifier>{e8d11d8c-4442-431f-a17a-82eecaff7245}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\tools">
+      <UniqueIdentifier>{d85f4cc5-d6d6-4d90-b181-0bf770fe66b2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\tools\ApplyTag">
+      <UniqueIdentifier>{d368e7ca-7885-4d8e-b889-b02a01c4aa01}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\tools\CrashHandlerClient">
+      <UniqueIdentifier>{1c1e6e52-3c4e-487a-b1d0-79624c35f001}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\tools\CrashProcess">
+      <UniqueIdentifier>{760c7ea1-900a-4c1b-9b4e-354d8d3cfc4a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\tools\MsiTagger">
+      <UniqueIdentifier>{b05d0741-2bb3-4637-baae-225d2d6cb10d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\tools\ReadTag">
+      <UniqueIdentifier>{6ea4ab4c-3f52-4d2d-a464-ada680c1df8e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\tools\SetShutDownEvent">
+      <UniqueIdentifier>{bbf687f0-7cdf-49d3-9af8-21bd77dba695}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\tools\eckeytool">
+      <UniqueIdentifier>{a6363140-9597-4641-9abe-3c242047bb37}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\tools\goopdump">
+      <UniqueIdentifier>{38078405-8876-41f1-bec6-28062d1ae5c2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\tools\longrunning">
+      <UniqueIdentifier>{ad748126-5dd9-40bc-8657-5f0bbf6136b8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\tools\performondemand">
+      <UniqueIdentifier>{c11f7aa8-e674-4313-908b-0ffd07fa9b7d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\tools\runupdate3web">
+      <UniqueIdentifier>{e8a801d0-000b-499a-8d87-5672cf60c00e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\ui">
+      <UniqueIdentifier>{da8f6d1c-2a74-4a37-8724-ff07e438d3c9}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\..\build.scons">
+      <Filter>source</Filter>
+    </None>
+    <None Include="..\..\..\main.scons">
+      <Filter>source</Filter>
+    </None>
+    <None Include="..\..\..\base\build.scons">
+      <Filter>source\base</Filter>
+    </None>
+    <None Include="..\..\..\base\logging\build.scons">
+      <Filter>source\base\logging</Filter>
+    </None>
+    <None Include="..\..\..\base\security\build.scons">
+      <Filter>source\base\security</Filter>
+    </None>
+    <None Include="..\..\..\client\build.scons">
+      <Filter>source\client</Filter>
+    </None>
+    <None Include="..\..\..\common\build.scons">
+      <Filter>source\common</Filter>
+    </None>
+    <None Include="..\..\..\core\build.scons">
+      <Filter>source\core</Filter>
+    </None>
+    <None Include="..\..\..\crashhandler\build.scons">
+      <Filter>source\crashhandler</Filter>
+    </None>
+    <None Include="..\..\..\enterprise\build.scons">
+      <Filter>source\enterprise</Filter>
+    </None>
+    <None Include="..\..\..\enterprise\installer\build.scons">
+      <Filter>source\enterprise\installer</Filter>
+    </None>
+    <None Include="..\..\..\enterprise\installer\custom_actions\build.scons">
+      <Filter>source\enterprise\installer\custom_actions</Filter>
+    </None>
+    <None Include="..\..\..\enterprise\installer\test\build.scons">
+      <Filter>source\enterprise\installer\test</Filter>
+    </None>
+    <None Include="..\..\..\google_update\build.scons">
+      <Filter>source\google_update</Filter>
+    </None>
+    <None Include="..\..\..\goopdate\build.scons">
+      <Filter>source\goopdate</Filter>
+    </None>
+    <None Include="..\..\..\goopdate\resources\build.scons">
+      <Filter>source\goopdate\resources</Filter>
+    </None>
+    <None Include="..\..\..\installers\build.scons">
+      <Filter>source\installers</Filter>
+    </None>
+    <None Include="..\..\..\internal\chrome_recovery_improved\build.scons">
+      <Filter>source\internal\chrome_recovery_improved</Filter>
+    </None>
+    <None Include="..\..\..\mi_exe_stub\build.scons">
+      <Filter>source\mi_exe_stub</Filter>
+    </None>
+    <None Include="..\..\..\mi_exe_stub\x86_encoder\build.scons">
+      <Filter>source\mi_exe_stub\x86_encoder</Filter>
+    </None>
+    <None Include="..\..\..\net\build.scons">
+      <Filter>source\net</Filter>
+    </None>
+    <None Include="..\..\..\recovery\build.scons">
+      <Filter>source\recovery</Filter>
+    </None>
+    <None Include="..\..\..\service\build.scons">
+      <Filter>source\service</Filter>
+    </None>
+    <None Include="..\..\..\setup\build.scons">
+      <Filter>source\setup</Filter>
+    </None>
+    <None Include="..\..\..\standalone\build.scons">
+      <Filter>source\standalone</Filter>
+    </None>
+    <None Include="..\..\..\statsreport\build.scons">
+      <Filter>source\statsreport</Filter>
+    </None>
+    <None Include="..\..\..\testing\build.scons">
+      <Filter>source\testing</Filter>
+    </None>
+    <None Include="..\..\..\testing\ui\build.scons">
+      <Filter>source\testing\ui</Filter>
+    </None>
+    <None Include="..\..\..\third_party\build.scons">
+      <Filter>source\third_party</Filter>
+    </None>
+    <None Include="..\..\..\tools\build.scons">
+      <Filter>source\tools</Filter>
+    </None>
+    <None Include="..\..\..\tools\ApplyTag\build.scons">
+      <Filter>source\tools\ApplyTag</Filter>
+    </None>
+    <None Include="..\..\..\tools\CrashHandlerClient\build.scons">
+      <Filter>source\tools\CrashHandlerClient</Filter>
+    </None>
+    <None Include="..\..\..\tools\CrashProcess\build.scons">
+      <Filter>source\tools\CrashProcess</Filter>
+    </None>
+    <None Include="..\..\..\tools\MsiTagger\build.scons">
+      <Filter>source\tools\MsiTagger</Filter>
+    </None>
+    <None Include="..\..\..\tools\ReadTag\build.scons">
+      <Filter>source\tools\ReadTag</Filter>
+    </None>
+    <None Include="..\..\..\tools\SetShutDownEvent\build.scons">
+      <Filter>source\tools\SetShutDownEvent</Filter>
+    </None>
+    <None Include="..\..\..\tools\goopdump\build.scons">
+      <Filter>source\tools\goopdump</Filter>
+    </None>
+    <None Include="..\..\..\tools\longrunning\build.scons">
+      <Filter>source\tools\longrunning</Filter>
+    </None>
+    <None Include="..\..\..\tools\performondemand\build.scons">
+      <Filter>source\tools\performondemand</Filter>
+    </None>
+    <None Include="..\..\..\tools\runupdate3web\build.scons">
+      <Filter>source\tools\runupdate3web</Filter>
+    </None>
+    <None Include="..\..\..\ui\build.scons">
+      <Filter>source\ui</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\base\ATLRegMapEx.h">
+      <Filter>source\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\base\app_util.h">
+      <Filter>source\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\base\apply_tag.h">
+      <Filter>source\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\base\atlconvfix.h">
+      <Filter>source\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\base\browser_utils.h">
+      <Filter>source\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\base\cgi.h">
+      <Filter>source\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\base\clipboard.h">
+      <Filter>source\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\base\command_line_parser.h">
+      <Filter>source\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\base\command_line_parser_internal.h">
+      <Filter>source\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\base\command_line_validator.h">
+      <Filter>source\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\base\commands.h">
+      <Filter>source\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\base\commontypes.h">
+      <Filter>source\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\base\const_addresses.h">
+      <Filter>source\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\base\const_code_signing.h">
+      <Filter>source\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\base\const_config.h">
+      <Filter>source\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\base\const_debug.h">
+      <Filter>source\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\base\const_object_names.h">
+      <Filter>source\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\base\const_timeouts.h">
+      <Filter>source\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\base\const_utils.h">
+      <Filter>source\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\base\constants.h">
+      <Filter>source\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\base\crash_if_specific_error.h">
+      <Filter>source\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\base\debug.h">
+      <Filter>source\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\base\disk.h">
+      <Filter>source\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\base\dynamic_link_kernel32.h">
+      <Filter>source\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\base\encrypt.h">
+      <Filter>source\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\base\environment_block_modifier.h">
+      <Filter>source\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\base\environment_utils.h">
+      <Filter>source\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\base\error.h">
+      <Filter>source\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\base\etw_log_writer.h">
+      <Filter>source\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\base\event_handler.h">
+      <Filter>source\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\base\event_trace_consumer.h">
+      <Filter>source\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\base\event_trace_controller.h">
+      <Filter>source\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\base\event_trace_provider.h">
+      <Filter>source\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\base\extractor.h">
+      <Filter>source\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\base\file.h">
+      <Filter>source\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\base\file_reader.h">
+      <Filter>source\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\base\file_ver.h">
+      <Filter>source\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\base\firewall_product_detection.h">
+      <Filter>source\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\base\highres_timer-win32.h">
+      <Filter>source\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\base\logging.h">
+      <Filter>source\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\base\marshal_by_value.h">
+      <Filter>source\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\base\object_factory.h">
+      <Filter>source\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\base\omaha_version.h">
+      <Filter>source\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\base\path.h">
+      <Filter>source\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\base\preprocessor_fun.h">
+      <Filter>source\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\base\proc_utils.h">
+      <Filter>source\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\base\process.h">
+      <Filter>source\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\base\program_instance.h">
+      <Filter>source\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\base\queue_timer.h">
+      <Filter>source\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\base\reactor.h">
+      <Filter>source\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\base\reg_key.h">
+      <Filter>source\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\base\registry_monitor_manager.h">
+      <Filter>source\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\base\safe_format.h">
+      <Filter>source\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\base\scope_guard.h">
+      <Filter>source\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\base\scoped_current_directory.h">
+      <Filter>source\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\base\scoped_impersonation.h">
+      <Filter>source\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\base\scoped_ptr_cotask.h">
+      <Filter>source\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\base\service_utils.h">
+      <Filter>source\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\base\shell.h">
+      <Filter>source\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\base\shutdown_callback.h">
+      <Filter>source\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\base\shutdown_handler.h">
+      <Filter>source\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\base\signatures.h">
+      <Filter>source\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\base\signaturevalidator.h">
+      <Filter>source\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\base\smart_handle.h">
+      <Filter>source\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\base\static_assert.h">
+      <Filter>source\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\base\store_watcher.h">
+      <Filter>source\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\base\string.h">
+      <Filter>source\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\base\synchronized.h">
+      <Filter>source\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\base\system.h">
+      <Filter>source\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\base\system_info.h">
+      <Filter>source\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\base\thread.h">
+      <Filter>source\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\base\thread_pool.h">
+      <Filter>source\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\base\thread_pool_callback.h">
+      <Filter>source\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\base\time.h">
+      <Filter>source\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\base\timer.h">
+      <Filter>source\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\base\user_info.h">
+      <Filter>source\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\base\user_rights.h">
+      <Filter>source\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\base\utils.h">
+      <Filter>source\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\base\vista_utils.h">
+      <Filter>source\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\base\vistautil.h">
+      <Filter>source\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\base\window_utils.h">
+      <Filter>source\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\base\wmi_query.h">
+      <Filter>source\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\base\wtl_atlapp_wrapper.h">
+      <Filter>source\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\base\xml_utils.h">
+      <Filter>source\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\base\libzip\config.h">
+      <Filter>source\base\libzip</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\base\libzip\zipconf.h">
+      <Filter>source\base\libzip</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\base\logging\logging.h">
+      <Filter>source\base\logging</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\base\security\hash-internal.h">
+      <Filter>source\base\security</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\base\security\hmac.h">
+      <Filter>source\base\security</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\base\security\p256.h">
+      <Filter>source\base\security</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\base\security\p256_ecdsa.h">
+      <Filter>source\base\security</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\base\security\p256_prng.h">
+      <Filter>source\base\security</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\base\security\sha256.h">
+      <Filter>source\base\security</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\base\security\util.h">
+      <Filter>source\base\security</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\client\bundle_creator.h">
+      <Filter>source\client</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\client\bundle_installer.h">
+      <Filter>source\client</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\client\client_metrics.h">
+      <Filter>source\client</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\client\client_utils.h">
+      <Filter>source\client</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\client\help_url_builder.h">
+      <Filter>source\client</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\client\install.h">
+      <Filter>source\client</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\client\install_apps.h">
+      <Filter>source\client</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\client\install_apps_internal.h">
+      <Filter>source\client</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\client\install_internal.h">
+      <Filter>source\client</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\client\install_progress_observer.h">
+      <Filter>source\client</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\client\install_self.h">
+      <Filter>source\client</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\client\install_self_internal.h">
+      <Filter>source\client</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\client\resource.h">
+      <Filter>source\client</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\client\shutdown_events.h">
+      <Filter>source\client</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\client\ua.h">
+      <Filter>source\client</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\common\app_registry_utils.h">
+      <Filter>source\common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\common\command_line.h">
+      <Filter>source\common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\common\command_line_builder.h">
+      <Filter>source\common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\common\config_manager.h">
+      <Filter>source\common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\common\const_cmd_line.h">
+      <Filter>source\common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\common\const_goopdate.h">
+      <Filter>source\common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\common\const_group_policy.h">
+      <Filter>source\common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\common\crash_utils.h">
+      <Filter>source\common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\common\event_logger.h">
+      <Filter>source\common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\common\exception_handler.h">
+      <Filter>source\common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\common\experiment_labels.h">
+      <Filter>source\common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\common\extra_args_parser.h">
+      <Filter>source\common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\common\genspark_referral_code_utils.h">
+      <Filter>source\common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\common\google_signaturevalidator.h">
+      <Filter>source\common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\common\goopdate_command_line_validator.h">
+      <Filter>source\common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\common\goopdate_utils.h">
+      <Filter>source\common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\common\install_manifest.h">
+      <Filter>source\common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\common\lang.h">
+      <Filter>source\common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\common\oem_install_utils.h">
+      <Filter>source\common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\common\omaha_customization_proxy_clsid.h">
+      <Filter>source\common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\common\ping.h">
+      <Filter>source\common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\common\ping_event.h">
+      <Filter>source\common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\common\ping_event_download_metrics.h">
+      <Filter>source\common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\common\progress_sampler.h">
+      <Filter>source\common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\common\protocol_definition.h">
+      <Filter>source\common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\common\scheduled_task_utils.h">
+      <Filter>source\common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\common\scheduled_task_utils_internal.h">
+      <Filter>source\common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\common\stats_uploader.h">
+      <Filter>source\common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\common\update3_utils.h">
+      <Filter>source\common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\common\update_request.h">
+      <Filter>source\common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\common\update_response.h">
+      <Filter>source\common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\common\url_utils.h">
+      <Filter>source\common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\common\web_services_client.h">
+      <Filter>source\common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\common\xml_const.h">
+      <Filter>source\common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\common\xml_parser.h">
+      <Filter>source\common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\core\core.h">
+      <Filter>source\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\core\core_launcher.h">
+      <Filter>source\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\core\core_metrics.h">
+      <Filter>source\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\core\google_update_core.h">
+      <Filter>source\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\core\resource.h">
+      <Filter>source\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\core\scheduler.h">
+      <Filter>source\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\core\system_monitor.h">
+      <Filter>source\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\crashhandler\crash_analyzer.h">
+      <Filter>source\crashhandler</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\crashhandler\crash_analyzer_checks.h">
+      <Filter>source\crashhandler</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\crashhandler\crash_dump_util.h">
+      <Filter>source\crashhandler</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\crashhandler\crash_dump_util_internal.h">
+      <Filter>source\crashhandler</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\crashhandler\crash_handler.h">
+      <Filter>source\crashhandler</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\crashhandler\crash_worker.h">
+      <Filter>source\crashhandler</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\crashhandler\crashhandler_metrics.h">
+      <Filter>source\crashhandler</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\crashhandler\resource.h">
+      <Filter>source\crashhandler</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\enterprise\installer\custom_actions\msi_custom_action.h">
+      <Filter>source\enterprise\installer\custom_actions</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\enterprise\installer\custom_actions\msi_tag_extractor.h">
+      <Filter>source\enterprise\installer\custom_actions</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\google_update\resource.h">
+      <Filter>source\google_update</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\goopdate\app.h">
+      <Filter>source\goopdate</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\goopdate\app_bundle.h">
+      <Filter>source\goopdate</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\goopdate\app_bundle_state.h">
+      <Filter>source\goopdate</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\goopdate\app_bundle_state_busy.h">
+      <Filter>source\goopdate</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\goopdate\app_bundle_state_init.h">
+      <Filter>source\goopdate</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\goopdate\app_bundle_state_initialized.h">
+      <Filter>source\goopdate</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\goopdate\app_bundle_state_paused.h">
+      <Filter>source\goopdate</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\goopdate\app_bundle_state_ready.h">
+      <Filter>source\goopdate</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\goopdate\app_bundle_state_stopped.h">
+      <Filter>source\goopdate</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\goopdate\app_command.h">
+      <Filter>source\goopdate</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\goopdate\app_command_completion_observer.h">
+      <Filter>source\goopdate</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\goopdate\app_command_configuration.h">
+      <Filter>source\goopdate</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\goopdate\app_command_delegate.h">
+      <Filter>source\goopdate</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\goopdate\app_command_formatter.h">
+      <Filter>source\goopdate</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\goopdate\app_command_model.h">
+      <Filter>source\goopdate</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\goopdate\app_command_ping_delegate.h">
+      <Filter>source\goopdate</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\goopdate\app_command_test_base.h">
+      <Filter>source\goopdate</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\goopdate\app_command_verifier.h">
+      <Filter>source\goopdate</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\goopdate\app_manager.h">
+      <Filter>source\goopdate</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\goopdate\app_state.h">
+      <Filter>source\goopdate</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\goopdate\app_state_checking_for_update.h">
+      <Filter>source\goopdate</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\goopdate\app_state_download_complete.h">
+      <Filter>source\goopdate</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\goopdate\app_state_downloading.h">
+      <Filter>source\goopdate</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\goopdate\app_state_error.h">
+      <Filter>source\goopdate</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\goopdate\app_state_init.h">
+      <Filter>source\goopdate</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\goopdate\app_state_install_complete.h">
+      <Filter>source\goopdate</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\goopdate\app_state_installing.h">
+      <Filter>source\goopdate</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\goopdate\app_state_no_update.h">
+      <Filter>source\goopdate</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\goopdate\app_state_ready_to_install.h">
+      <Filter>source\goopdate</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\goopdate\app_state_update_available.h">
+      <Filter>source\goopdate</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\goopdate\app_state_waiting_to_check_for_update.h">
+      <Filter>source\goopdate</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\goopdate\app_state_waiting_to_download.h">
+      <Filter>source\goopdate</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\goopdate\app_state_waiting_to_install.h">
+      <Filter>source\goopdate</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\goopdate\app_unittest_base.h">
+      <Filter>source\goopdate</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\goopdate\app_version.h">
+      <Filter>source\goopdate</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\goopdate\application_usage_data.h">
+      <Filter>source\goopdate</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\goopdate\broker_class_factory.h">
+      <Filter>source\goopdate</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\goopdate\cocreate_async.h">
+      <Filter>source\goopdate</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\goopdate\code_red_check.h">
+      <Filter>source\goopdate</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\goopdate\com_proxy.h">
+      <Filter>source\goopdate</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\goopdate\com_wrapper_creator.h">
+      <Filter>source\goopdate</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\goopdate\crash.h">
+      <Filter>source\goopdate</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\goopdate\cred_dialog.h">
+      <Filter>source\goopdate</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\goopdate\current_state.h">
+      <Filter>source\goopdate</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\goopdate\dm_client.h">
+      <Filter>source\goopdate</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\goopdate\dm_messages.h">
+      <Filter>source\goopdate</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\goopdate\dm_storage.h">
+      <Filter>source\goopdate</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\goopdate\dm_storage_test_utils.h">
+      <Filter>source\goopdate</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\goopdate\download_manager.h">
+      <Filter>source\goopdate</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\goopdate\elevation_moniker_resource.h">
+      <Filter>source\goopdate</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\goopdate\google_app_command_verifier.h">
+      <Filter>source\goopdate</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\goopdate\google_update.h">
+      <Filter>source\goopdate</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\goopdate\google_update3.h">
+      <Filter>source\goopdate</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\goopdate\google_update_ps_resource.h">
+      <Filter>source\goopdate</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\goopdate\goopdate.h">
+      <Filter>source\goopdate</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\goopdate\goopdate_internal.h">
+      <Filter>source\goopdate</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\goopdate\goopdate_metrics.h">
+      <Filter>source\goopdate</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\goopdate\install_manager.h">
+      <Filter>source\goopdate</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\goopdate\installer_result_info.h">
+      <Filter>source\goopdate</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\goopdate\installer_wrapper.h">
+      <Filter>source\goopdate</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\goopdate\job_observer.h">
+      <Filter>source\goopdate</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\goopdate\main.h">
+      <Filter>source\goopdate</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\goopdate\model.h">
+      <Filter>source\goopdate</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\goopdate\model_object.h">
+      <Filter>source\goopdate</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\goopdate\non_localized_resource.h">
+      <Filter>source\goopdate</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\goopdate\offline_utils.h">
+      <Filter>source\goopdate</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\goopdate\omaha3_idl_datax.h">
+      <Filter>source\goopdate</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\goopdate\ondemand.h">
+      <Filter>source\goopdate</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\goopdate\package.h">
+      <Filter>source\goopdate</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\goopdate\package_cache.h">
+      <Filter>source\goopdate</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\goopdate\package_cache_internal.h">
+      <Filter>source\goopdate</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\goopdate\ping_event_cancel.h">
+      <Filter>source\goopdate</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\goopdate\policy_status.h">
+      <Filter>source\goopdate</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\goopdate\policy_status_value.h">
+      <Filter>source\goopdate</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\goopdate\process_launcher.h">
+      <Filter>source\goopdate</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\goopdate\resource_manager.h">
+      <Filter>source\goopdate</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\goopdate\server_resource.h">
+      <Filter>source\goopdate</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\goopdate\string_formatter.h">
+      <Filter>source\goopdate</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\goopdate\update3web.h">
+      <Filter>source\goopdate</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\goopdate\update_request_utils.h">
+      <Filter>source\goopdate</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\goopdate\update_response_utils.h">
+      <Filter>source\goopdate</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\goopdate\worker.h">
+      <Filter>source\goopdate</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\goopdate\worker_internal.h">
+      <Filter>source\goopdate</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\goopdate\worker_metrics.h">
+      <Filter>source\goopdate</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\goopdate\worker_mock.h">
+      <Filter>source\goopdate</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\goopdate\worker_utils.h">
+      <Filter>source\goopdate</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\installers\resource.h">
+      <Filter>source\installers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\internal\chrome_recovery_improved\command_line.h">
+      <Filter>source\internal\chrome_recovery_improved</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\internal\chrome_recovery_improved\recovery.h">
+      <Filter>source\internal\chrome_recovery_improved</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\mi_exe_stub\process.h">
+      <Filter>source\mi_exe_stub</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\mi_exe_stub\resource.h">
+      <Filter>source\mi_exe_stub</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\mi_exe_stub\tar.h">
+      <Filter>source\mi_exe_stub</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\mi_exe_stub\x86_encoder\bcj2_encoder.h">
+      <Filter>source\mi_exe_stub\x86_encoder</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\mi_exe_stub\x86_encoder\range_encoder.h">
+      <Filter>source\mi_exe_stub\x86_encoder</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\net\bits_job_callback.h">
+      <Filter>source\net</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\net\bits_request.h">
+      <Filter>source\net</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\net\bits_utils.h">
+      <Filter>source\net</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\net\cup_ecdsa_metrics.h">
+      <Filter>source\net</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\net\cup_ecdsa_pubkey.1.h">
+      <Filter>source\net</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\net\cup_ecdsa_pubkey.14.h">
+      <Filter>source\net</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\net\cup_ecdsa_pubkey.2.h">
+      <Filter>source\net</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\net\cup_ecdsa_pubkey.3.h">
+      <Filter>source\net</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\net\cup_ecdsa_request.h">
+      <Filter>source\net</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\net\cup_ecdsa_request_impl.h">
+      <Filter>source\net</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\net\cup_ecdsa_utils.h">
+      <Filter>source\net</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\net\detector.h">
+      <Filter>source\net</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\net\http_client.h">
+      <Filter>source\net</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\net\http_request.h">
+      <Filter>source\net</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\net\net_utils.h">
+      <Filter>source\net</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\net\network_config.h">
+      <Filter>source\net</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\net\network_request.h">
+      <Filter>source\net</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\net\network_request_impl.h">
+      <Filter>source\net</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\net\proxy_auth.h">
+      <Filter>source\net</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\net\simple_request.h">
+      <Filter>source\net</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\net\winhttp.h">
+      <Filter>source\net</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\net\winhttp_adapter.h">
+      <Filter>source\net</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\net\winhttp_vtable.h">
+      <Filter>source\net</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\recovery\client\google_update_recovery.h">
+      <Filter>source\recovery\client</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\recovery\lib\google_update_recovery.h">
+      <Filter>source\recovery\lib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\dbg-win\obj\goopdate\omaha3_idl.h">
+      <Filter>source\scons-out\dbg-win\obj\goopdate</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\dbg-win\obj\goopdate\omaha3_idl_64.h">
+      <Filter>source\scons-out\dbg-win\obj\goopdate</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\dbg-win\obj\goopdate\omaha3_idl_arm64.h">
+      <Filter>source\scons-out\dbg-win\obj\goopdate</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\dbg-win\proto_files\third_party\chrome\files\src\components\crx_file\crx3.pb.h">
+      <Filter>source\scons-out\dbg-win\proto_files\third_party\chrome\files\src\components\crx_file</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\opt-win\obj\goopdate\omaha3_idl.h">
+      <Filter>source\scons-out\opt-win\obj\goopdate</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\opt-win\obj\goopdate\omaha3_idl_64.h">
+      <Filter>source\scons-out\opt-win\obj\goopdate</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\opt-win\obj\goopdate\omaha3_idl_arm64.h">
+      <Filter>source\scons-out\opt-win\obj\goopdate</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\opt-win\proto_files\third_party\chrome\files\src\components\crx_file\crx3.pb.h">
+      <Filter>source\scons-out\opt-win\proto_files\third_party\chrome\files\src\components\crx_file</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\opt-win\staging\google_update_recovery.h">
+      <Filter>source\scons-out\opt-win\staging</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\opt-win\staging\idls\omaha3_idl.h">
+      <Filter>source\scons-out\opt-win\staging\idls</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\service\service_main.h">
+      <Filter>source\service</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\setup\setup.h">
+      <Filter>source\setup</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\setup\setup_files.h">
+      <Filter>source\setup</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\setup\setup_google_update.h">
+      <Filter>source\setup</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\setup\setup_metrics.h">
+      <Filter>source\setup</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\setup\setup_service.h">
+      <Filter>source\setup</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\statsreport\aggregator-win32.h">
+      <Filter>source\statsreport</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\statsreport\aggregator-win32_unittest.h">
+      <Filter>source\statsreport</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\statsreport\aggregator.h">
+      <Filter>source\statsreport</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\statsreport\aggregator_unittest.h">
+      <Filter>source\statsreport</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\statsreport\const-win32.h">
+      <Filter>source\statsreport</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\statsreport\formatter.h">
+      <Filter>source\statsreport</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\statsreport\metrics.h">
+      <Filter>source\statsreport</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\statsreport\persistent_iterator-win32.h">
+      <Filter>source\statsreport</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\statsreport\util-win32.h">
+      <Filter>source\statsreport</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\testing\omaha_customization_test.h">
+      <Filter>source\testing</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\testing\omaha_unittest.h">
+      <Filter>source\testing</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\testing\resource.h">
+      <Filter>source\testing</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\testing\test_foo_resource.h">
+      <Filter>source\testing</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\testing\unit_test.h">
+      <Filter>source\testing</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\testing\unittest_debug_helper.h">
+      <Filter>source\testing</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\third_party\chrome\files\src\base\basictypes.h">
+      <Filter>source\third_party\chrome\files\src\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\third_party\chrome\files\src\base\cpu.h">
+      <Filter>source\third_party\chrome\files\src\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\third_party\chrome\files\src\base\port.h">
+      <Filter>source\third_party\chrome\files\src\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\third_party\chrome\files\src\base\rand_util.h">
+      <Filter>source\third_party\chrome\files\src\base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\third_party\chrome\files\src\build\build_config.h">
+      <Filter>source\third_party\chrome\files\src\build</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\third_party\chrome\files\src\components\crx_file\crx_verifier.h">
+      <Filter>source\third_party\chrome\files\src\components\crx_file</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\third_party\chrome\files\src\components\crx_file\id_util.h">
+      <Filter>source\third_party\chrome\files\src\components\crx_file</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\third_party\chrome\files\src\crypto\crypto_export.h">
+      <Filter>source\third_party\chrome\files\src\crypto</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\third_party\chrome\files\src\crypto\rsa_private_key.h">
+      <Filter>source\third_party\chrome\files\src\crypto</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\third_party\chrome\files\src\crypto\scoped_capi_types.h">
+      <Filter>source\third_party\chrome\files\src\crypto</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\third_party\chrome\files\src\crypto\secure_util.h">
+      <Filter>source\third_party\chrome\files\src\crypto</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\third_party\chrome\files\src\crypto\signature_creator.h">
+      <Filter>source\third_party\chrome\files\src\crypto</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\third_party\chrome\files\src\crypto\signature_verifier.h">
+      <Filter>source\third_party\chrome\files\src\crypto</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\third_party\chrome\files\src\crypto\signature_verifier_win.h">
+      <Filter>source\third_party\chrome\files\src\crypto</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\third_party\smartany\auto_any.h">
+      <Filter>source\third_party\smartany</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\third_party\smartany\scoped_any.h">
+      <Filter>source\third_party\smartany</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\third_party\smartany\smart_any_fwd.h">
+      <Filter>source\third_party\smartany</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\tools\goopdump\data_dumper.h">
+      <Filter>source\tools\goopdump</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\tools\goopdump\data_dumper_app_manager.h">
+      <Filter>source\tools\goopdump</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\tools\goopdump\data_dumper_goopdate.h">
+      <Filter>source\tools\goopdump</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\tools\goopdump\data_dumper_network.h">
+      <Filter>source\tools\goopdump</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\tools\goopdump\data_dumper_oneclick.h">
+      <Filter>source\tools\goopdump</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\tools\goopdump\data_dumper_osdata.h">
+      <Filter>source\tools\goopdump</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\tools\goopdump\dump_log.h">
+      <Filter>source\tools\goopdump</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\tools\goopdump\goopdump.h">
+      <Filter>source\tools\goopdump</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\tools\goopdump\goopdump_cmd_line_parser.h">
+      <Filter>source\tools\goopdump</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\tools\goopdump\process_commandline.h">
+      <Filter>source\tools\goopdump</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\tools\goopdump\process_monitor.h">
+      <Filter>source\tools\goopdump</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\tools\goopdump\resource.h">
+      <Filter>source\tools\goopdump</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\tools\performondemand\performondemand.h">
+      <Filter>source\tools\performondemand</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\ui\complete_wnd.h">
+      <Filter>source\ui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\ui\owner_draw_title_bar.h">
+      <Filter>source\ui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\ui\progress_wnd.h">
+      <Filter>source\ui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\ui\scoped_gdi.h">
+      <Filter>source\ui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\ui\splash_screen.h">
+      <Filter>source\ui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\ui\ui.h">
+      <Filter>source\ui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\ui\ui_ctls.h">
+      <Filter>source\ui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\ui\ui_displayed_event.h">
+      <Filter>source\ui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\ui\ui_metrics.h">
+      <Filter>source\ui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\ui\yes_no_dialog.h">
+      <Filter>source\ui</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\base\app_util.cc">
+      <Filter>source\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\base\app_util_unittest.cc">
+      <Filter>source\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\base\apply_tag.cc">
+      <Filter>source\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\base\browser_utils.cc">
+      <Filter>source\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\base\browser_utils_unittest.cc">
+      <Filter>source\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\base\cgi.cc">
+      <Filter>source\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\base\cgi_unittest.cc">
+      <Filter>source\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\base\clipboard.cc">
+      <Filter>source\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\base\command_line_parser.cc">
+      <Filter>source\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\base\command_line_parser_unittest.cc">
+      <Filter>source\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\base\command_line_validator.cc">
+      <Filter>source\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\base\command_line_validator_unittest.cc">
+      <Filter>source\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\base\commands.cc">
+      <Filter>source\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\base\commands_unittest.cc">
+      <Filter>source\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\base\crash_if_specific_error.cc">
+      <Filter>source\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\base\debug.cc">
+      <Filter>source\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\base\debug_unittest.cc">
+      <Filter>source\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\base\disk.cc">
+      <Filter>source\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\base\disk_unittest.cc">
+      <Filter>source\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\base\dynamic_link_kernel32.cc">
+      <Filter>source\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\base\dynamic_link_kernel32_unittest.cc">
+      <Filter>source\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\base\encrypt.cc">
+      <Filter>source\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\base\encrypt_test.cc">
+      <Filter>source\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\base\environment_block_modifier.cc">
+      <Filter>source\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\base\environment_block_modifier_unittest.cc">
+      <Filter>source\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\base\environment_utils.cc">
+      <Filter>source\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\base\environment_utils_unittest.cc">
+      <Filter>source\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\base\error.cc">
+      <Filter>source\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\base\error_unittest.cc">
+      <Filter>source\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\base\etw_log_writer.cc">
+      <Filter>source\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\base\etw_log_writer_unittest.cc">
+      <Filter>source\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\base\event_trace_consumer_unittest.cc">
+      <Filter>source\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\base\event_trace_controller.cc">
+      <Filter>source\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\base\event_trace_controller_unittest.cc">
+      <Filter>source\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\base\event_trace_provider.cc">
+      <Filter>source\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\base\event_trace_provider_unittest.cc">
+      <Filter>source\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\base\extractor.cc">
+      <Filter>source\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\base\extractor_unittest.cc">
+      <Filter>source\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\base\file.cc">
+      <Filter>source\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\base\file_reader.cc">
+      <Filter>source\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\base\file_reader_unittest.cc">
+      <Filter>source\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\base\file_unittest.cc">
+      <Filter>source\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\base\file_ver.cc">
+      <Filter>source\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\base\firewall_product_detection.cc">
+      <Filter>source\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\base\firewall_product_detection_unittest.cc">
+      <Filter>source\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\base\highres_timer-win32.cc">
+      <Filter>source\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\base\highres_timer_unittest.cc">
+      <Filter>source\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\base\logging.cc">
+      <Filter>source\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\base\logging_unittest.cc">
+      <Filter>source\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\base\object_factory_unittest.cc">
+      <Filter>source\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\base\omaha_version.cc">
+      <Filter>source\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\base\omaha_version_unittest.cc">
+      <Filter>source\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\base\path.cc">
+      <Filter>source\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\base\path_unittest.cc">
+      <Filter>source\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\base\proc_utils.cc">
+      <Filter>source\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\base\proc_utils_unittest.cc">
+      <Filter>source\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\base\process.cc">
+      <Filter>source\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\base\process_unittest.cc">
+      <Filter>source\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\base\program_instance.cc">
+      <Filter>source\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\base\queue_timer.cc">
+      <Filter>source\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\base\queue_timer_unittest.cc">
+      <Filter>source\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\base\reactor.cc">
+      <Filter>source\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\base\reactor_unittest.cc">
+      <Filter>source\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\base\reg_key.cc">
+      <Filter>source\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\base\reg_key_unittest.cc">
+      <Filter>source\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\base\registry_monitor_manager.cc">
+      <Filter>source\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\base\registry_monitor_manager_unittest.cc">
+      <Filter>source\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\base\safe_format.cc">
+      <Filter>source\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\base\safe_format_unittest.cc">
+      <Filter>source\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\base\scoped_impersonation_unittest.cc">
+      <Filter>source\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\base\scoped_ptr_cotask_unittest.cc">
+      <Filter>source\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\base\service_utils.cc">
+      <Filter>source\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\base\service_utils_unittest.cc">
+      <Filter>source\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\base\shell.cc">
+      <Filter>source\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\base\shell_unittest.cc">
+      <Filter>source\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\base\shutdown_handler.cc">
+      <Filter>source\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\base\signatures.cc">
+      <Filter>source\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\base\signatures_unittest.cc">
+      <Filter>source\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\base\signaturevalidator.cc">
+      <Filter>source\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\base\signaturevalidator_unittest.cc">
+      <Filter>source\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\base\string.cc">
+      <Filter>source\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\base\string_unittest.cc">
+      <Filter>source\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\base\synchronized.cc">
+      <Filter>source\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\base\synchronized_unittest.cc">
+      <Filter>source\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\base\system.cc">
+      <Filter>source\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\base\system_info.cc">
+      <Filter>source\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\base\system_info_unittest.cc">
+      <Filter>source\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\base\system_unittest.cc">
+      <Filter>source\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\base\thread.cc">
+      <Filter>source\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\base\thread_pool.cc">
+      <Filter>source\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\base\thread_pool_unittest.cc">
+      <Filter>source\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\base\time.cc">
+      <Filter>source\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\base\time_unittest.cc">
+      <Filter>source\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\base\timer.cc">
+      <Filter>source\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\base\timer_unittest.cc">
+      <Filter>source\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\base\user_info.cc">
+      <Filter>source\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\base\user_info_unittest.cc">
+      <Filter>source\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\base\user_rights.cc">
+      <Filter>source\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\base\user_rights_unittest.cc">
+      <Filter>source\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\base\utils.cc">
+      <Filter>source\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\base\utils_unittest.cc">
+      <Filter>source\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\base\vista_utils.cc">
+      <Filter>source\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\base\vista_utils_unittest.cc">
+      <Filter>source\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\base\vistautil.cc">
+      <Filter>source\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\base\vistautil_unittest.cc">
+      <Filter>source\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\base\window_utils.cc">
+      <Filter>source\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\base\wmi_query.cc">
+      <Filter>source\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\base\wmi_query_unittest.cc">
+      <Filter>source\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\base\xml_utils.cc">
+      <Filter>source\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\base\xml_utils_unittest.cc">
+      <Filter>source\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\base\libzip\zip_err_str.c">
+      <Filter>source\base\libzip</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\base\logging\logging.cc">
+      <Filter>source\base\logging</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\base\security\hmac.c">
+      <Filter>source\base\security</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\base\security\hmac_unittest.cc">
+      <Filter>source\base\security</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\base\security\p256.c">
+      <Filter>source\base\security</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\base\security\p256_ec.c">
+      <Filter>source\base\security</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\base\security\p256_ecdsa.c">
+      <Filter>source\base\security</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\base\security\p256_ecdsa_unittest.cc">
+      <Filter>source\base\security</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\base\security\p256_prng.c">
+      <Filter>source\base\security</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\base\security\p256_prng_unittest.c">
+      <Filter>source\base\security</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\base\security\p256_prng_unittest.cc">
+      <Filter>source\base\security</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\base\security\p256_unittest.c">
+      <Filter>source\base\security</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\base\security\p256_unittest.cc">
+      <Filter>source\base\security</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\base\security\sha256.c">
+      <Filter>source\base\security</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\base\security\sha256_unittest.cc">
+      <Filter>source\base\security</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\base\security\util.c">
+      <Filter>source\base\security</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\client\bundle_creator.cc">
+      <Filter>source\client</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\client\bundle_creator_test.cc">
+      <Filter>source\client</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\client\bundle_installer.cc">
+      <Filter>source\client</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\client\bundle_installer_unittest.cc">
+      <Filter>source\client</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\client\client_metrics.cc">
+      <Filter>source\client</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\client\client_utils.cc">
+      <Filter>source\client</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\client\client_utils_unittest.cc">
+      <Filter>source\client</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\client\help_url_builder.cc">
+      <Filter>source\client</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\client\help_url_builder_test.cc">
+      <Filter>source\client</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\client\install.cc">
+      <Filter>source\client</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\client\install_apps.cc">
+      <Filter>source\client</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\client\install_apps_unittest.cc">
+      <Filter>source\client</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\client\install_progress_observer.cc">
+      <Filter>source\client</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\client\install_self.cc">
+      <Filter>source\client</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\client\install_self_unittest.cc">
+      <Filter>source\client</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\client\install_self_unittest_no_xml_parser.cc">
+      <Filter>source\client</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\client\install_unittest.cc">
+      <Filter>source\client</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\client\shutdown_events.cc">
+      <Filter>source\client</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\client\ua.cc">
+      <Filter>source\client</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\client\ua_unittest.cc">
+      <Filter>source\client</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\common\app_registry_utils.cc">
+      <Filter>source\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\common\app_registry_utils_unittest.cc">
+      <Filter>source\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\common\command_line.cc">
+      <Filter>source\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\common\command_line_builder.cc">
+      <Filter>source\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\common\command_line_builder_unittest.cc">
+      <Filter>source\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\common\command_line_unittest.cc">
+      <Filter>source\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\common\config_manager.cc">
+      <Filter>source\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\common\config_manager_unittest.cc">
+      <Filter>source\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\common\crash_utils.cc">
+      <Filter>source\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\common\crash_utils_unittest.cc">
+      <Filter>source\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\common\event_logger.cc">
+      <Filter>source\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\common\event_logger_unittest.cc">
+      <Filter>source\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\common\exception_handler.cc">
+      <Filter>source\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\common\exception_handler_unittest.cc">
+      <Filter>source\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\common\experiment_labels.cc">
+      <Filter>source\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\common\experiment_labels_unittest.cc">
+      <Filter>source\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\common\extra_args_parser.cc">
+      <Filter>source\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\common\extra_args_parser_unittest.cc">
+      <Filter>source\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\common\genspark_referral_code_utils.cc">
+      <Filter>source\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\common\google_signaturevalidator.cc">
+      <Filter>source\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\common\google_signaturevalidator_unittest.cc">
+      <Filter>source\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\common\goopdate_command_line_validator.cc">
+      <Filter>source\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\common\goopdate_utils.cc">
+      <Filter>source\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\common\goopdate_utils_unittest.cc">
+      <Filter>source\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\common\lang.cc">
+      <Filter>source\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\common\lang_unittest.cc">
+      <Filter>source\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\common\oem_install_utils.cc">
+      <Filter>source\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\common\oem_install_utils_test.cc">
+      <Filter>source\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\common\omaha_brave_customization_unittest.cc">
+      <Filter>source\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\common\omaha_customization_unittest.cc">
+      <Filter>source\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\common\ping.cc">
+      <Filter>source\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\common\ping_event.cc">
+      <Filter>source\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\common\ping_event_download_metrics.cc">
+      <Filter>source\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\common\ping_event_download_metrics_unittest.cc">
+      <Filter>source\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\common\ping_event_unittest.cc">
+      <Filter>source\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\common\ping_test.cc">
+      <Filter>source\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\common\protocol_definition_test.cc">
+      <Filter>source\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\common\scheduled_task_utils.cc">
+      <Filter>source\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\common\scheduled_task_utils_unittest.cc">
+      <Filter>source\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\common\stats_uploader.cc">
+      <Filter>source\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\common\stats_uploader_unittest.cc">
+      <Filter>source\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\common\update3_utils.cc">
+      <Filter>source\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\common\update_request.cc">
+      <Filter>source\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\common\update_request_unittest.cc">
+      <Filter>source\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\common\update_response.cc">
+      <Filter>source\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\common\url_utils.cc">
+      <Filter>source\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\common\url_utils_unittest.cc">
+      <Filter>source\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\common\web_services_client.cc">
+      <Filter>source\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\common\web_services_client_unittest.cc">
+      <Filter>source\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\common\xml_const.cc">
+      <Filter>source\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\common\xml_parser.cc">
+      <Filter>source\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\common\xml_parser_unittest.cc">
+      <Filter>source\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\core\core.cc">
+      <Filter>source\core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\core\core_launcher.cc">
+      <Filter>source\core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\core\core_metrics.cc">
+      <Filter>source\core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\core\core_unittest.cc">
+      <Filter>source\core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\core\google_update_core.cc">
+      <Filter>source\core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\core\google_update_core_unittest.cc">
+      <Filter>source\core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\core\scheduler.cc">
+      <Filter>source\core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\core\scheduler_unittest.cc">
+      <Filter>source\core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\core\system_monitor.cc">
+      <Filter>source\core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\core\system_monitor_unittest.cc">
+      <Filter>source\core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\core\winmain.cc">
+      <Filter>source\core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\crashhandler\crash_analyzer.cc">
+      <Filter>source\crashhandler</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\crashhandler\crash_analyzer_checks.cc">
+      <Filter>source\crashhandler</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\crashhandler\crash_analyzer_debugee_test.cc">
+      <Filter>source\crashhandler</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\crashhandler\crash_analyzer_unittest.cc">
+      <Filter>source\crashhandler</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\crashhandler\crash_dump_util.cc">
+      <Filter>source\crashhandler</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\crashhandler\crash_dump_util_test.cc">
+      <Filter>source\crashhandler</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\crashhandler\crash_handler.cc">
+      <Filter>source\crashhandler</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\crashhandler\crash_worker.cc">
+      <Filter>source\crashhandler</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\crashhandler\crashhandler_metrics.cc">
+      <Filter>source\crashhandler</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\crashhandler\winmain.cc">
+      <Filter>source\crashhandler</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\enterprise\installer\custom_actions\extract_tag_action.cc">
+      <Filter>source\enterprise\installer\custom_actions</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\enterprise\installer\custom_actions\msi_custom_action.cc">
+      <Filter>source\enterprise\installer\custom_actions</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\enterprise\installer\custom_actions\msi_tag_extractor.cc">
+      <Filter>source\enterprise\installer\custom_actions</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\enterprise\installer\custom_actions\msi_tag_extractor_test.cc">
+      <Filter>source\enterprise\installer\custom_actions</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\enterprise\installer\custom_actions\show_error_action.cc">
+      <Filter>source\enterprise\installer\custom_actions</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\enterprise\installer\test\test_setup.cc">
+      <Filter>source\enterprise\installer\test</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\google_update\google_update_unittest.cc">
+      <Filter>source\google_update</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\google_update\winmain.cc">
+      <Filter>source\google_update</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\goopdate\app.cc">
+      <Filter>source\goopdate</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\goopdate\app_bundle.cc">
+      <Filter>source\goopdate</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\goopdate\app_bundle_state.cc">
+      <Filter>source\goopdate</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\goopdate\app_bundle_state_busy.cc">
+      <Filter>source\goopdate</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\goopdate\app_bundle_state_init.cc">
+      <Filter>source\goopdate</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\goopdate\app_bundle_state_initialized.cc">
+      <Filter>source\goopdate</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\goopdate\app_bundle_state_paused.cc">
+      <Filter>source\goopdate</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\goopdate\app_bundle_state_ready.cc">
+      <Filter>source\goopdate</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\goopdate\app_bundle_state_stopped.cc">
+      <Filter>source\goopdate</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\goopdate\app_bundle_unittest.cc">
+      <Filter>source\goopdate</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\goopdate\app_command.cc">
+      <Filter>source\goopdate</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\goopdate\app_command_completion_observer.cc">
+      <Filter>source\goopdate</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\goopdate\app_command_configuration.cc">
+      <Filter>source\goopdate</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\goopdate\app_command_configuration_unittest.cc">
+      <Filter>source\goopdate</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\goopdate\app_command_formatter.cc">
+      <Filter>source\goopdate</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\goopdate\app_command_formatter_unittest.cc">
+      <Filter>source\goopdate</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\goopdate\app_command_model.cc">
+      <Filter>source\goopdate</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\goopdate\app_command_model_unittest.cc">
+      <Filter>source\goopdate</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\goopdate\app_command_ping_delegate.cc">
+      <Filter>source\goopdate</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\goopdate\app_command_test_base.cc">
+      <Filter>source\goopdate</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\goopdate\app_command_unittest.cc">
+      <Filter>source\goopdate</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\goopdate\app_manager.cc">
+      <Filter>source\goopdate</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\goopdate\app_manager_unittest.cc">
+      <Filter>source\goopdate</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\goopdate\app_state.cc">
+      <Filter>source\goopdate</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\goopdate\app_state_checking_for_update.cc">
+      <Filter>source\goopdate</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\goopdate\app_state_download_complete.cc">
+      <Filter>source\goopdate</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\goopdate\app_state_downloading.cc">
+      <Filter>source\goopdate</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\goopdate\app_state_error.cc">
+      <Filter>source\goopdate</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\goopdate\app_state_init.cc">
+      <Filter>source\goopdate</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\goopdate\app_state_install_complete.cc">
+      <Filter>source\goopdate</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\goopdate\app_state_installing.cc">
+      <Filter>source\goopdate</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\goopdate\app_state_no_update.cc">
+      <Filter>source\goopdate</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\goopdate\app_state_ready_to_install.cc">
+      <Filter>source\goopdate</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\goopdate\app_state_update_available.cc">
+      <Filter>source\goopdate</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\goopdate\app_state_waiting_to_check_for_update.cc">
+      <Filter>source\goopdate</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\goopdate\app_state_waiting_to_download.cc">
+      <Filter>source\goopdate</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\goopdate\app_state_waiting_to_install.cc">
+      <Filter>source\goopdate</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\goopdate\app_unittest.cc">
+      <Filter>source\goopdate</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\goopdate\app_version.cc">
+      <Filter>source\goopdate</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\goopdate\app_version_unittest.cc">
+      <Filter>source\goopdate</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\goopdate\application_usage_data.cc">
+      <Filter>source\goopdate</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\goopdate\application_usage_data_unittest.cc">
+      <Filter>source\goopdate</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\goopdate\broker_idl_datax.c">
+      <Filter>source\goopdate</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\goopdate\cocreate_async.cc">
+      <Filter>source\goopdate</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\goopdate\code_red_check.cc">
+      <Filter>source\goopdate</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\goopdate\com_forwarder.cc">
+      <Filter>source\goopdate</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\goopdate\com_register_shell.cc">
+      <Filter>source\goopdate</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\goopdate\crash.cc">
+      <Filter>source\goopdate</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\goopdate\crash_unittest.cc">
+      <Filter>source\goopdate</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\goopdate\cred_dialog.cc">
+      <Filter>source\goopdate</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\goopdate\cred_dialog_unittest.cc">
+      <Filter>source\goopdate</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\goopdate\current_state.cc">
+      <Filter>source\goopdate</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\goopdate\dm_client.cc">
+      <Filter>source\goopdate</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\goopdate\dm_client_unittest.cc">
+      <Filter>source\goopdate</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\goopdate\dm_messages.cc">
+      <Filter>source\goopdate</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\goopdate\dm_messages_unittest.cc">
+      <Filter>source\goopdate</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\goopdate\dm_storage.cc">
+      <Filter>source\goopdate</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\goopdate\dm_storage_test_utils.cc">
+      <Filter>source\goopdate</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\goopdate\dm_storage_unittest.cc">
+      <Filter>source\goopdate</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\goopdate\download_manager.cc">
+      <Filter>source\goopdate</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\goopdate\download_manager_unittest.cc">
+      <Filter>source\goopdate</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\goopdate\google_app_command_verifier.cc">
+      <Filter>source\goopdate</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\goopdate\google_update.cc">
+      <Filter>source\goopdate</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\goopdate\google_update_ps.cc">
+      <Filter>source\goopdate</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\goopdate\goopdate.cc">
+      <Filter>source\goopdate</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\goopdate\goopdate_metrics.cc">
+      <Filter>source\goopdate</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\goopdate\goopdate_unittest.cc">
+      <Filter>source\goopdate</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\goopdate\install_manager.cc">
+      <Filter>source\goopdate</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\goopdate\install_manager_unittest.cc">
+      <Filter>source\goopdate</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\goopdate\installer_wrapper.cc">
+      <Filter>source\goopdate</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\goopdate\installer_wrapper_unittest.cc">
+      <Filter>source\goopdate</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\goopdate\job_observer.cc">
+      <Filter>source\goopdate</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\goopdate\main.cc">
+      <Filter>source\goopdate</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\goopdate\main_unittest.cc">
+      <Filter>source\goopdate</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\goopdate\model.cc">
+      <Filter>source\goopdate</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\goopdate\model_object.cc">
+      <Filter>source\goopdate</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\goopdate\model_unittest.cc">
+      <Filter>source\goopdate</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\goopdate\offline_utils.cc">
+      <Filter>source\goopdate</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\goopdate\offline_utils_unittest.cc">
+      <Filter>source\goopdate</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\goopdate\omaha3_idl_datax.c">
+      <Filter>source\goopdate</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\goopdate\omaha_brave_customization_goopdate_apis_unittest.cc">
+      <Filter>source\goopdate</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\goopdate\omaha_customization_goopdate_apis_unittest.cc">
+      <Filter>source\goopdate</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\goopdate\ondemand.cc">
+      <Filter>source\goopdate</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\goopdate\package.cc">
+      <Filter>source\goopdate</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\goopdate\package_cache.cc">
+      <Filter>source\goopdate</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\goopdate\package_cache_unittest.cc">
+      <Filter>source\goopdate</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\goopdate\ping_event_cancel.cc">
+      <Filter>source\goopdate</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\goopdate\ping_event_cancel_test.cc">
+      <Filter>source\goopdate</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\goopdate\policy_status.cc">
+      <Filter>source\goopdate</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\goopdate\policy_status_value.cc">
+      <Filter>source\goopdate</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\goopdate\process_launcher.cc">
+      <Filter>source\goopdate</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\goopdate\resource_manager.cc">
+      <Filter>source\goopdate</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\goopdate\resource_manager_unittest.cc">
+      <Filter>source\goopdate</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\goopdate\string_formatter.cc">
+      <Filter>source\goopdate</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\goopdate\string_formatter_unittest.cc">
+      <Filter>source\goopdate</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\goopdate\test_omaha_exe_installer.cc">
+      <Filter>source\goopdate</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\goopdate\update3web.cc">
+      <Filter>source\goopdate</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\goopdate\update_request_utils.cc">
+      <Filter>source\goopdate</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\goopdate\update_request_utils_unittest.cc">
+      <Filter>source\goopdate</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\goopdate\update_response_utils.cc">
+      <Filter>source\goopdate</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\goopdate\update_response_utils_unittest.cc">
+      <Filter>source\goopdate</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\goopdate\worker.cc">
+      <Filter>source\goopdate</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\goopdate\worker_metrics.cc">
+      <Filter>source\goopdate</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\goopdate\worker_unittest.cc">
+      <Filter>source\goopdate</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\goopdate\worker_utils.cc">
+      <Filter>source\goopdate</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\goopdate\worker_utils_unittest.cc">
+      <Filter>source\goopdate</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\goopdate\resources\resdll_main.cc">
+      <Filter>source\goopdate\resources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\internal\chrome_recovery_improved\command_line.cc">
+      <Filter>source\internal\chrome_recovery_improved</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\internal\chrome_recovery_improved\command_line_unittest.cc">
+      <Filter>source\internal\chrome_recovery_improved</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\internal\chrome_recovery_improved\recovery.cc">
+      <Filter>source\internal\chrome_recovery_improved</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\internal\chrome_recovery_improved\winmain.cc">
+      <Filter>source\internal\chrome_recovery_improved</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\mi_exe_stub\mi.cc">
+      <Filter>source\mi_exe_stub</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\mi_exe_stub\process.cc">
+      <Filter>source\mi_exe_stub</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\mi_exe_stub\tar.cc">
+      <Filter>source\mi_exe_stub</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\mi_exe_stub\x86_encoder\bcj.cc">
+      <Filter>source\mi_exe_stub\x86_encoder</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\mi_exe_stub\x86_encoder\bcj2.cc">
+      <Filter>source\mi_exe_stub\x86_encoder</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\mi_exe_stub\x86_encoder\bcj2_encoder.cc">
+      <Filter>source\mi_exe_stub\x86_encoder</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\mi_exe_stub\x86_encoder\bcj2_encoder_unittest.cc">
+      <Filter>source\mi_exe_stub\x86_encoder</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\mi_exe_stub\x86_encoder\range_encoder.cc">
+      <Filter>source\mi_exe_stub\x86_encoder</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\net\bits_job_callback.cc">
+      <Filter>source\net</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\net\bits_request.cc">
+      <Filter>source\net</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\net\bits_request_unittest.cc">
+      <Filter>source\net</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\net\bits_utils.cc">
+      <Filter>source\net</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\net\bits_utils_unittest.cc">
+      <Filter>source\net</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\net\cup_ecdsa_metrics.cc">
+      <Filter>source\net</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\net\cup_ecdsa_request.cc">
+      <Filter>source\net</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\net\cup_ecdsa_request_unittest.cc">
+      <Filter>source\net</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\net\cup_ecdsa_utils.cc">
+      <Filter>source\net</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\net\cup_ecdsa_utils_unittest.cc">
+      <Filter>source\net</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\net\detector.cc">
+      <Filter>source\net</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\net\detector_unittest.cc">
+      <Filter>source\net</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\net\http_client.cc">
+      <Filter>source\net</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\net\http_client_unittest.cc">
+      <Filter>source\net</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\net\net_utils.cc">
+      <Filter>source\net</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\net\net_utils_unittest.cc">
+      <Filter>source\net</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\net\network_config.cc">
+      <Filter>source\net</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\net\network_config_unittest.cc">
+      <Filter>source\net</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\net\network_request.cc">
+      <Filter>source\net</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\net\network_request_impl.cc">
+      <Filter>source\net</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\net\network_request_unittest.cc">
+      <Filter>source\net</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\net\proxy_auth.cc">
+      <Filter>source\net</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\net\simple_request.cc">
+      <Filter>source\net</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\net\simple_request_unittest.cc">
+      <Filter>source\net</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\net\winhttp.cc">
+      <Filter>source\net</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\net\winhttp_adapter.cc">
+      <Filter>source\net</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\net\winhttp_adapter_unittest.cc">
+      <Filter>source\net</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\net\winhttp_vtable.cc">
+      <Filter>source\net</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\net\winhttp_vtable_unittest.cc">
+      <Filter>source\net</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\recovery\recovery_test.cc">
+      <Filter>source\recovery</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\recovery\client\google_update_recovery.cc">
+      <Filter>source\recovery\client</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\recovery\client\google_update_recovery_unittest.cc">
+      <Filter>source\recovery\client</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\dbg-win\obj\goopdate\omaha3_idl_64_data.c">
+      <Filter>source\scons-out\dbg-win\obj\goopdate</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\dbg-win\obj\goopdate\omaha3_idl_64_i.c">
+      <Filter>source\scons-out\dbg-win\obj\goopdate</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\dbg-win\obj\goopdate\omaha3_idl_64_p.c">
+      <Filter>source\scons-out\dbg-win\obj\goopdate</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\dbg-win\obj\goopdate\omaha3_idl_arm64_data.c">
+      <Filter>source\scons-out\dbg-win\obj\goopdate</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\dbg-win\obj\goopdate\omaha3_idl_arm64_i.c">
+      <Filter>source\scons-out\dbg-win\obj\goopdate</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\dbg-win\obj\goopdate\omaha3_idl_arm64_p.c">
+      <Filter>source\scons-out\dbg-win\obj\goopdate</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\dbg-win\obj\goopdate\omaha3_idl_data.c">
+      <Filter>source\scons-out\dbg-win\obj\goopdate</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\dbg-win\obj\goopdate\omaha3_idl_i.c">
+      <Filter>source\scons-out\dbg-win\obj\goopdate</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\dbg-win\obj\goopdate\omaha3_idl_p.c">
+      <Filter>source\scons-out\dbg-win\obj\goopdate</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\dbg-win\proto_files\third_party\chrome\files\src\components\crx_file\crx3.pb.cc">
+      <Filter>source\scons-out\dbg-win\proto_files\third_party\chrome\files\src\components\crx_file</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\opt-win\obj\goopdate\omaha3_idl_64_data.c">
+      <Filter>source\scons-out\opt-win\obj\goopdate</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\opt-win\obj\goopdate\omaha3_idl_64_i.c">
+      <Filter>source\scons-out\opt-win\obj\goopdate</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\opt-win\obj\goopdate\omaha3_idl_64_p.c">
+      <Filter>source\scons-out\opt-win\obj\goopdate</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\opt-win\obj\goopdate\omaha3_idl_arm64_data.c">
+      <Filter>source\scons-out\opt-win\obj\goopdate</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\opt-win\obj\goopdate\omaha3_idl_arm64_i.c">
+      <Filter>source\scons-out\opt-win\obj\goopdate</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\opt-win\obj\goopdate\omaha3_idl_arm64_p.c">
+      <Filter>source\scons-out\opt-win\obj\goopdate</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\opt-win\obj\goopdate\omaha3_idl_data.c">
+      <Filter>source\scons-out\opt-win\obj\goopdate</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\opt-win\obj\goopdate\omaha3_idl_i.c">
+      <Filter>source\scons-out\opt-win\obj\goopdate</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\opt-win\obj\goopdate\omaha3_idl_p.c">
+      <Filter>source\scons-out\opt-win\obj\goopdate</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\opt-win\proto_files\third_party\chrome\files\src\components\crx_file\crx3.pb.cc">
+      <Filter>source\scons-out\opt-win\proto_files\third_party\chrome\files\src\components\crx_file</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\service\service_main.cc">
+      <Filter>source\service</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\setup\setup.cc">
+      <Filter>source\setup</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\setup\setup_files.cc">
+      <Filter>source\setup</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\setup\setup_files_unittest.cc">
+      <Filter>source\setup</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\setup\setup_google_update.cc">
+      <Filter>source\setup</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\setup\setup_google_update_unittest.cc">
+      <Filter>source\setup</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\setup\setup_metrics.cc">
+      <Filter>source\setup</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\setup\setup_service_unittest.cc">
+      <Filter>source\setup</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\setup\setup_unittest.cc">
+      <Filter>source\setup</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\statsreport\aggregator-win32.cc">
+      <Filter>source\statsreport</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\statsreport\aggregator-win32_unittest.cc">
+      <Filter>source\statsreport</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\statsreport\aggregator.cc">
+      <Filter>source\statsreport</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\statsreport\aggregator_unittest.cc">
+      <Filter>source\statsreport</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\statsreport\const-win32.cc">
+      <Filter>source\statsreport</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\statsreport\formatter.cc">
+      <Filter>source\statsreport</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\statsreport\formatter_unittest.cc">
+      <Filter>source\statsreport</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\statsreport\metrics.cc">
+      <Filter>source\statsreport</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\statsreport\metrics_unittest.cc">
+      <Filter>source\statsreport</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\statsreport\persistent_iterator-win32.cc">
+      <Filter>source\statsreport</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\statsreport\persistent_iterator-win32_unittest.cc">
+      <Filter>source\statsreport</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\testing\omaha_unittest.cc">
+      <Filter>source\testing</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\testing\omaha_unittest_main.cc">
+      <Filter>source\testing</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\testing\omaha_unittest_main_small_tests.cc">
+      <Filter>source\testing</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\testing\omaha_unittest_main_small_tests_with_resources.cc">
+      <Filter>source\testing</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\testing\omaha_unittest_network.cc">
+      <Filter>source\testing</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\testing\ondemandsystem_unittest.cc">
+      <Filter>source\testing</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\testing\save_arguments.cc">
+      <Filter>source\testing</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\testing\test_foo.cc">
+      <Filter>source\testing</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\testing\unit_test.cc">
+      <Filter>source\testing</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\testing\unit_test_unittest.cc">
+      <Filter>source\testing</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\testing\unittest_debug_helper_unittest.cc">
+      <Filter>source\testing</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\testing\ui\ui_unittest.cc">
+      <Filter>source\testing\ui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\third_party\chrome\files\src\base\cpu.cc">
+      <Filter>source\third_party\chrome\files\src\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\third_party\chrome\files\src\base\cpu_unittest.cc">
+      <Filter>source\third_party\chrome\files\src\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\third_party\chrome\files\src\base\rand_util.cc">
+      <Filter>source\third_party\chrome\files\src\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\third_party\chrome\files\src\base\rand_util_unittest.cc">
+      <Filter>source\third_party\chrome\files\src\base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\third_party\chrome\files\src\components\crx_file\crx_verifier.cc">
+      <Filter>source\third_party\chrome\files\src\components\crx_file</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\third_party\chrome\files\src\components\crx_file\crx_verifier_unittest.cc">
+      <Filter>source\third_party\chrome\files\src\components\crx_file</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\third_party\chrome\files\src\components\crx_file\id_util.cc">
+      <Filter>source\third_party\chrome\files\src\components\crx_file</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\third_party\chrome\files\src\components\crx_file\id_util_unittest.cc">
+      <Filter>source\third_party\chrome\files\src\components\crx_file</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\third_party\chrome\files\src\crypto\rsa_private_key.cc">
+      <Filter>source\third_party\chrome\files\src\crypto</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\third_party\chrome\files\src\crypto\rsa_private_key_unittest.cc">
+      <Filter>source\third_party\chrome\files\src\crypto</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\third_party\chrome\files\src\crypto\rsa_private_key_win.cc">
+      <Filter>source\third_party\chrome\files\src\crypto</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\third_party\chrome\files\src\crypto\secure_util.cc">
+      <Filter>source\third_party\chrome\files\src\crypto</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\third_party\chrome\files\src\crypto\signature_creator_unittest.cc">
+      <Filter>source\third_party\chrome\files\src\crypto</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\third_party\chrome\files\src\crypto\signature_creator_win.cc">
+      <Filter>source\third_party\chrome\files\src\crypto</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\third_party\chrome\files\src\crypto\signature_verifier.cc">
+      <Filter>source\third_party\chrome\files\src\crypto</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\third_party\chrome\files\src\crypto\signature_verifier_unittest.cc">
+      <Filter>source\third_party\chrome\files\src\crypto</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\third_party\chrome\files\src\crypto\signature_verifier_win.cc">
+      <Filter>source\third_party\chrome\files\src\crypto</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\third_party\chrome\files\src\crypto\signature_verifier_win_unittest.cc">
+      <Filter>source\third_party\chrome\files\src\crypto</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\tools\ApplyTag\apply_tag_tool.cc">
+      <Filter>source\tools\ApplyTag</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\tools\CrashHandlerClient\crash_handler_client_tool.cc">
+      <Filter>source\tools\CrashHandlerClient</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\tools\CrashProcess\crash_process.cc">
+      <Filter>source\tools\CrashProcess</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\tools\MsiTagger\msi_tag_tool.cc">
+      <Filter>source\tools\MsiTagger</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\tools\ReadTag\read_tag.cc">
+      <Filter>source\tools\ReadTag</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\tools\SetShutDownEvent\signal_shutdown.cc">
+      <Filter>source\tools\SetShutDownEvent</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\tools\eckeytool\eckeytool.c">
+      <Filter>source\tools\eckeytool</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\tools\goopdump\data_dumper.cc">
+      <Filter>source\tools\goopdump</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\tools\goopdump\data_dumper_app_manager.cc">
+      <Filter>source\tools\goopdump</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\tools\goopdump\data_dumper_goopdate.cc">
+      <Filter>source\tools\goopdump</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\tools\goopdump\data_dumper_network.cc">
+      <Filter>source\tools\goopdump</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\tools\goopdump\data_dumper_osdata.cc">
+      <Filter>source\tools\goopdump</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\tools\goopdump\dump_log.cc">
+      <Filter>source\tools\goopdump</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\tools\goopdump\goopdump.cc">
+      <Filter>source\tools\goopdump</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\tools\goopdump\goopdump_cmd_line_parser.cc">
+      <Filter>source\tools\goopdump</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\tools\goopdump\goopdump_main.cc">
+      <Filter>source\tools\goopdump</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\tools\goopdump\process_commandline.cc">
+      <Filter>source\tools\goopdump</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\tools\goopdump\process_commandline_unittest.cc">
+      <Filter>source\tools\goopdump</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\tools\goopdump\process_monitor.cc">
+      <Filter>source\tools\goopdump</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\tools\goopdump\process_monitor_unittest.cc">
+      <Filter>source\tools\goopdump</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\tools\longrunning\long_running.cc">
+      <Filter>source\tools\longrunning</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\tools\performondemand\performondemand.cc">
+      <Filter>source\tools\performondemand</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\tools\runupdate3web\runupdate3web.cc">
+      <Filter>source\tools\runupdate3web</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\ui\complete_wnd.cc">
+      <Filter>source\ui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\ui\owner_draw_title_bar.cc">
+      <Filter>source\ui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\ui\progress_wnd.cc">
+      <Filter>source\ui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\ui\progress_wnd_unittest.cc">
+      <Filter>source\ui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\ui\splash_screen.cc">
+      <Filter>source\ui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\ui\splash_screen_test.cc">
+      <Filter>source\ui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\ui\ui.cc">
+      <Filter>source\ui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\ui\ui_displayed_event.cc">
+      <Filter>source\ui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\ui\ui_metrics.cc">
+      <Filter>source\ui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\ui\yes_no_dialog.cc">
+      <Filter>source\ui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\ui\yes_no_dialog_unittest.cc">
+      <Filter>source\ui</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="..\..\..\base\run_as_invoker.rc">
+      <Filter>source\base</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\core\resource.rc">
+      <Filter>source\core</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\crashhandler\resource.rc">
+      <Filter>source\crashhandler</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\enterprise\installer\custom_actions\msi_custom_action.rc">
+      <Filter>source\enterprise\installer\custom_actions</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\google_update\generated_resources_am.rc">
+      <Filter>source\google_update</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\google_update\generated_resources_ar.rc">
+      <Filter>source\google_update</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\google_update\generated_resources_bg.rc">
+      <Filter>source\google_update</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\google_update\generated_resources_bn.rc">
+      <Filter>source\google_update</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\google_update\generated_resources_ca.rc">
+      <Filter>source\google_update</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\google_update\generated_resources_cs.rc">
+      <Filter>source\google_update</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\google_update\generated_resources_da.rc">
+      <Filter>source\google_update</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\google_update\generated_resources_de.rc">
+      <Filter>source\google_update</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\google_update\generated_resources_el.rc">
+      <Filter>source\google_update</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\google_update\generated_resources_en-GB.rc">
+      <Filter>source\google_update</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\google_update\generated_resources_en.rc">
+      <Filter>source\google_update</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\google_update\generated_resources_es-419.rc">
+      <Filter>source\google_update</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\google_update\generated_resources_es.rc">
+      <Filter>source\google_update</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\google_update\generated_resources_et.rc">
+      <Filter>source\google_update</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\google_update\generated_resources_fa.rc">
+      <Filter>source\google_update</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\google_update\generated_resources_fi.rc">
+      <Filter>source\google_update</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\google_update\generated_resources_fil.rc">
+      <Filter>source\google_update</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\google_update\generated_resources_fr.rc">
+      <Filter>source\google_update</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\google_update\generated_resources_gu.rc">
+      <Filter>source\google_update</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\google_update\generated_resources_hi.rc">
+      <Filter>source\google_update</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\google_update\generated_resources_hr.rc">
+      <Filter>source\google_update</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\google_update\generated_resources_hu.rc">
+      <Filter>source\google_update</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\google_update\generated_resources_id.rc">
+      <Filter>source\google_update</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\google_update\generated_resources_is.rc">
+      <Filter>source\google_update</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\google_update\generated_resources_it.rc">
+      <Filter>source\google_update</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\google_update\generated_resources_iw.rc">
+      <Filter>source\google_update</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\google_update\generated_resources_ja.rc">
+      <Filter>source\google_update</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\google_update\generated_resources_kn.rc">
+      <Filter>source\google_update</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\google_update\generated_resources_ko.rc">
+      <Filter>source\google_update</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\google_update\generated_resources_lt.rc">
+      <Filter>source\google_update</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\google_update\generated_resources_lv.rc">
+      <Filter>source\google_update</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\google_update\generated_resources_ml.rc">
+      <Filter>source\google_update</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\google_update\generated_resources_mr.rc">
+      <Filter>source\google_update</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\google_update\generated_resources_ms.rc">
+      <Filter>source\google_update</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\google_update\generated_resources_nl.rc">
+      <Filter>source\google_update</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\google_update\generated_resources_no.rc">
+      <Filter>source\google_update</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\google_update\generated_resources_or.rc">
+      <Filter>source\google_update</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\google_update\generated_resources_pl.rc">
+      <Filter>source\google_update</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\google_update\generated_resources_pt-BR.rc">
+      <Filter>source\google_update</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\google_update\generated_resources_pt-PT.rc">
+      <Filter>source\google_update</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\google_update\generated_resources_ro.rc">
+      <Filter>source\google_update</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\google_update\generated_resources_ru.rc">
+      <Filter>source\google_update</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\google_update\generated_resources_sk.rc">
+      <Filter>source\google_update</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\google_update\generated_resources_sl.rc">
+      <Filter>source\google_update</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\google_update\generated_resources_sr.rc">
+      <Filter>source\google_update</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\google_update\generated_resources_sv.rc">
+      <Filter>source\google_update</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\google_update\generated_resources_sw.rc">
+      <Filter>source\google_update</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\google_update\generated_resources_ta.rc">
+      <Filter>source\google_update</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\google_update\generated_resources_te.rc">
+      <Filter>source\google_update</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\google_update\generated_resources_th.rc">
+      <Filter>source\google_update</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\google_update\generated_resources_tr.rc">
+      <Filter>source\google_update</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\google_update\generated_resources_uk.rc">
+      <Filter>source\google_update</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\google_update\generated_resources_ur.rc">
+      <Filter>source\google_update</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\google_update\generated_resources_userdefault.rc">
+      <Filter>source\google_update</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\google_update\generated_resources_vi.rc">
+      <Filter>source\google_update</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\google_update\generated_resources_zh-CN.rc">
+      <Filter>source\google_update</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\google_update\generated_resources_zh-HK.rc">
+      <Filter>source\google_update</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\google_update\generated_resources_zh-TW.rc">
+      <Filter>source\google_update</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\google_update\resource.rc">
+      <Filter>source\google_update</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\goopdate\google_update_ps_resource.rc">
+      <Filter>source\goopdate</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\goopdate\goopdate.rc">
+      <Filter>source\goopdate</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\goopdate\goopdate_version.rc">
+      <Filter>source\goopdate</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\goopdate\resources\goopdate_dll\generated_resources_am.rc">
+      <Filter>source\goopdate\resources\goopdate_dll</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\goopdate\resources\goopdate_dll\generated_resources_ar.rc">
+      <Filter>source\goopdate\resources\goopdate_dll</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\goopdate\resources\goopdate_dll\generated_resources_bg.rc">
+      <Filter>source\goopdate\resources\goopdate_dll</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\goopdate\resources\goopdate_dll\generated_resources_bn.rc">
+      <Filter>source\goopdate\resources\goopdate_dll</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\goopdate\resources\goopdate_dll\generated_resources_ca.rc">
+      <Filter>source\goopdate\resources\goopdate_dll</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\goopdate\resources\goopdate_dll\generated_resources_cs.rc">
+      <Filter>source\goopdate\resources\goopdate_dll</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\goopdate\resources\goopdate_dll\generated_resources_da.rc">
+      <Filter>source\goopdate\resources\goopdate_dll</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\goopdate\resources\goopdate_dll\generated_resources_de.rc">
+      <Filter>source\goopdate\resources\goopdate_dll</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\goopdate\resources\goopdate_dll\generated_resources_el.rc">
+      <Filter>source\goopdate\resources\goopdate_dll</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\goopdate\resources\goopdate_dll\generated_resources_en-GB.rc">
+      <Filter>source\goopdate\resources\goopdate_dll</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\goopdate\resources\goopdate_dll\generated_resources_en.rc">
+      <Filter>source\goopdate\resources\goopdate_dll</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\goopdate\resources\goopdate_dll\generated_resources_es-419.rc">
+      <Filter>source\goopdate\resources\goopdate_dll</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\goopdate\resources\goopdate_dll\generated_resources_es.rc">
+      <Filter>source\goopdate\resources\goopdate_dll</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\goopdate\resources\goopdate_dll\generated_resources_et.rc">
+      <Filter>source\goopdate\resources\goopdate_dll</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\goopdate\resources\goopdate_dll\generated_resources_fa.rc">
+      <Filter>source\goopdate\resources\goopdate_dll</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\goopdate\resources\goopdate_dll\generated_resources_fi.rc">
+      <Filter>source\goopdate\resources\goopdate_dll</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\goopdate\resources\goopdate_dll\generated_resources_fil.rc">
+      <Filter>source\goopdate\resources\goopdate_dll</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\goopdate\resources\goopdate_dll\generated_resources_fr.rc">
+      <Filter>source\goopdate\resources\goopdate_dll</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\goopdate\resources\goopdate_dll\generated_resources_gu.rc">
+      <Filter>source\goopdate\resources\goopdate_dll</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\goopdate\resources\goopdate_dll\generated_resources_hi.rc">
+      <Filter>source\goopdate\resources\goopdate_dll</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\goopdate\resources\goopdate_dll\generated_resources_hr.rc">
+      <Filter>source\goopdate\resources\goopdate_dll</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\goopdate\resources\goopdate_dll\generated_resources_hu.rc">
+      <Filter>source\goopdate\resources\goopdate_dll</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\goopdate\resources\goopdate_dll\generated_resources_id.rc">
+      <Filter>source\goopdate\resources\goopdate_dll</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\goopdate\resources\goopdate_dll\generated_resources_is.rc">
+      <Filter>source\goopdate\resources\goopdate_dll</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\goopdate\resources\goopdate_dll\generated_resources_it.rc">
+      <Filter>source\goopdate\resources\goopdate_dll</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\goopdate\resources\goopdate_dll\generated_resources_iw.rc">
+      <Filter>source\goopdate\resources\goopdate_dll</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\goopdate\resources\goopdate_dll\generated_resources_ja.rc">
+      <Filter>source\goopdate\resources\goopdate_dll</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\goopdate\resources\goopdate_dll\generated_resources_kn.rc">
+      <Filter>source\goopdate\resources\goopdate_dll</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\goopdate\resources\goopdate_dll\generated_resources_ko.rc">
+      <Filter>source\goopdate\resources\goopdate_dll</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\goopdate\resources\goopdate_dll\generated_resources_lt.rc">
+      <Filter>source\goopdate\resources\goopdate_dll</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\goopdate\resources\goopdate_dll\generated_resources_lv.rc">
+      <Filter>source\goopdate\resources\goopdate_dll</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\goopdate\resources\goopdate_dll\generated_resources_ml.rc">
+      <Filter>source\goopdate\resources\goopdate_dll</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\goopdate\resources\goopdate_dll\generated_resources_mr.rc">
+      <Filter>source\goopdate\resources\goopdate_dll</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\goopdate\resources\goopdate_dll\generated_resources_ms.rc">
+      <Filter>source\goopdate\resources\goopdate_dll</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\goopdate\resources\goopdate_dll\generated_resources_nl.rc">
+      <Filter>source\goopdate\resources\goopdate_dll</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\goopdate\resources\goopdate_dll\generated_resources_no.rc">
+      <Filter>source\goopdate\resources\goopdate_dll</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\goopdate\resources\goopdate_dll\generated_resources_or.rc">
+      <Filter>source\goopdate\resources\goopdate_dll</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\goopdate\resources\goopdate_dll\generated_resources_pl.rc">
+      <Filter>source\goopdate\resources\goopdate_dll</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\goopdate\resources\goopdate_dll\generated_resources_pt-BR.rc">
+      <Filter>source\goopdate\resources\goopdate_dll</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\goopdate\resources\goopdate_dll\generated_resources_pt-PT.rc">
+      <Filter>source\goopdate\resources\goopdate_dll</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\goopdate\resources\goopdate_dll\generated_resources_ro.rc">
+      <Filter>source\goopdate\resources\goopdate_dll</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\goopdate\resources\goopdate_dll\generated_resources_ru.rc">
+      <Filter>source\goopdate\resources\goopdate_dll</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\goopdate\resources\goopdate_dll\generated_resources_sk.rc">
+      <Filter>source\goopdate\resources\goopdate_dll</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\goopdate\resources\goopdate_dll\generated_resources_sl.rc">
+      <Filter>source\goopdate\resources\goopdate_dll</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\goopdate\resources\goopdate_dll\generated_resources_sr.rc">
+      <Filter>source\goopdate\resources\goopdate_dll</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\goopdate\resources\goopdate_dll\generated_resources_sv.rc">
+      <Filter>source\goopdate\resources\goopdate_dll</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\goopdate\resources\goopdate_dll\generated_resources_sw.rc">
+      <Filter>source\goopdate\resources\goopdate_dll</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\goopdate\resources\goopdate_dll\generated_resources_ta.rc">
+      <Filter>source\goopdate\resources\goopdate_dll</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\goopdate\resources\goopdate_dll\generated_resources_te.rc">
+      <Filter>source\goopdate\resources\goopdate_dll</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\goopdate\resources\goopdate_dll\generated_resources_th.rc">
+      <Filter>source\goopdate\resources\goopdate_dll</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\goopdate\resources\goopdate_dll\generated_resources_tr.rc">
+      <Filter>source\goopdate\resources\goopdate_dll</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\goopdate\resources\goopdate_dll\generated_resources_uk.rc">
+      <Filter>source\goopdate\resources\goopdate_dll</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\goopdate\resources\goopdate_dll\generated_resources_ur.rc">
+      <Filter>source\goopdate\resources\goopdate_dll</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\goopdate\resources\goopdate_dll\generated_resources_userdefault.rc">
+      <Filter>source\goopdate\resources\goopdate_dll</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\goopdate\resources\goopdate_dll\generated_resources_vi.rc">
+      <Filter>source\goopdate\resources\goopdate_dll</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\goopdate\resources\goopdate_dll\generated_resources_zh-CN.rc">
+      <Filter>source\goopdate\resources\goopdate_dll</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\goopdate\resources\goopdate_dll\generated_resources_zh-HK.rc">
+      <Filter>source\goopdate\resources\goopdate_dll</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\goopdate\resources\goopdate_dll\generated_resources_zh-TW.rc">
+      <Filter>source\goopdate\resources\goopdate_dll</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\goopdate\resources\goopdateres\generated_resources_am.rc">
+      <Filter>source\goopdate\resources\goopdateres</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\goopdate\resources\goopdateres\generated_resources_ar.rc">
+      <Filter>source\goopdate\resources\goopdateres</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\goopdate\resources\goopdateres\generated_resources_bg.rc">
+      <Filter>source\goopdate\resources\goopdateres</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\goopdate\resources\goopdateres\generated_resources_bn.rc">
+      <Filter>source\goopdate\resources\goopdateres</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\goopdate\resources\goopdateres\generated_resources_ca.rc">
+      <Filter>source\goopdate\resources\goopdateres</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\goopdate\resources\goopdateres\generated_resources_cs.rc">
+      <Filter>source\goopdate\resources\goopdateres</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\goopdate\resources\goopdateres\generated_resources_da.rc">
+      <Filter>source\goopdate\resources\goopdateres</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\goopdate\resources\goopdateres\generated_resources_de.rc">
+      <Filter>source\goopdate\resources\goopdateres</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\goopdate\resources\goopdateres\generated_resources_el.rc">
+      <Filter>source\goopdate\resources\goopdateres</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\goopdate\resources\goopdateres\generated_resources_en-GB.rc">
+      <Filter>source\goopdate\resources\goopdateres</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\goopdate\resources\goopdateres\generated_resources_en.rc">
+      <Filter>source\goopdate\resources\goopdateres</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\goopdate\resources\goopdateres\generated_resources_es-419.rc">
+      <Filter>source\goopdate\resources\goopdateres</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\goopdate\resources\goopdateres\generated_resources_es.rc">
+      <Filter>source\goopdate\resources\goopdateres</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\goopdate\resources\goopdateres\generated_resources_et.rc">
+      <Filter>source\goopdate\resources\goopdateres</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\goopdate\resources\goopdateres\generated_resources_fa.rc">
+      <Filter>source\goopdate\resources\goopdateres</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\goopdate\resources\goopdateres\generated_resources_fi.rc">
+      <Filter>source\goopdate\resources\goopdateres</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\goopdate\resources\goopdateres\generated_resources_fil.rc">
+      <Filter>source\goopdate\resources\goopdateres</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\goopdate\resources\goopdateres\generated_resources_fr.rc">
+      <Filter>source\goopdate\resources\goopdateres</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\goopdate\resources\goopdateres\generated_resources_gu.rc">
+      <Filter>source\goopdate\resources\goopdateres</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\goopdate\resources\goopdateres\generated_resources_hi.rc">
+      <Filter>source\goopdate\resources\goopdateres</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\goopdate\resources\goopdateres\generated_resources_hr.rc">
+      <Filter>source\goopdate\resources\goopdateres</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\goopdate\resources\goopdateres\generated_resources_hu.rc">
+      <Filter>source\goopdate\resources\goopdateres</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\goopdate\resources\goopdateres\generated_resources_id.rc">
+      <Filter>source\goopdate\resources\goopdateres</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\goopdate\resources\goopdateres\generated_resources_is.rc">
+      <Filter>source\goopdate\resources\goopdateres</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\goopdate\resources\goopdateres\generated_resources_it.rc">
+      <Filter>source\goopdate\resources\goopdateres</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\goopdate\resources\goopdateres\generated_resources_iw.rc">
+      <Filter>source\goopdate\resources\goopdateres</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\goopdate\resources\goopdateres\generated_resources_ja.rc">
+      <Filter>source\goopdate\resources\goopdateres</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\goopdate\resources\goopdateres\generated_resources_kn.rc">
+      <Filter>source\goopdate\resources\goopdateres</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\goopdate\resources\goopdateres\generated_resources_ko.rc">
+      <Filter>source\goopdate\resources\goopdateres</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\goopdate\resources\goopdateres\generated_resources_lt.rc">
+      <Filter>source\goopdate\resources\goopdateres</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\goopdate\resources\goopdateres\generated_resources_lv.rc">
+      <Filter>source\goopdate\resources\goopdateres</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\goopdate\resources\goopdateres\generated_resources_ml.rc">
+      <Filter>source\goopdate\resources\goopdateres</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\goopdate\resources\goopdateres\generated_resources_mr.rc">
+      <Filter>source\goopdate\resources\goopdateres</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\goopdate\resources\goopdateres\generated_resources_ms.rc">
+      <Filter>source\goopdate\resources\goopdateres</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\goopdate\resources\goopdateres\generated_resources_nl.rc">
+      <Filter>source\goopdate\resources\goopdateres</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\goopdate\resources\goopdateres\generated_resources_no.rc">
+      <Filter>source\goopdate\resources\goopdateres</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\goopdate\resources\goopdateres\generated_resources_pl.rc">
+      <Filter>source\goopdate\resources\goopdateres</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\goopdate\resources\goopdateres\generated_resources_pt-BR.rc">
+      <Filter>source\goopdate\resources\goopdateres</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\goopdate\resources\goopdateres\generated_resources_pt-PT.rc">
+      <Filter>source\goopdate\resources\goopdateres</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\goopdate\resources\goopdateres\generated_resources_ro.rc">
+      <Filter>source\goopdate\resources\goopdateres</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\goopdate\resources\goopdateres\generated_resources_ru.rc">
+      <Filter>source\goopdate\resources\goopdateres</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\goopdate\resources\goopdateres\generated_resources_sk.rc">
+      <Filter>source\goopdate\resources\goopdateres</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\goopdate\resources\goopdateres\generated_resources_sl.rc">
+      <Filter>source\goopdate\resources\goopdateres</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\goopdate\resources\goopdateres\generated_resources_sr.rc">
+      <Filter>source\goopdate\resources\goopdateres</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\goopdate\resources\goopdateres\generated_resources_sv.rc">
+      <Filter>source\goopdate\resources\goopdateres</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\goopdate\resources\goopdateres\generated_resources_sw.rc">
+      <Filter>source\goopdate\resources\goopdateres</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\goopdate\resources\goopdateres\generated_resources_ta.rc">
+      <Filter>source\goopdate\resources\goopdateres</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\goopdate\resources\goopdateres\generated_resources_te.rc">
+      <Filter>source\goopdate\resources\goopdateres</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\goopdate\resources\goopdateres\generated_resources_th.rc">
+      <Filter>source\goopdate\resources\goopdateres</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\goopdate\resources\goopdateres\generated_resources_tr.rc">
+      <Filter>source\goopdate\resources\goopdateres</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\goopdate\resources\goopdateres\generated_resources_uk.rc">
+      <Filter>source\goopdate\resources\goopdateres</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\goopdate\resources\goopdateres\generated_resources_ur.rc">
+      <Filter>source\goopdate\resources\goopdateres</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\goopdate\resources\goopdateres\generated_resources_vi.rc">
+      <Filter>source\goopdate\resources\goopdateres</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\goopdate\resources\goopdateres\generated_resources_zh-CN.rc">
+      <Filter>source\goopdate\resources\goopdateres</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\goopdate\resources\goopdateres\generated_resources_zh-TW.rc">
+      <Filter>source\goopdate\resources\goopdateres</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\internal\chrome_recovery_improved\resource.rc">
+      <Filter>source\internal\chrome_recovery_improved</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\mi_exe_stub\mi.rc">
+      <Filter>source\mi_exe_stub</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\mi_exe_stub\mi_generated_resources_am.rc">
+      <Filter>source\mi_exe_stub</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\mi_exe_stub\mi_generated_resources_ar.rc">
+      <Filter>source\mi_exe_stub</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\mi_exe_stub\mi_generated_resources_bg.rc">
+      <Filter>source\mi_exe_stub</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\mi_exe_stub\mi_generated_resources_bn.rc">
+      <Filter>source\mi_exe_stub</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\mi_exe_stub\mi_generated_resources_ca.rc">
+      <Filter>source\mi_exe_stub</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\mi_exe_stub\mi_generated_resources_cs.rc">
+      <Filter>source\mi_exe_stub</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\mi_exe_stub\mi_generated_resources_da.rc">
+      <Filter>source\mi_exe_stub</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\mi_exe_stub\mi_generated_resources_de.rc">
+      <Filter>source\mi_exe_stub</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\mi_exe_stub\mi_generated_resources_el.rc">
+      <Filter>source\mi_exe_stub</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\mi_exe_stub\mi_generated_resources_en-GB.rc">
+      <Filter>source\mi_exe_stub</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\mi_exe_stub\mi_generated_resources_en.rc">
+      <Filter>source\mi_exe_stub</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\mi_exe_stub\mi_generated_resources_es-419.rc">
+      <Filter>source\mi_exe_stub</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\mi_exe_stub\mi_generated_resources_es.rc">
+      <Filter>source\mi_exe_stub</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\mi_exe_stub\mi_generated_resources_et.rc">
+      <Filter>source\mi_exe_stub</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\mi_exe_stub\mi_generated_resources_fa.rc">
+      <Filter>source\mi_exe_stub</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\mi_exe_stub\mi_generated_resources_fi.rc">
+      <Filter>source\mi_exe_stub</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\mi_exe_stub\mi_generated_resources_fil.rc">
+      <Filter>source\mi_exe_stub</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\mi_exe_stub\mi_generated_resources_fr.rc">
+      <Filter>source\mi_exe_stub</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\mi_exe_stub\mi_generated_resources_gu.rc">
+      <Filter>source\mi_exe_stub</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\mi_exe_stub\mi_generated_resources_hi.rc">
+      <Filter>source\mi_exe_stub</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\mi_exe_stub\mi_generated_resources_hr.rc">
+      <Filter>source\mi_exe_stub</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\mi_exe_stub\mi_generated_resources_hu.rc">
+      <Filter>source\mi_exe_stub</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\mi_exe_stub\mi_generated_resources_id.rc">
+      <Filter>source\mi_exe_stub</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\mi_exe_stub\mi_generated_resources_is.rc">
+      <Filter>source\mi_exe_stub</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\mi_exe_stub\mi_generated_resources_it.rc">
+      <Filter>source\mi_exe_stub</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\mi_exe_stub\mi_generated_resources_iw.rc">
+      <Filter>source\mi_exe_stub</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\mi_exe_stub\mi_generated_resources_ja.rc">
+      <Filter>source\mi_exe_stub</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\mi_exe_stub\mi_generated_resources_kn.rc">
+      <Filter>source\mi_exe_stub</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\mi_exe_stub\mi_generated_resources_ko.rc">
+      <Filter>source\mi_exe_stub</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\mi_exe_stub\mi_generated_resources_lt.rc">
+      <Filter>source\mi_exe_stub</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\mi_exe_stub\mi_generated_resources_lv.rc">
+      <Filter>source\mi_exe_stub</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\mi_exe_stub\mi_generated_resources_ml.rc">
+      <Filter>source\mi_exe_stub</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\mi_exe_stub\mi_generated_resources_mr.rc">
+      <Filter>source\mi_exe_stub</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\mi_exe_stub\mi_generated_resources_ms.rc">
+      <Filter>source\mi_exe_stub</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\mi_exe_stub\mi_generated_resources_nl.rc">
+      <Filter>source\mi_exe_stub</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\mi_exe_stub\mi_generated_resources_no.rc">
+      <Filter>source\mi_exe_stub</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\mi_exe_stub\mi_generated_resources_pl.rc">
+      <Filter>source\mi_exe_stub</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\mi_exe_stub\mi_generated_resources_pt-BR.rc">
+      <Filter>source\mi_exe_stub</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\mi_exe_stub\mi_generated_resources_pt-PT.rc">
+      <Filter>source\mi_exe_stub</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\mi_exe_stub\mi_generated_resources_ro.rc">
+      <Filter>source\mi_exe_stub</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\mi_exe_stub\mi_generated_resources_ru.rc">
+      <Filter>source\mi_exe_stub</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\mi_exe_stub\mi_generated_resources_sk.rc">
+      <Filter>source\mi_exe_stub</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\mi_exe_stub\mi_generated_resources_sl.rc">
+      <Filter>source\mi_exe_stub</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\mi_exe_stub\mi_generated_resources_sr.rc">
+      <Filter>source\mi_exe_stub</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\mi_exe_stub\mi_generated_resources_sv.rc">
+      <Filter>source\mi_exe_stub</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\mi_exe_stub\mi_generated_resources_sw.rc">
+      <Filter>source\mi_exe_stub</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\mi_exe_stub\mi_generated_resources_ta.rc">
+      <Filter>source\mi_exe_stub</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\mi_exe_stub\mi_generated_resources_te.rc">
+      <Filter>source\mi_exe_stub</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\mi_exe_stub\mi_generated_resources_th.rc">
+      <Filter>source\mi_exe_stub</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\mi_exe_stub\mi_generated_resources_tr.rc">
+      <Filter>source\mi_exe_stub</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\mi_exe_stub\mi_generated_resources_uk.rc">
+      <Filter>source\mi_exe_stub</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\mi_exe_stub\mi_generated_resources_ur.rc">
+      <Filter>source\mi_exe_stub</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\mi_exe_stub\mi_generated_resources_vi.rc">
+      <Filter>source\mi_exe_stub</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\mi_exe_stub\mi_generated_resources_zh-CN.rc">
+      <Filter>source\mi_exe_stub</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\mi_exe_stub\mi_generated_resources_zh-TW.rc">
+      <Filter>source\mi_exe_stub</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\recovery\recovery_markup.rc">
+      <Filter>source\recovery</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\dbg-win\obj\installers\resource.rc">
+      <Filter>source\scons-out\dbg-win\obj\installers</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\dbg-win\obj\installers\resource_repair.rc">
+      <Filter>source\scons-out\dbg-win\obj\installers</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\dbg-win\obj\standalone\resource_UNOFFICIAL_Bundle_Foo_Argument_StandaloneInstaller.rc">
+      <Filter>source\scons-out\dbg-win\obj\standalone</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\dbg-win\obj\standalone\resource_UNOFFICIAL_SaveArgumentsStandaloneInstaller.rc">
+      <Filter>source\scons-out\dbg-win\obj\standalone</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\dbg-win\obj\standalone\resource_UNOFFICIAL_TestFooStandaloneInstaller.rc">
+      <Filter>source\scons-out\dbg-win\obj\standalone</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\opt-win\obj\installers\resource.rc">
+      <Filter>source\scons-out\opt-win\obj\installers</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\opt-win\obj\installers\resource_repair.rc">
+      <Filter>source\scons-out\opt-win\obj\installers</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\opt-win\obj\standalone\resource_UNOFFICIAL_GensparkBrowserStandaloneSetup_135_1_0_300.rc">
+      <Filter>source\scons-out\opt-win\obj\standalone</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\opt-win\obj\standalone\resource_UNOFFICIAL_GensparkBrowserStandaloneSilentSetup_135_1_0_300.rc">
+      <Filter>source\scons-out\opt-win\obj\standalone</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\opt-win\obj\standalone\resource_UNOFFICIAL_GensparkBrowserStandaloneUntaggedSetup_135_1_0_300.rc">
+      <Filter>source\scons-out\opt-win\obj\standalone</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\testing\omaha_unittest.rc">
+      <Filter>source\testing</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\testing\omaha_unittest_version.rc">
+      <Filter>source\testing</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\testing\save_arguments_version.rc">
+      <Filter>source\testing</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\testing\test_foo.rc">
+      <Filter>source\testing</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\testing\ui\ui_unittest.rc">
+      <Filter>source\testing\ui</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="..\..\..\tools\goopdump\resource.rc">
+      <Filter>source\tools\goopdump</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+</Project>
