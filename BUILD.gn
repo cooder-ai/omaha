@@ -58,7 +58,6 @@ action("build_omaha_installer") {
   outputs = [
     "$root_out_dir/$brave_stub_installer_exe",
     "$root_out_dir/$brave_standalone_installer_exe",
-    "$root_out_dir/$brave_silent_installer_exe",
     "$root_out_dir/$brave_untagged_installer_exe",
   ]
 
