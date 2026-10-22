@@ -56,6 +56,8 @@ def build(omaha_dir, standalone_installers_dir, options):
     # Our certs identified by hash are always in the machine store:
     command.append('--use_authenticode_machine_store')
 
+  os.environ.pop('NoDefaultCurrentDirectoryInExePath', None)
+
   # Pick signtool.exe from PATH. This in particular ensures that we use the same
   # signtool as Chromium, which is 64 bit and thus has access to the same certs.
   env = dict(os.environ)
@@ -71,7 +73,6 @@ def build(omaha_dir, standalone_installers_dir, options):
       command.append('--digicert_sign_keypair=' + digicert_sign_keypair)
   command.append('--no-tests')
   print(command)
-  print(env)
   sp.check_call(command, stderr=sp.STDOUT, env=env)
 
 def copy_untagged_installers(args, omaha_dir):
